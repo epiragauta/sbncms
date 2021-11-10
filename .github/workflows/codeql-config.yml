@@ -1,0 +1,14 @@
+name: "CodeQL config"
+on:
+  push:
+    branches: [v8/contrib,v8/dev]
+paths-ignore: 
+  - node_modules
+  - Sbn.TestData
+  - Sbn.Tests
+  - Sbn.Tests.AcceptanceTest
+  - Sbn.Tests.Benchmarks
+  - bin
+  - build.tmp
+paths:
+  - src   

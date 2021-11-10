@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+    - name: 💡 Features and ideas
+      url: https://github.com/sbn/Sbn-CMS/discussions/new?category=features-and-ideas
+      about: Start a new discussion when you have ideas or feature requests, eventually discussions can turn into plans
+    - name: ⁉️ Support Question
+      url: https://our.sbn.com
+      about: This issue tracker is NOT meant for support questions. If you have a question, please join us on the forum.
+    - name: 📖 Documentation Issue
+      url: https://github.com/sbn/SbnDocs/issues
+      about: Documentation issues should be reported on the Sbn documentation repository.
+    - name: 🔐 Security Issue
+      url: https://sbn.com/about-us/trust-center/security-and-sbn/how-to-report-a-vulnerability-in-sbn/
+      about: Discovered a Security Issue in Sbn?
