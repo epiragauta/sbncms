@@ -1,0 +1,7 @@
+var app = angular.module('sbn', [    
+    'sbn.directives',
+    'sbn.install',
+    'ngCookies',
+    'ngSanitize',
+    'ngTouch'
+]);
