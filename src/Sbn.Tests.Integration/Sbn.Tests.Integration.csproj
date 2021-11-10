@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <RootNamespace>Sbn.Cms.Tests.Integration</RootNamespace>
+    <PackageId>Sbn.Cms.Tests.Integration</PackageId>
+    <Title>Sbn CMS Integration Tests</Title>
+    <Description>Contains helper classes for integration tests with Sbn, including all internal integration tests.</Description>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(OS)' == 'Windows_NT'">
+    <PackageReference Include="Microsoft.ICU.ICU4C.Runtime" Version="68.2.0.6" />
+    <RuntimeHostConfigurationOption Include="System.Globalization.AppLocalIcu" Value="68.2" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(OS)' == 'Windows_NT' ">
+    <DefineConstants>IS_WINDOWS</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="App_Data\**" />
+    <Compile Remove="TEMP\**" />
+    <Compile Remove="Sbn\**" />
+    <EmbeddedResource Remove="App_Data\**" />
+    <EmbeddedResource Remove="TEMP\**" />
+    <EmbeddedResource Remove="Sbn\**" />
+    <None Remove="App_Data\**" />
+    <None Remove="TEMP\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Sbn\**" />
+    <None Remove="Views\**" />
+    <None Remove="create_slicing_filter_condition.sh" />
+    <None Remove="Sbn.Examine.Lucene\SbnExamine\TestFiles\media.xml" />
+    <EmbeddedResource Update="Sbn.Examine.Lucene\SbnExamine\TestFiles.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>TestFiles.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Sbn.Infrastructure\Services\Importing\ImportResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Update="Sbn.Examine.Lucene\SbnExamine\TestFiles.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>TestFiles.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Sbn.Infrastructure\Services\Importing\ImportResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Sbn.Infrastructure\Services\Importing\Dictionary-Package.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sbn.Examine.Lucene\SbnExamine\TestFiles\media.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\CheckboxList-Content-Package.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sbn.Infrastructure\Services\Importing\CompositionsTestPackage-Random.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\CompositionsTestPackage.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\Dictionary-Package.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\Fanoe-Package.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\InheritedDocTypes-Package.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\SingleDocType.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\StandardMvc-Package.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Sbn.Infrastructure\Services\Importing\TemplateOnly-Package.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\TemplateOnly-Updated-Package.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\uBlogsy-Package.xml" />
+    <Content Include="Sbn.Infrastructure\Services\Importing\XsltSearch-Package.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Examine.Lucene" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.10" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sbn.Core\Sbn.Core.csproj" />
+    <ProjectReference Include="..\Sbn.Infrastructure\Sbn.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sbn.PublishedCache.NuCache\Sbn.PublishedCache.NuCache.csproj" />
+    <ProjectReference Include="..\Sbn.Tests.Common\Sbn.Tests.Common.csproj" />
+    <ProjectReference Include="..\Sbn.Web.BackOffice\Sbn.Web.BackOffice.csproj" />
+    <ProjectReference Include="..\Sbn.Web.UI\Sbn.Web.UI.csproj" />
+    <ProjectReference Include="..\Sbn.Web.Website\Sbn.Web.Website.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Sbn.Examine.Lucene\SbnExamine\TestFiles\sbn-sort.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+      <TargetFramework>net5.0</TargetFramework>
+      <RootNamespace>Sbn.Cms.Tests.Common</RootNamespace>
+      <PackageId>Sbn.Cms.Tests</PackageId>
+      <Title>Sbn CMS Test Tools</Title>
+      <Description>Contains commonly used tools to write tests for Sbn CMS, such as various builders for content etc.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture.AutoMoq" Version="4.17.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MiniProfiler.AspNetCore" Version="4.2.22" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.17.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sbn.Core\Sbn.Core.csproj" />
+    <ProjectReference Include="..\Sbn.Infrastructure\Sbn.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sbn.Web.Common\Sbn.Web.Common.csproj" />
+  </ItemGroup>
+</Project>

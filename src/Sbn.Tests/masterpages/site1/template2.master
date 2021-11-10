@@ -1,0 +1,5 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/sbn/masterpages/default.master" AutoEventWireup="true" %>
+
+<asp:Content ContentPlaceHolderID="ContentPlaceHolderDefault" runat="server">
+
+</asp:Content>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Examine.Lucene" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.10" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sbn.Core\Sbn.Core.csproj" />
+    <ProjectReference Include="..\Sbn.Infrastructure\Sbn.Infrastructure.csproj" />
+    <ProjectReference Include="..\Sbn.PublishedCache.NuCache\Sbn.PublishedCache.NuCache.csproj" />
+    <ProjectReference Include="..\Sbn.Tests.Common\Sbn.Tests.Common.csproj" />
+    <ProjectReference Include="..\Sbn.Tests.Integration\Sbn.Tests.Integration.csproj" />
+    <ProjectReference Include="..\Sbn.Web.BackOffice\Sbn.Web.BackOffice.csproj" />
+    <ProjectReference Include="..\Sbn.Web.Website\Sbn.Web.Website.csproj" />
+    <ProjectReference Include="..\Sbn.Persistence.SqlCe\Sbn.Persistence.SqlCe.csproj" Condition="'$(OS)' == 'Windows_NT'" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Sbn.TestData</RootNamespace>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="33.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Sbn.Core\Sbn.Core.csproj" />
+    <ProjectReference Include="..\Sbn.PublishedCache.NuCache\Sbn.PublishedCache.NuCache.csproj" />
+    <ProjectReference Include="..\Sbn.Web.Common\Sbn.Web.Common.csproj" />
+    <ProjectReference Include="..\Sbn.Web.Website\Sbn.Web.Website.csproj" />
+  </ItemGroup>
+
+</Project>
