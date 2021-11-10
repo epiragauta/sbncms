@@ -1,0 +1,118 @@
+// Copyright (c) Sbn.
+// See LICENSE for more details.
+
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Moq;
+using NUnit.Framework;
+using Sbn.Cms.Core.Cache;
+using Sbn.Cms.Core.Models;
+using Sbn.Cms.Core.Models.Membership;
+using Sbn.Cms.Core.Security;
+using Sbn.Cms.Core.Services;
+using Sbn.Cms.Tests.Common.Builders;
+using Sbn.Cms.Web.BackOffice.Authorization;
+
+namespace Sbn.Cms.Tests.UnitTests.Sbn.Web.BackOffice.Authorization
+{
+    public class MediaPermissionsResourceHandlerTests
+    {
+        private const int NodeId = 1000;
+
+        [Test]
+        public async Task Resource_With_Node_Id_With_Permission_Is_Authorized()
+        {
+            AuthorizationHandlerContext authHandlerContext = CreateAuthorizationHandlerContext(NodeId, createWithNodeId: true);
+            MediaPermissionsResourceHandler sut = CreateHandler(NodeId);
+
+            await sut.HandleAsync(authHandlerContext);
+
+            Assert.IsTrue(authHandlerContext.HasSucceeded);
+        }
+
+        [Test]
+        public async Task Resource_With_Media_With_Permission_Is_Authorized()
+        {
+            AuthorizationHandlerContext authHandlerContext = CreateAuthorizationHandlerContext(NodeId);
+            MediaPermissionsResourceHandler sut = CreateHandler(NodeId);
+
+            await sut.HandleAsync(authHandlerContext);
+
+            Assert.IsTrue(authHandlerContext.HasSucceeded);
+        }
+
+        [Test]
+        public async Task Resource_With_Node_Id_Withou_Permission_Is_Not_Authorized()
+        {
+            AuthorizationHandlerContext authHandlerContext = CreateAuthorizationHandlerContext(NodeId, createWithNodeId: true);
+            MediaPermissionsResourceHandler sut = CreateHandler(NodeId, startMediaId: 1001);
+
+            await sut.HandleAsync(authHandlerContext);
+
+            Assert.IsFalse(authHandlerContext.HasSucceeded);
+        }
+
+        [Test]
+        public async Task Resource_With_Media_Without_Permission_Is_Not_Authorized()
+        {
+            AuthorizationHandlerContext authHandlerContext = CreateAuthorizationHandlerContext(NodeId);
+            MediaPermissionsResourceHandler sut = CreateHandler(NodeId, startMediaId: 1001);
+
+            await sut.HandleAsync(authHandlerContext);
+
+            Assert.IsFalse(authHandlerContext.HasSucceeded);
+        }
+
+        private static AuthorizationHandlerContext CreateAuthorizationHandlerContext(int nodeId, bool createWithNodeId = false)
+        {
+            var requirement = new MediaPermissionsResourceRequirement();
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new List<Claim>()));
+            IMedia media = CreateMedia(nodeId);
+            MediaPermissionsResource resource = createWithNodeId
+                ? new MediaPermissionsResource(nodeId)
+                : new MediaPermissionsResource(media);
+            return new AuthorizationHandlerContext(new List<IAuthorizationRequirement> { requirement }, user, resource);
+        }
+
+        private static IMedia CreateMedia(int nodeId)
+        {
+            MediaType mediaType = MediaTypeBuilder.CreateSimpleMediaType("image", "Image");
+            return MediaBuilder.CreateSimpleMedia(mediaType, "Test image", -1, nodeId);
+        }
+
+        private MediaPermissionsResourceHandler CreateHandler(int nodeId, int startMediaId = -1)
+        {
+            Mock<IBackOfficeSecurityAccessor> mockBackOfficeSecurityAccessor = CreateMockBackOfficeSecurityAccessor(startMediaId);
+            MediaPermissions contentPermissions = CreateMediaPermissions(nodeId);
+            return new MediaPermissionsResourceHandler(mockBackOfficeSecurityAccessor.Object, contentPermissions);
+        }
+
+        private static Mock<IBackOfficeSecurityAccessor> CreateMockBackOfficeSecurityAccessor(int startMediaId)
+        {
+            User user = CreateUser(startMediaId);
+            var mockBackOfficeSecurity = new Mock<IBackOfficeSecurity>();
+            mockBackOfficeSecurity.SetupGet(x => x.CurrentUser).Returns(user);
+            var mockBackOfficeSecurityAccessor = new Mock<IBackOfficeSecurityAccessor>();
+            mockBackOfficeSecurityAccessor.Setup(x => x.BackOfficeSecurity).Returns(mockBackOfficeSecurity.Object);
+            return mockBackOfficeSecurityAccessor;
+        }
+
+        private static User CreateUser(int startMediaId) =>
+            new UserBuilder()
+                .WithStartMediaId(startMediaId)
+                .Build();
+
+        private static MediaPermissions CreateMediaPermissions(int nodeId)
+        {
+            var mockMediaService = new Mock<IMediaService>();
+            mockMediaService
+                .Setup(x => x.GetById(It.Is<int>(y => y == nodeId)))
+                .Returns(CreateMedia(nodeId));
+
+            var mockEntityService = new Mock<IEntityService>();
+            return new MediaPermissions(mockMediaService.Object, mockEntityService.Object, AppCaches.Disabled);
+        }
+    }
+}

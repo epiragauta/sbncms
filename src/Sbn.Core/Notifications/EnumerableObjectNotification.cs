@@ -1,0 +1,19 @@
+// Copyright (c) Sbn.
+// See LICENSE for more details.
+
+using System.Collections.Generic;
+using Sbn.Cms.Core.Events;
+
+namespace Sbn.Cms.Core.Notifications
+{
+    public abstract class EnumerableObjectNotification<T> : ObjectNotification<IEnumerable<T>>
+    {
+        protected EnumerableObjectNotification(T target, EventMessages messages) : base(new [] {target}, messages)
+        {
+        }
+
+        protected EnumerableObjectNotification(IEnumerable<T> target, EventMessages messages) : base(target, messages)
+        {
+        }
+    }
+}

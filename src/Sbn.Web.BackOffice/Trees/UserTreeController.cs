@@ -1,0 +1,65 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Sbn.Cms.Core;
+using Sbn.Cms.Core.Events;
+using Sbn.Cms.Core.Services;
+using Sbn.Cms.Core.Trees;
+using Sbn.Cms.Web.Common.Attributes;
+using Sbn.Cms.Web.Common.Authorization;
+using Constants = Sbn.Cms.Core.Constants;
+
+namespace Sbn.Cms.Web.BackOffice.Trees
+{
+    [Authorize(Policy = AuthorizationPolicies.TreeAccessUsers)]
+    [Tree(Constants.Applications.Users, Constants.Trees.Users, SortOrder = 0, IsSingleNodeTree = true)]
+    [PluginController(Constants.Web.Mvc.BackOfficeTreeArea)]
+    [CoreTree]
+    public class UserTreeController : TreeController
+    {
+        private readonly IMenuItemCollectionFactory _menuItemCollectionFactory;
+
+        public UserTreeController(
+            IMenuItemCollectionFactory menuItemCollectionFactory,
+            ILocalizedTextService localizedTextService,
+            SbnApiControllerTypeCollection sbnApiControllerTypeCollection,
+            IEventAggregator eventAggregator
+            ) : base(localizedTextService, sbnApiControllerTypeCollection, eventAggregator)
+        {
+            _menuItemCollectionFactory = menuItemCollectionFactory;
+        }
+
+        /// <summary>
+        /// Helper method to create a root model for a tree
+        /// </summary>
+        /// <returns></returns>
+        protected override ActionResult<TreeNode> CreateRootNode(FormCollection queryStrings)
+        {
+            var rootResult = base.CreateRootNode(queryStrings);
+            if (!(rootResult.Result is null))
+            {
+                return rootResult;
+            }
+            var root = rootResult.Value;
+
+            //this will load in a custom UI instead of the dashboard for the root node
+            root.RoutePath = $"{Constants.Applications.Users}/{Constants.Trees.Users}/users";
+            root.Icon = Constants.Icons.UserGroup;
+
+            root.HasChildren = false;
+            return root;
+        }
+
+        protected override ActionResult<TreeNodeCollection> GetTreeNodes(string id, FormCollection queryStrings)
+        {
+            //full screen app without tree nodes
+            return TreeNodeCollection.Empty;
+        }
+
+        protected override ActionResult<MenuItemCollection> GetMenuForNode(string id, FormCollection queryStrings)
+        {
+            //doesn't have a menu, this is a full screen app without tree nodes
+            return _menuItemCollectionFactory.Create();
+        }
+    }
+}

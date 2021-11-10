@@ -1,0 +1,26 @@
+// Copyright (c) Sbn.
+// See LICENSE for more details.
+
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Sbn.Cms.Core.Configuration.Models
+{
+    /// <summary>
+    /// Typed configuration options for type finder settings.
+    /// </summary>
+    [SbnOptions(Constants.Configuration.ConfigTypeFinder)]
+    public class TypeFinderSettings
+    {
+        /// <summary>
+        /// Gets or sets a value for the assemblies that accept load exceptions during type finder operations.
+        /// </summary>
+        public string AssembliesAcceptingLoadExceptions { get; set; }
+
+        /// <summary>
+        /// By default the entry assemblies for scanning plugin types is the Sbn DLLs. If you require
+        /// scanning for plugins based on different root referenced assemblies you can add the assembly name to this list.
+        /// </summary>
+        public IEnumerable<string> AdditionalEntryAssemblies { get; set; }
+    }
+}

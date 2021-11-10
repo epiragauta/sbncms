@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Sbn.Cms.Core.Configuration.Models;
+using Sbn.Cms.Core.Hosting;
+using Sbn.Cms.Core.IO;
+using Sbn.Cms.Web.Common.Attributes;
+using Constants = Sbn.Cms.Core.Constants;
+
+namespace Sbn.Cms.Web.BackOffice.Controllers
+{
+    [PluginController(Constants.Web.Mvc.BackOfficeApiArea)]
+    public class BackOfficeAssetsController : SbnAuthorizedJsonController
+    {
+        private readonly IFileSystem _jsLibFileSystem;
+
+        public BackOfficeAssetsController(IIOHelper ioHelper, IHostingEnvironment hostingEnvironment, ILoggerFactory loggerFactory, IOptions<GlobalSettings> globalSettings)
+        {
+            var path = globalSettings.Value.SbnPath + Path.DirectorySeparatorChar + "lib";
+            _jsLibFileSystem = new PhysicalFileSystem(ioHelper, hostingEnvironment, loggerFactory.CreateLogger<PhysicalFileSystem>(), hostingEnvironment.MapPathWebRoot(path), hostingEnvironment.ToAbsolute(path));
+        }
+
+        [HttpGet]
+        public object GetSupportedLocales()
+        {
+            const string momentLocaleFolder = "moment";
+            const string flatpickrLocaleFolder = "flatpickr/l10n";
+
+            return new
+            {
+                moment = GetLocales(momentLocaleFolder),
+                flatpickr = GetLocales(flatpickrLocaleFolder)
+            };
+        }
+
+        private IEnumerable<string> GetLocales(string path)
+        {
+            var cultures = _jsLibFileSystem.GetFiles(path, "*.js").ToList();
+            for (var i = 0; i < cultures.Count; i++)
+            {
+                cultures[i] = cultures[i]
+                    .Substring(cultures[i].IndexOf(path, StringComparison.Ordinal) + path.Length + 1);
+            }
+            return cultures;
+        }
+    }
+}

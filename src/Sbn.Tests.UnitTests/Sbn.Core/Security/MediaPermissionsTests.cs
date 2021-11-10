@@ -1,0 +1,173 @@
+// Copyright (c) Sbn.
+// See LICENSE for more details.
+
+using Moq;
+using NUnit.Framework;
+using Sbn.Cms.Core.Cache;
+using Sbn.Cms.Core.Models;
+using Sbn.Cms.Core.Models.Entities;
+using Sbn.Cms.Core.Models.Membership;
+using Sbn.Cms.Core.Security;
+using Sbn.Cms.Core.Services;
+using Sbn.Cms.Tests.Common.Builders;
+using Sbn.Cms.Tests.Common.Builders.Extensions;
+
+namespace Sbn.Cms.Tests.UnitTests.Sbn.Core.Security
+{
+    [TestFixture]
+    public class MediaPermissionsTests
+    {
+        [Test]
+        public void Access_Allowed_By_Path()
+        {
+            // Arrange
+            IUser user = CreateUser(id: 9);
+            var mediaMock = new Mock<IMedia>();
+            mediaMock.Setup(m => m.Path).Returns("-1,1234,5678");
+            IMedia media = mediaMock.Object;
+            var mediaServiceMock = new Mock<IMediaService>();
+            mediaServiceMock.Setup(x => x.GetById(1234)).Returns(media);
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, 1234, out _);
+
+            // Assert
+            Assert.AreEqual(MediaPermissions.MediaAccess.Granted, result);
+        }
+
+        [Test]
+        public void Returns_Not_Found_When_No_Media_Found()
+        {
+            // Arrange
+            IUser user = CreateUser(id: 9);
+            var mediaMock = new Mock<IMedia>();
+            mediaMock.Setup(m => m.Path).Returns("-1,1234,5678");
+            IMedia media = mediaMock.Object;
+            var mediaServiceMock = new Mock<IMediaService>();
+            mediaServiceMock.Setup(x => x.GetById(0)).Returns(media);
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act/assert
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, 1234, out _);
+            Assert.AreEqual(MediaPermissions.MediaAccess.NotFound, result);
+        }
+
+        [Test]
+        public void No_Access_By_Path()
+        {
+            // Arrange
+            IUser user = CreateUser(id: 9, startMediaId: 9876);
+            var mediaMock = new Mock<IMedia>();
+            mediaMock.Setup(m => m.Path).Returns("-1,1234,5678");
+            IMedia media = mediaMock.Object;
+            var mediaServiceMock = new Mock<IMediaService>();
+            mediaServiceMock.Setup(x => x.GetById(1234)).Returns(media);
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            entityServiceMock.Setup(x => x.GetAllPaths(It.IsAny<SbnObjectTypes>(), It.IsAny<int[]>()))
+                .Returns(new[] { Mock.Of<TreeEntityPath>(entity => entity.Id == 9876 && entity.Path == "-1,9876") });
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, 1234, out _);
+
+            // Assert
+            Assert.AreEqual(MediaPermissions.MediaAccess.Denied, result);
+        }
+
+        [Test]
+        public void Access_To_Root_By_Path()
+        {
+            // Arrange
+            IUser user = CreateUser();
+            var mediaServiceMock = new Mock<IMediaService>();
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, -1, out _);
+
+            // Assert
+            Assert.AreEqual(MediaPermissions.MediaAccess.Granted, result);
+        }
+
+        [Test]
+        public void No_Access_To_Root_By_Path()
+        {
+            // Arrange
+            IUser user = CreateUser(startMediaId: 1234);
+            var mediaServiceMock = new Mock<IMediaService>();
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            entityServiceMock.Setup(x => x.GetAllPaths(It.IsAny<SbnObjectTypes>(), It.IsAny<int[]>()))
+                .Returns(new[] { Mock.Of<TreeEntityPath>(entity => entity.Id == 1234 && entity.Path == "-1,1234") });
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, -1, out _);
+
+            // Assert
+            Assert.AreEqual(MediaPermissions.MediaAccess.Denied, result);
+        }
+
+        [Test]
+        public void Access_To_Recycle_Bin_By_Path()
+        {
+            // Arrange
+            IUser user = CreateUser();
+            var mediaServiceMock = new Mock<IMediaService>();
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, -21, out _);
+
+            // Assert
+            Assert.AreEqual(MediaPermissions.MediaAccess.Granted, result);
+        }
+
+        [Test]
+        public void No_Access_To_Recycle_Bin_By_Path()
+        {
+            // Arrange
+            IUser user = CreateUser(startMediaId: 1234);
+            var mediaServiceMock = new Mock<IMediaService>();
+            IMediaService mediaService = mediaServiceMock.Object;
+            var entityServiceMock = new Mock<IEntityService>();
+            entityServiceMock.Setup(x => x.GetAllPaths(It.IsAny<SbnObjectTypes>(), It.IsAny<int[]>()))
+                .Returns(new[] { Mock.Of<TreeEntityPath>(entity => entity.Id == 1234 && entity.Path == "-1,1234") });
+            IEntityService entityService = entityServiceMock.Object;
+            var mediaPermissions = new MediaPermissions(mediaService, entityService, AppCaches.Disabled);
+
+            // Act
+            MediaPermissions.MediaAccess result = mediaPermissions.CheckPermissions(user, -21, out _);
+
+            // Assert
+            Assert.AreEqual(MediaPermissions.MediaAccess.Denied, result);
+        }
+
+        private IUser CreateUser(int id = 0, int? startMediaId = null) =>
+            new UserBuilder()
+                .WithId(id)
+                .WithStartMediaIds(startMediaId.HasValue ? new[] { startMediaId.Value } : new int[0])
+                .AddUserGroup()
+                    .WithId(1)
+                    .WithName("admin")
+                    .WithAlias("admin")
+                    .Done()
+                .Build();
+    }
+}

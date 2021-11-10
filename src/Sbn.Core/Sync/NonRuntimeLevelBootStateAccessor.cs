@@ -1,0 +1,10 @@
+﻿namespace Sbn.Cms.Core.Sync
+{
+    /// <summary>
+    /// Boot state implementation for when sbn is not in the run state
+    /// </summary>
+    public sealed class NonRuntimeLevelBootStateAccessor : ISyncBootStateAccessor
+    {
+        public SyncBootState GetSyncBootState() => SyncBootState.Unknown;
+    }
+}

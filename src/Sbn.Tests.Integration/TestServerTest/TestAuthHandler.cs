@@ -1,0 +1,52 @@
+// Copyright (c) Sbn.
+// See LICENSE for more details.
+
+using System.Security.Claims;
+using System.Text.Encodings.Web;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Sbn.Cms.Core.Mapping;
+using Sbn.Cms.Core.Models.Membership;
+using Sbn.Cms.Core.Security;
+using Sbn.Cms.Core.Services;
+using Sbn.Cms.Web.BackOffice.Security;
+using Constants = Sbn.Cms.Core.Constants;
+
+namespace Sbn.Cms.Tests.Integration.TestServerTest
+{
+    public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>
+    {
+        public const string TestAuthenticationScheme = "Test";
+
+        private readonly IBackOfficeSignInManager _backOfficeSignInManager;
+
+        private readonly BackOfficeIdentityUser _fakeUser;
+
+        public TestAuthHandler(
+            IOptionsMonitor<AuthenticationSchemeOptions> options,
+            ILoggerFactory logger,
+            UrlEncoder encoder,
+            ISystemClock clock,
+            IBackOfficeSignInManager backOfficeSignInManager,
+            IUserService userService,
+            ISbnMapper sbnMapper)
+            : base(options, logger, encoder, clock)
+        {
+            _backOfficeSignInManager = backOfficeSignInManager;
+
+            IUser user = userService.GetUserById(Constants.Security.SuperUserId);
+            _fakeUser = sbnMapper.Map<IUser, BackOfficeIdentityUser>(user);
+            _fakeUser.SecurityStamp = "Needed";
+        }
+
+        protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
+        {
+            ClaimsPrincipal principal = await _backOfficeSignInManager.CreateUserPrincipalAsync(_fakeUser);
+            var ticket = new AuthenticationTicket(principal, TestAuthenticationScheme);
+
+            return AuthenticateResult.Success(ticket);
+        }
+    }
+}

@@ -1,0 +1,28 @@
+﻿using Sbn.Cms.Infrastructure.Persistence.DatabaseModelDefinitions;
+
+namespace Sbn.Cms.Infrastructure.Migrations.Expressions.Delete.Expressions
+{
+    public class DeleteIndexExpression : MigrationExpressionBase
+    {
+        public DeleteIndexExpression(IMigrationContext context)
+            : base(context)
+        {
+            Index = new IndexDefinition();
+        }
+
+        public DeleteIndexExpression(IMigrationContext context, IndexDefinition index)
+            : base(context)
+        {
+            Index = index;
+        }
+
+        public IndexDefinition Index { get; }
+
+        protected override string GetSql()
+        {
+            return string.Format(SqlSyntax.DropIndex,
+                SqlSyntax.GetQuotedName(Index.Name),
+                SqlSyntax.GetQuotedTableName(Index.TableName));
+        }
+    }
+}

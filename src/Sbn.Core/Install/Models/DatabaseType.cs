@@ -1,0 +1,11 @@
+namespace Sbn.Cms.Core.Install.Models
+{
+    public enum DatabaseType
+    {
+        SqlLocalDb,
+        SqlCe,
+        SqlServer,
+        SqlAzure,
+        Custom
+    }
+}

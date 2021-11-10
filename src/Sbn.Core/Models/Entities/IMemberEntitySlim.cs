@@ -1,0 +1,7 @@
+﻿namespace Sbn.Cms.Core.Models.Entities
+{
+    public interface IMemberEntitySlim : IContentEntitySlim
+    {
+
+    }
+}
