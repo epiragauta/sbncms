@@ -1,0 +1,27 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <SbnPackageMsBuildContentFilesPath>$(MSBuildThisFileDirectory)..\App_Plugins\SbnPackage\**\*.*</SbnPackageMsBuildContentFilesPath>
+    </PropertyGroup>
+
+    <Target Name="CopySbnPackageMsBuildAssets" BeforeTargets="Build">
+        <ItemGroup>
+            <SbnPackageMsBuildContentFiles Include="$(SbnPackageMsBuildContentFilesPath)" />
+        </ItemGroup>
+        <Message Text="Copying SbnPackage files: $(SbnPackageMsBuildContentFilesPath) - #@(SbnPackageMsBuildContentFiles->Count()) files"  Importance="high" />
+        <Copy
+            SourceFiles="@(SbnPackageMsBuildContentFiles)"
+            DestinationFiles="@(SbnPackageMsBuildContentFiles->'$(MSBuildProjectDirectory)\App_Plugins\SbnPackage\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+
+    </Target>
+
+    <Target Name="ClearSbnPackageMsBuildAssets" BeforeTargets="Clean">
+        <ItemGroup>
+            <SbnPackageMsBuildDir Include="$(MSBuildProjectDirectory)\App_Plugins\SbnPackage\" />
+        </ItemGroup>
+        <Message Text="Clear old SbnPackage data"  Importance="high" />
+        <RemoveDir Directories="@(SbnPackageMsBuildDir)"  />
+    </Target>
+
+</Project>

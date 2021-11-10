@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="4.1.0">
+        <id>Sbn.Cms.StaticAssets</id>
+        <version>9.0.0</version>
+        <title>Sbn Cms Static Assets</title>
+        <authors>Sbn HQ</authors>
+        <owners>Sbn HQ</owners>
+        <license type="expression">MIT</license>
+        <projectUrl>https://sbn.com/</projectUrl>
+        <iconUrl>https://sbn.com/dist/nuget/logo-small.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Contains the static assets that is required to run Sbn CMS.</description>
+        <summary>Contains the static assets that is required to run Sbn CMS.</summary>
+        <language>en-US</language>
+        <tags>sbn</tags>
+        <repository type="git" url="https://github.com/sbn/sbn-cms" />
+        <dependencies>
+        </dependencies>
+    </metadata>
+    <files>
+        <!-- Content -->
+        <file src="$BuildTmp$\WebApp\wwwroot\sbn\**\*.*" target="content\wwwroot\sbn" />
+        <file src="$BuildTmp$\WebApp\sbn\**\*.*" target="content\sbn" />
+
+        <!-- Readme -->
+        <file src="tools\Readme.txt" target="Readme.txt" />
+        <file src="tools\ReadmeUpgrade.txt" target="ReadmeUpgrade.txt" />
+
+        <!-- SbnCms props and targets used to copy the content into the solution -->
+        <file src="build\**" target="buildTransitive\" />
+    </files>
+</package>

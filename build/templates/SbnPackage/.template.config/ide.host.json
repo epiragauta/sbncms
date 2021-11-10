@@ -1,0 +1,13 @@
+{
+    "$schema": "http://json.schemastore.org/vs-2017.3.host",
+    "order" : 0,
+    "icon": "icon.png",
+    "description": {
+        "id": "SbnPackage",
+        "text": "Sbn Package - An empty Sbn CMS package (Plugin)"
+    },
+    "symbolInfo": [
+
+    ]
+
+}

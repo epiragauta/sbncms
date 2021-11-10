@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <ContentTargetFolders>.</ContentTargetFolders>
+        <Product>SbnPackage</Product>
+        <PackageId>SbnPackage</PackageId>
+        <Title>SbnPackage</Title>
+        <Description>...</Description>
+        <Product>...</Product>
+        <PackageTags>sbn plugin package</PackageTags>
+        <RootNamespace>SbnPackage</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Sbn.Cms.Web.Website" Version="SBN_VERSION_FROM_TEMPLATE"/>
+        <PackageReference Include="Sbn.Cms.Web.BackOffice" Version="SBN_VERSION_FROM_TEMPLATE"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="App_Plugins\SbnPackage\**\*.*">
+            <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+            <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+        </Content>
+        <None Include="build\**\*.*">
+            <Pack>True</Pack>
+            <PackagePath>buildTransitive</PackagePath>
+        </None>
+    </ItemGroup>
+</Project>

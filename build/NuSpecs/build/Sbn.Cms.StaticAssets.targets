@@ -1,0 +1,45 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <PropertyGroup>
+        <ContentFilesPath>$(MSBuildThisFileDirectory)..\content\sbn\**\*.*</ContentFilesPath>
+        <ContentWwwrootFilesPath>$(MSBuildThisFileDirectory)..\content\wwwroot\sbn\**\*.*</ContentWwwrootFilesPath>
+        <SbnWwwrootName Condition="'$(SbnWwwrootName)' == ''">sbn</SbnWwwrootName>
+    </PropertyGroup>
+
+    <Target Name="CopySbnAssets" BeforeTargets="BeforeBuild">
+        <ItemGroup>
+            <ContentFiles Include="$(ContentFilesPath)" />
+            <ContentWwwrootFiles Include="$(ContentWwwrootFilesPath)" />
+        </ItemGroup>
+        <Message Text="Copying Sbn content files: $(ContentFilesPath) - #@(ContentFiles->Count()) files"  Importance="high" />
+        <Message Text="Copying Sbn wwwroot content files: $(ContentWwwrootFilesPath) - #@(ContentWwwrootFiles->Count()) files"  Importance="high" />
+        <Copy
+            SourceFiles="@(ContentFiles)"
+            DestinationFiles="@(ContentFiles->'$(MSBuildProjectDirectory)\sbn\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+        <Copy
+            SourceFiles="@(ContentWwwrootFiles)"
+            DestinationFiles="@(ContentWwwrootFiles->'$(MSBuildProjectDirectory)\wwwroot\$(SbnWwwrootName)\%(RecursiveDir)%(Filename)%(Extension)')"
+            SkipUnchangedFiles="true" />
+
+    </Target>
+
+    <Target Name="ClearSbnAssets" BeforeTargets="Clean">
+        <ItemGroup>
+            <SbnConfigPackageDir Include="$(MSBuildProjectDirectory)\sbn\config\" />
+            <SbnPartialViewMacrosPackageDir Include="$(MSBuildProjectDirectory)\sbn\PartialViewMacros\" />
+            <SbnSbnBackOfficeMacrosDir Include="$(MSBuildProjectDirectory)\sbn\SbnBackOffice\" />
+            <SbnSbnInstallDir Include="$(MSBuildProjectDirectory)\sbn\SbnInstall\" />
+            <SbnSbnWebsiteMacrosDir Include="$(MSBuildProjectDirectory)\sbn\SbnWebsite\" />
+            <WwwrootSbnPackageDir Include="$(MSBuildProjectDirectory)\wwwroot\$(SbnWwwrootName)\" />
+        </ItemGroup>
+        <Message Text="Clear old sbn data"  Importance="high" />
+        <RemoveDir Directories="@(SbnConfigPackageDir)"  />
+        <RemoveDir Directories="@(SbnPartialViewMacrosPackageDir)"  />
+        <RemoveDir Directories="@(SbnSbnBackOfficeMacrosDir)"  />
+        <RemoveDir Directories="@(SbnSbnInstallDir)"  />
+        <RemoveDir Directories="@(SbnSbnWebsiteMacrosDir)"  />
+        <RemoveDir Directories="@(WwwrootSbnPackageDir)"  />
+    </Target>
+
+</Project>

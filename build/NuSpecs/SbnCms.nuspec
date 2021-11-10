@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata minClientVersion="4.1.0">
+        <id>Sbn.Cms</id>
+        <version>9.0.0</version>
+        <title>Sbn Cms</title>
+        <authors>Sbn HQ</authors>
+        <owners>Sbn HQ</owners>
+        <license type="expression">MIT</license>
+        <projectUrl>https://sbn.com/</projectUrl>
+        <iconUrl>https://sbn.com/dist/nuget/logo-small.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Installs Sbn Cms in your Visual Studio ASP.NET Core project</description>
+        <summary>Installs Sbn Cms in your Visual Studio ASP.NET Core project</summary>
+        <language>en-US</language>
+        <tags>sbn</tags>
+        <repository type="git" url="https://github.com/sbn/sbn-cms" />
+        <dependencies>
+            <group targetFramework="net5.0">
+                <dependency id="Sbn.Cms.Web.Website" version="[$version$]" />
+                <dependency id="Sbn.Cms.Web.BackOffice" version="[$version$]" />
+                <dependency id="Sbn.Cms.StaticAssets" version="[$version$]" />
+            </group>
+        </dependencies>
+        <!--
+        We can't use content files, as the files need to be copied into the solution, links/shortcuts to the files
+        are not good enough
+        -->
+        <contentFiles />
+    </metadata>
+    <files>
+    </files>
+</package>
