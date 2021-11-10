@@ -1,0 +1,65 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../",
+          "files": [
+            "**/*.csproj",
+            "**/Sbn.Infrastructure/**/*.cs"
+          ],
+          "exclude": [
+            "**/obj/**",
+            "**/bin/**",
+            "**/Sbn.Web.csproj",
+            "**/Sbn.Infrastructure.csproj",
+            "**/Sbn.Web.UI.csproj",
+            "**/**.Test**/*.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "filter": "docfx.filter.yml"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
+          "toc.yml",
+          "*.md"
+        ],
+        "exclude": [
+          "obj/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "**.md"
+        ],
+        "exclude": [
+          "obj/**"
+        ]
+      }
+    ],
+    "globalMetadata": {
+      "_appTitle": "Sbn c# Api docs",
+      "_enableSearch": true,
+      "_disableContribution": false
+    },
+    "dest": "_site",
+    "template": [
+      "default", "sbntemplate"
+    ]
+  }
+}

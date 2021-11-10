@@ -1,0 +1,14 @@
+[
+    'lib/jquery/jquery.min.js',
+    'lib/angular/angular.min.js',
+    'lib/underscore/underscore-min.js',
+    'lib/sbn/Extensions.js',
+    'js/utilities.min.js',
+    'js/app.min.js',
+    'js/sbn.resources.min.js',
+    'js/sbn.services.min.js',
+    'js/sbn.interceptors.min.js',
+    'ServerVariables',
+    'lib/signalr/signalr.min.js',
+    'js/sbn.preview.min.js'
+]

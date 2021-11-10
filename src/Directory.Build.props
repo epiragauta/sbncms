@@ -1,0 +1,41 @@
+﻿<Project>
+  <PropertyGroup>
+    <Version>9.1.0</Version>
+    <AssemblyVersion>9.1.0</AssemblyVersion>
+    <InformationalVersion>9.1.0</InformationalVersion>
+    <FileVersion>9.1.0</FileVersion>
+    <LangVersion Condition="'$(LangVersion)' == ''">9.0</LangVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Company>Sbn CMS</Company>
+    <Copyright>Copyright © Sbn 2021</Copyright>
+    <Authors>Sbn HQ</Authors>
+    <PackageProjectUrl>https://sbn.com/</PackageProjectUrl>
+    <PackageIconUrl>https://sbn.com/dist/nuget/logo-small.png</PackageIconUrl>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>sbn</PackageTags>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/sbn/sbn-cms</RepositoryUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- SourceLink: Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element)-->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- SourceLink: Embed source files that are not tracked by the source control manager in the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+    <!-- SourceLink: Build symbol package (.snupkg) to distribute the PDB containing Source Link -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <!-- SourceLink: Deterministic -->
+  <!-- https://github.com/clairernovotny/DeterministicBuilds -->
+  <!-- Only for Azure Pipelines CI Build -->
+  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+</Project>
+

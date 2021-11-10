@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Sbn.Cms.Infrastructure.Examine</RootNamespace>
+    <Product>Sbn CMS</Product>
+    <Title>Sbn.Examine.Lucene</Title>
+    <!-- But we still need to have PackageId for the depdents to know the actual name of the package. -->
+    <PackageId>Sbn.Cms.Examine.Lucene</PackageId>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile>bin\Release\Sbn.Examine.Lucene.xml</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="obj\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Examine" Version="2.0.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sbn.Core\Sbn.Core.csproj" />
+    <ProjectReference Include="..\Sbn.Infrastructure\Sbn.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
