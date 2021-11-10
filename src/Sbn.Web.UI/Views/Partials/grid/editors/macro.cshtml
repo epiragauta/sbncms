@@ -1,0 +1,15 @@
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<dynamic>
+
+@if (Model.value != null)
+{
+    string macroAlias = Model.value.macroAlias.ToString();
+    var parameters = new Dictionary<string,object>();
+    foreach (var mpd in Model.value.macroParamsDictionary)
+    {
+        parameters.Add(mpd.Name, mpd.Value);
+    }
+
+    <text>
+        @await Sbn.RenderMacroAsync(macroAlias, parameters)
+    </text>
+}

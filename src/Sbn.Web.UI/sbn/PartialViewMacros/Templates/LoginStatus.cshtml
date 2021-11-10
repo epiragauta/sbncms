@@ -1,0 +1,26 @@
+@inherits Sbn.Cms.Web.Common.Macros.PartialViewMacroPage
+@using Microsoft.AspNetCore.Http.Extensions
+@using Sbn.Cms.Web.Common.Models
+@using Sbn.Cms.Web.Website.Controllers
+@using Sbn.Extensions
+
+@{
+    var isLoggedIn = Context.User?.Identity?.IsAuthenticated ?? false;
+    var logoutModel = new PostRedirectModel();
+    // You can modify this to redirect to a different URL instead of the current one
+    logoutModel.RedirectUrl = null;
+}
+
+@if (isLoggedIn)
+{
+    <div class="login-status">
+
+        <p>Welcome back <strong>@Context.User.Identity.Name</strong>!</p>
+
+        @using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout", new { RedirectUrl = logoutModel.RedirectUrl }))
+        {
+            <button type="submit" class="btn btn-primary">Log out</button>
+        }
+
+    </div>
+}

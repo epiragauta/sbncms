@@ -1,0 +1,133 @@
+﻿@using Microsoft.Extensions.Options;
+@using System.Globalization
+@using Sbn.Cms.Core
+@using Sbn.Cms.Core.Configuration
+@using Sbn.Cms.Core.Configuration.Models
+@using Sbn.Cms.Core.Hosting
+@using Sbn.Cms.Core.Logging
+@using Sbn.Cms.Core.Routing
+@using Sbn.Cms.Core.Services
+@using Sbn.Cms.Core.WebAssets
+@using Sbn.Cms.Infrastructure.WebAssets
+@using Sbn.Cms.Web.BackOffice.Controllers
+@using Sbn.Cms.Web.BackOffice.Security
+@using Sbn.Extensions
+@inject BackOfficeServerVariables backOfficeServerVariables
+@inject ISbnVersion sbnVersion
+@inject IHostingEnvironment hostingEnvironment
+@inject IOptions<GlobalSettings> globalSettings
+@inject IRuntimeMinifier runtimeMinifier
+@inject IProfilerHtml profilerHtml
+@inject IIconService IconService
+@inject IBackOfficeExternalLoginProviders externalLogins
+@{
+    bool.TryParse(Context.Request.Query["umbDebug"], out bool isDebug);
+    var backOfficePath = globalSettings.Value.GetBackOfficePath(hostingEnvironment);
+}
+
+<!DOCTYPE html>
+
+<html lang="@CultureInfo.CurrentCulture.Name">
+<head>
+    <base href="@backOfficePath.EnsureEndsWith('/')" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="pinterest" content="nopin" />
+
+    <title ng-bind="$root.locationTitle">Sbn</title>
+
+    @Html.Raw(await runtimeMinifier.RenderCssHereAsync(BackOfficeWebAssets.SbnInitCssBundleName))
+
+</head>
+<body ng-class="{'touch':touchDevice, 'emptySection':emptySection, 'umb-drawer-is-visible':drawer.show, 'umb-tour-is-visible': tour.show, 'tabbing-active':tabbingActive}" ng-controller="Sbn.MainController" id="sbnMainPageBody">
+
+    <noscript>
+        <div style="margin: 10px;">
+            <h3><img src="assets/img/application/logo.png" alt="Sbn logo" style="vertical-align: text-bottom;" /> Sbn</h3>
+            <p>For full functionality of Sbn CMS it is necessary to enable JavaScript.</p>
+            <p>Here are the <a href="https://www.enable-javascript.com/" target="_blank" rel="noopener" style="text-decoration: underline;">instructions how to enable JavaScript in your web browser</a>.</p>
+        </div>
+    </noscript>
+
+    <div ng-hide="!authenticated" ng-cloak>
+
+        <div style="display: none;" id="mainwrapper" class="clearfix">
+
+            <umb-app-header></umb-app-header>
+
+            <div class="umb-app-content">
+
+                <umb-navigation></umb-navigation>
+
+                <section id="contentwrapper">
+
+                    <div id="contentcolumn">
+                        <div class="umb-editor" ng-view></div>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <umb-notifications></umb-notifications>
+
+        </div>
+
+        <umb-tour ng-if="tour.show"
+                  model="tour">
+        </umb-tour>
+
+        <!-- help dialog controller by the help button - this also forces the backoffice UI to shift 400px  -->
+        <umb-drawer data-element="drawer" ng-if="drawer.show" model="drawer.model" view="drawer.view"></umb-drawer>
+
+        <umb-search ng-if="search.show" on-close="closeSearch()"></umb-search>
+
+    </div>
+
+    <umb-backdrop ng-if="backdrop.show || infiniteMode"
+                  backdrop-opacity="backdrop.opacity"
+                  highlight-element="backdrop.element"
+                  highlight-prevent-click="backdrop.elementPreventClick"
+                  disable-events-on-click="backdrop.disableEventsOnClick">
+    </umb-backdrop>
+
+    <umb-overlay ng-if="overlay.show"
+                 model="overlay"
+                 position="{{overlay.position}}"
+                 size="overlay.size"
+                 view="overlay.view"
+                 name="overlay.name"
+                 parent-scope="overlay.parentScope">
+    </umb-overlay>
+
+    <umb-editors ng-show="infiniteMode"></umb-editors>
+
+    <umb-login ng-if="login.show"
+               on-login="hideLoginScreen()">
+    </umb-login>
+
+    @await Html.BareMinimumServerVariablesScriptAsync(backOfficeServerVariables)
+
+    <script>
+        document.angularReady = function(app) {
+            @await Html.AngularValueExternalLoginInfoScriptAsync(externalLogins, ViewData.GetExternalSignInProviderErrors())
+            @Html.AngularValueResetPasswordCodeInfoScript(ViewData[ViewDataExtensions.TokenPasswordResetCode])
+            @await Html.AngularValueTinyMceAssetsAsync(runtimeMinifier)
+            //required for the noscript trick
+            document.getElementById("mainwrapper").style.display = "inherit";
+        }
+    </script>
+
+    <script src="@WebPath.Combine(backOfficePath.TrimStart("~"), "/lib/lazyload-js/LazyLoad.min.js")"></script>
+    <script src="@Url.GetUrlWithCacheBust("Application", "BackOffice", null, hostingEnvironment, sbnVersion, runtimeMinifier)"></script>
+
+    @if (isDebug)
+    {
+        @Html.Raw(profilerHtml.Render())
+    }
+
+</body>
+</html>

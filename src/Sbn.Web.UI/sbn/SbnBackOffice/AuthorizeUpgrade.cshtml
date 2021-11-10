@@ -1,0 +1,73 @@
+﻿@using Microsoft.Extensions.Options;
+@using Sbn.Cms.Core
+@using Sbn.Cms.Core.Configuration
+@using Sbn.Cms.Core.Configuration.Models
+@using Sbn.Cms.Core.Hosting
+@using Sbn.Cms.Core.WebAssets
+@using Sbn.Cms.Infrastructure.WebAssets
+@using Sbn.Cms.Web.BackOffice.Controllers
+@using Sbn.Cms.Web.BackOffice.Security
+@using Sbn.Extensions
+@inject BackOfficeServerVariables backOfficeServerVariables
+@inject ISbnVersion sbnVersion
+@inject IHostingEnvironment hostingEnvironment
+@inject IOptions<GlobalSettings> globalSettings
+@inject IBackOfficeExternalLoginProviders externalLogins
+@inject IRuntimeMinifier runtimeMinifier
+
+@{
+    var backOfficePath = globalSettings.Value.GetBackOfficePath(hostingEnvironment);
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <base href="@backOfficePath.EnsureEndsWith('/')" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sbn</title>
+
+    @Html.Raw(await runtimeMinifier.RenderCssHereAsync(BackOfficeWebAssets.SbnUpgradeCssBundleName))
+
+    @*Because we're lazy loading angular js, the embedded cloak style will not be loaded initially, but we need it*@
+    <style>
+        [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+            display: none !important;
+        }
+    </style>
+
+</head>
+<body id="sbnMainPageBody" ng-controller="Sbn.AuthorizeUpgradeController" class="login-only">
+
+    <umb-login on-login="loginAndRedirect()"></umb-login>
+
+    <umb-notifications></umb-notifications>
+
+    @{
+        var externalLoginUrl = Url.Action("ExternalLogin", "BackOffice", new
+        {
+            area = ViewData.GetSbnPath(),
+            //Custom redirect URL since we don't want to just redirect to the back office since this is for authing upgrades
+            redirectUrl = Url.Action("AuthorizeUpgrade", "BackOffice")
+        });
+    }
+
+    @await Html.BareMinimumServerVariablesScriptAsync(backOfficeServerVariables)
+
+    <script type="text/javascript">
+    document.angularReady = function (app) {
+
+        @await Html.AngularValueExternalLoginInfoScriptAsync(externalLogins, ViewData.GetExternalSignInProviderErrors())
+        @Html.AngularValueResetPasswordCodeInfoScript(ViewData[ViewDataExtensions.TokenPasswordResetCode])
+
+    }
+    </script>
+
+    @*And finally we can load in our angular app*@
+    <script type="text/javascript" src="lib/lazyload-js/LazyLoad.min.js"></script>
+    <script src="@Url.GetUrlWithCacheBust("Application", "BackOffice", null, hostingEnvironment, sbnVersion, runtimeMinifier)"></script>
+
+</body>
+</html>
