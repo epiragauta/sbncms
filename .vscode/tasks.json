@@ -1,0 +1,67 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "detail": "Builds the client and SLN",
+            "promptOnClose": true,
+            "group": "build",
+            "dependsOn": [
+                "Client Build",
+                "Dotnet build"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "Client Install",
+            "detail": "install npm for Sbn.Web.UI.Client",
+            "promptOnClose": true,
+            "type": "npm",
+            "script": "install",
+            "path": "src/Sbn.Web.UI.Client/",
+            "problemMatcher": []
+        },
+        {
+            "label": "Client Build",
+            "detail": "runs npm run build for Sbn.Web.UI.Client",
+            "promptOnClose": true,
+            "group": "build",
+            "type": "npm",
+            "script": "build",
+            "path": "src/Sbn.Web.UI.Client/",
+            "problemMatcher": [
+                "$gulp-tsc"
+            ]
+        },
+        {
+            "label": "Dotnet build",
+            "detail": "Dotnet build of SLN",
+            "promptOnClose": true,
+            "group": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/sbn-netcore-only.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Dotnet watch",
+            "detail": "Dotnet run and watch of Web.UI",
+            "promptOnClose": true,
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "${workspaceFolder}/src/Sbn.Web.UI/Sbn.Web.UI.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
