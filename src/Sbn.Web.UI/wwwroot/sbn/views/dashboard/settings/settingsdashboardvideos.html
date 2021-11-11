@@ -1,0 +1,26 @@
+<h3>
+    <localize key="settingsDashboardVideos_trainingHeadline">Hours of Sbn training videos are only a click away</localize>
+</h3>
+<localize key="settingsDashboardVideos_trainingDescription">
+    <p>Want to master Sbn? Spend a couple of minutes learning some best practices by watching one of these videos about using Sbn. And visit <a href="http://Sbn.tv" target="_blank" rel="noopener">Sbn.tv</a> for even more Sbn videos</p>
+</localize>
+
+<div class="row-fluid" 
+	ng-init="init('https://Sbn.tv/videos/implementor/chapterrss?sort=no')" 
+	ng-controller="Sbn.Dashboard.StartupVideosController">
+
+    <div ng-show="videos.length">
+        <h4>
+            <localize key="settingsDashboardVideos_getStarted">To get you started</localize>:
+        </h4>
+        <ul class="thumbnails" >
+            <li class="span2" ng-repeat="video in videos">
+                <div class="thumbnail" style="margin-right: 20px">
+                    <a target="_blank" rel="noopener" href="{{video.link}}" title="{{video.title}}">
+                        <img ng-src="{{video.thumbnail}}"  alt="{{video.title}}">
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

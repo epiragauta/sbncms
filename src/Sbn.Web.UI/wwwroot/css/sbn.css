@@ -1,0 +1,149 @@
+footer {
+  background: #bad405;
+  padding: 30px 0; 
+}
+  footer .logo_footer {
+    width: 190px;
+    display: block;
+    margin: 0 0 20px; 
+  }
+    footer .logo_footer img {
+      width: 100%; 
+        
+    }
+  footer .box_link_footer a {
+    display: inline-block;
+    margin: 0 5px 0 0; 
+      
+  }
+    footer .box_link_footer a img {
+      width: 25px; 
+        
+    }
+  footer .links_social a {
+    display: inline-block;
+    margin: 10px 5px 10px 0; 
+      
+  }
+    footer .links_social a img {
+      width: auto;
+      height: 20px; 
+        
+    }
+  footer .link-footer {
+    color: #333333;
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 14px;
+    margin-bottom: 1rem;
+    display: block; 
+  }
+  footer .info_footer {
+    font-size: 14px; }
+    footer .info_footer strong {
+      color: #333333;
+      font-weight: 600;
+      font-size: 14px; 
+    }
+    footer .info_footer a {
+      color: #333333;
+      font-size: 14px;
+      overflow-wrap: break-word; 
+        
+    }
+  footer .links_site {
+    text-align: right;
+    margin-top: 40px; 
+  }
+    @media screen and (max-width: 768px) {
+      footer .links_site {
+        text-align: left; 
+      } 
+        
+    }
+    footer .links_site a {
+      color: #333333;
+      display: block;
+      font-size: 14px;
+      text-decoration: underline;
+      margin: 16px 0; 
+    }
+  footer .box_tyc {
+    text-align: right;
+    margin: 22px 0; }
+    @media screen and (max-width: 768px) {
+      footer .box_tyc {
+        text-align: left;
+      } 
+    }
+    footer .box_tyc a {
+      color: #333333;
+      font-size: 14px; 
+    }
+
+.copyright {
+  height: 35px;
+  background-color: #E6E6E6;
+  color: #333333;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  padding-top: 10px; 
+}
+
+ #holder {
+    height: 600px;
+    margin: 0px 0 0 0px;
+    width: 850px;
+    margin-left: 15px;
+    background-color:#fefefe;
+}
+#time {
+    text-align: center;
+    font: 100 3em "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.news-wrapper .row .img {
+    width: 150px;
+    min-height: 150px;
+    border-radius: 50%;
+    margin-bottom: 16px;
+    margin-left:60px;
+    color: #333333;
+    background-size: cover;
+    border: 15px solid #eee;
+}
+
+.news-wrapper .row .flag {
+    position: absolute;
+    background: #bad405;
+    top: 24px;
+    padding: 6px 8px;
+    font-size: 14px;
+    color: #333333;
+    line-height: 1;
+    font-weight: 600;
+}
+
+.news-wrapper {
+    position: relative;
+    padding-bottom: 32px;
+    padding-left:20px;
+    padding-right:20px;
+}
+
+.news-vertical-content{
+    padding:1px;
+    width:300px;
+}
+
+.news-text{
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.news-wrapper .row .titulo-step{
+    text-align: center;
+    color: #1B4F72;
+}
+
