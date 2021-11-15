@@ -3,14 +3,6 @@ using Sbn.Cms.Core.Configuration;
 using Sbn.Cms.Core.Semver;
 using Sbn.Cms.Infrastructure.Migrations.Upgrade.Common;
 using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_0_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_0_1;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_1_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_10_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_15_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_17_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_6_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_7_0;
-using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_8_9_0;
 using Sbn.Cms.Infrastructure.Migrations.Upgrade.V_9_0_0;
 using Sbn.Extensions;
 
@@ -188,64 +180,7 @@ namespace Sbn.Cms.Infrastructure.Migrations.Upgrade
             To<RenameLabelAndRichTextPropertyEditorAliases>("{E0CBE54D-A84F-4A8F-9B13-900945FD7ED9}");
             To<MergeDateAndDateTimePropertyEditor>("{78BAF571-90D0-4D28-8175-EF96316DA789}");
             // release-8.0.0
-
-            // to 8.0.1
-            To<ChangeNuCacheJsonFormat>("{80C0A0CB-0DD5-4573-B000-C4B7C313C70D}");
-            // release-8.0.1
-
-            // to 8.1.0
-            To<ConvertTinyMceAndGridMediaUrlsToLocalLink>("{B69B6E8C-A769-4044-A27E-4A4E18D1645A}");
-            To<RenameUserLoginDtoDateIndex>("{0372A42B-DECF-498D-B4D1-6379E907EB94}");
-            To<FixContentNuCascade>("{5B1E0D93-F5A3-449B-84BA-65366B84E2D4}");
-
-            // to 8.6.0
-            To<UpdateRelationTypeTable>("{4759A294-9860-46BC-99F9-B4C975CAE580}");
-            To<AddNewRelationTypes>("{0BC866BC-0665-487A-9913-0290BD0169AD}");
-            To<AddPropertyTypeValidationMessageColumns>("{3D67D2C8-5E65-47D0-A9E1-DC2EE0779D6B}");
-            To<MissingContentVersionsIndexes>("{EE288A91-531B-4995-8179-1D62D9AA3E2E}");
-            To<AddMainDomLock>("{2AB29964-02A1-474D-BD6B-72148D2A53A2}");
-
-            // to 8.7.0
-            To<MissingDictionaryIndex>("{a78e3369-8ea3-40ec-ad3f-5f76929d2b20}");
-
-            // to 8.9.0
-            To<ExternalLoginTableUserData>("{B5838FF5-1D22-4F6C-BCEB-F83ACB14B575}");
-
-            // to 8.10.0
-            To<AddPropertyTypeLabelOnTopColumn>("{D6A8D863-38EC-44FB-91EC-ACD6A668BD18}");
-
-            // NOTE: we need to do a merge migration here because as of 'now',
-            // v9-beta* is already out and 8.15 isn't out yet
-            // so we need to ensure that migrations from 8.15 are included in the next
-            // v9*.
-
-            Merge()
-                // to 8.15.0
-                .To<AddCmsContentNuByteColumn>("{8DDDCD0B-D7D5-4C97-BD6A-6B38CA65752F}")
-                .To<UpgradedIncludeIndexes>("{4695D0C9-0729-4976-985B-048D503665D8}")
-                .To<UpdateCmsPropertyGroupIdSeed>("{5C424554-A32D-4852-8ED1-A13508187901}")
-            .With()
-                // to 9.0.0 RC1
-                .To<MigrateLogViewerQueriesFromFileToDb>("{22D801BA-A1FF-4539-BFCC-2139B55594F8}")
-                .To<ExternalLoginTableIndexes>("{50A43237-A6F4-49E2-A7A6-5DAD65C84669}")
-                .To<ExternalLoginTokenTable>("{3D8DADEF-0FDA-4377-A5F0-B52C2110E8F2}")
-                .To<MemberTableColumns>("{1303BDCF-2295-4645-9526-2F32E8B35ABD}")
-                .To<AddPasswordConfigToMemberTable>("{86AC839A-0D08-4D09-B7B5-027445E255A1}")
-            .As("{5060F3D2-88BE-4D30-8755-CF51F28EAD12}");
-
-            Merge()
-                // to 8.17.0
-                .To<AddPropertyTypeGroupColumns>("{153865E9-7332-4C2A-9F9D-F20AEE078EC7}")
-            .With()
-                // This should be safe to execute again. We need it with a new name to ensure updates from all the following has executed this step.
-                // - 8.15.0 RC    - Current state: {4695D0C9-0729-4976-985B-048D503665D8}
-                // - 8.15.0 Final - Current state: {5C424554-A32D-4852-8ED1-A13508187901}
-                // - 9.0.0 RC1    - Current state: {5060F3D2-88BE-4D30-8755-CF51F28EAD12}           
-                .To<UpdateCmsPropertyGroupIdSeed>("{622E5172-42E1-4662-AD80-9504AF5A4E53}")
-                .To<ExternalLoginTableIndexesFixup>("{10F7BB61-C550-426B-830B-7F954F689CDF}")
-                .To<DictionaryTablesIndexes>("{12DCDE7F-9AB7-4617-804F-AB66BF360980}")
-            .As("{5AAE6276-80DB-4ACF-B845-199BC6C37538}");
-
+            
             // TO 9.0.0-rc4
             To<SbnServerColumn>("5E02F241-5253-403D-B5D3-7DB00157E20F");
 
