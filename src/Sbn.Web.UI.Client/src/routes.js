@@ -1,11 +1,11 @@
 app.config(function ($routeProvider) {
-    
+
     /**
      * This determines if the route can continue depending on authentication and initialization requirements
      * @param {boolean} authRequired If true, it checks if the user is authenticated and will resolve successfully
         otherwise the route will fail and the $routeChangeError event will execute, in that handler we will redirect to the rejected
         path that is resolved from this method and prevent default (prevent the route from executing)
-     * @returns {promise} 
+     * @returns {promise}
      */
     var canRoute = function(authRequired) {
 
@@ -117,9 +117,9 @@ app.config(function ($routeProvider) {
             template: "<div ng-include='templateUrl'></div>",
             //This controller will execute for this route, then we can execute some code in order to set the template Url
             controller: function ($scope, $route, $routeParams, $location, sectionService) {
-                
+
                 //We are going to check the currently loaded sections for the user and if the section we are navigating
-                //to has a custom route path we'll use that 
+                //to has a custom route path we'll use that
                 sectionService.getSectionsForUser().then(function(sections) {
                     //find the one we're requesting
                     var found = _.find(sections, function(s) {
@@ -161,14 +161,6 @@ app.config(function ($routeProvider) {
                     return;
                 }
 
-                //TODO: Fix this special case by using components, the packager should be a component and then we just have a view for each route like normal rendering the component with the correct parameters
-                //special case for the package section
-                var packagePages = ["edit", "options"];
-                if ($routeParams.section.toLowerCase() === "packages" && $routeParams.tree.toLowerCase() === "packages" && packagePages.indexOf($routeParams.method.toLowerCase()) === -1) {
-                    $scope.templateUrl = "views/packages/overview.html";
-                    return;
-                }
-
                 //TODO: Fix this special case by using components, the users section should be a component and then we just have a view for each route like normal rendering the component with the correct parameters
                 //special case for the users section
                 var usersPages = ["user", "group"];
@@ -199,7 +191,7 @@ app.config(function ($routeProvider) {
         })
         .otherwise({ redirectTo: '/login' });
     }).config(function ($locationProvider) {
-        
+
         $locationProvider.html5Mode(false); //turn html5 mode off
         $locationProvider.hashPrefix('');
     });

@@ -1,7 +1,7 @@
 angular.module('sbn.mocks').
   factory('treeMocks', ['$httpBackend', 'mocksUtils', function ($httpBackend, mocksUtils) {
       'use strict';
-      
+
       function getMenuItems() {
 
           if (!mocksUtils.checkAuth()) {
@@ -27,7 +27,7 @@ angular.module('sbn.mocks').
               { name: "Public Access", cssclass: "group", alias: "publicaccess", metaData: {} },
 
               { separator: true, name: "Reload", cssclass: "refresh", alias: "users", metaData: {} },
-          
+
                 { separator: true, name: "Empty Recycle Bin", cssclass: "trash", alias: "emptyRecycleBin", metaData: {} }
           ];
 
@@ -40,7 +40,7 @@ angular.module('sbn.mocks').
       }
 
       function returnChildren(status, data, headers) {
-          
+
           if (!mocksUtils.checkAuth()) {
               return [401, null, null];
           }
@@ -51,7 +51,7 @@ angular.module('sbn.mocks').
 
           var url = "/sbn/SbnTrees/ApplicationTreeApi/GetChildren?treeType=" + section + "&id=1234&level=" + level;
           var menuUrl = "/sbn/SbnTrees/ApplicationTreeApi/GetMenu?treeType=" + section + "&id=1234&parentId=456";
-          
+
           //hack to have create as default content action
           var action;
           if (section === "content") {
@@ -72,17 +72,17 @@ angular.module('sbn.mocks').
           if (!mocksUtils.checkAuth()) {
               return [401, null, null];
           }
-          
+
           var children = [
               { name: "Textstring", childNodesUrl: null, id: 10, icon: "icon-document", children: [], expanded: false, hasChildren: false, level: 1,  menuUrl: null },
               { name: "Multiple textstring", childNodesUrl: null, id: 11, icon: "icon-document", children: [], expanded: false, hasChildren: false, level: 1,  menuUrl: null },
               { name: "Yes/No", childNodesUrl: null, id: 12, icon: "icon-document", children: [], expanded: false, hasChildren: false, level: 1,  menuUrl: null },
               { name: "Rich Text Editor", childNodesUrl: null, id: 13, icon: "icon-document", children: [], expanded: false, hasChildren: false, level: 1,  menuUrl: null }
-          ];  
-          
+          ];
+
           return [200, children, null];
       }
-      
+
       function returnDataTypeMenu(status, data, headers) {
           if (!mocksUtils.checkAuth()) {
               return [401, null, null];
@@ -93,7 +93,7 @@ angular.module('sbn.mocks').
                    name: "Create", cssclass: "plus", alias: "create", metaData: {
                        jsAction: "sbnMenuActions.CreateChildEntity"
                    }
-              },              
+              },
               { separator: true, name: "Reload", cssclass: "refresh", alias: "users", metaData: {} }
           ];
 
@@ -148,7 +148,7 @@ angular.module('sbn.mocks').
                   };
 
                   break;
-              case "developer":                  
+              case "developer":
 
                   var dataTypeChildrenUrl = "/sbn/SbnTrees/DataTypeTree/GetNodes?id=-1&application=developer";
                   var dataTypeMenuUrl = "/sbn/SbnTrees/DataTypeTree/GetMenu?id=-1&application=developer";
@@ -159,7 +159,6 @@ angular.module('sbn.mocks').
                       children: [
                           { name: "Data types", childNodesUrl: dataTypeChildrenUrl, id: -1, icon: "icon-folder-close", children: [], expanded: false, hasChildren: true, level: 1, menuUrl: dataTypeMenuUrl, metaData: { treeAlias: "dataTypes" } },
                           { name: "Macros", childNodesUrl: url, id: -1, icon: "icon-folder-close", children: [], expanded: false, hasChildren: true, level: 1, menuUrl: menuUrl, metaData: { treeAlias: "macros" } },
-                          { name: "Packages", childNodesUrl: url, id: -1, icon: "icon-folder-close", children: [], expanded: false, hasChildren: true, level: 1, menuUrl: menuUrl, metaData: { treeAlias: "packager" } },
                           { name: "Partial View Macros", childNodesUrl: url, id: -1, icon: "icon-folder-close", children: [], expanded: false, hasChildren: true, level: 1, menuUrl: menuUrl, metaData: { treeAlias: "partialViewMacros" } }
                       ],
                       expanded: true,
@@ -185,10 +184,10 @@ angular.module('sbn.mocks').
                       level: 0,
                       isContainer: true
                   };
-                  
+
                   break;
               default:
-                  
+
                   t = {
                       name: "randomTree",
                       id: -1,
@@ -208,14 +207,14 @@ angular.module('sbn.mocks').
                   break;
           }
 
-      
+
           return [200, t, null];
       }
 
 
       return {
           register: function() {
-              
+
               $httpBackend
                  .whenGET(mocksUtils.urlRegex('/sbn/SbnTrees/ApplicationTreeApi/GetApplicationTrees'))
                  .respond(returnApplicationTrees);
@@ -223,20 +222,20 @@ angular.module('sbn.mocks').
               $httpBackend
                  .whenGET(mocksUtils.urlRegex('/sbn/SbnTrees/ApplicationTreeApi/GetChildren'))
                  .respond(returnChildren);
-              
+
 
               $httpBackend
                  .whenGET(mocksUtils.urlRegex('/sbn/SbnTrees/DataTypeTree/GetNodes'))
                  .respond(returnDataTypes);
-              
+
               $httpBackend
                  .whenGET(mocksUtils.urlRegex('/sbn/SbnTrees/DataTypeTree/GetMenu'))
                  .respond(returnDataTypeMenu);
-              
+
               $httpBackend
                  .whenGET(mocksUtils.urlRegex('/sbn/SbnTrees/ApplicationTreeApi/GetMenu'))
                  .respond(getMenuItems);
-              
+
           }
       };
   }]);

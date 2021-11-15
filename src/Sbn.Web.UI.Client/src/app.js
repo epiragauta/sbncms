@@ -3,7 +3,7 @@ var app = angular.module('sbn', [
 	'sbn.directives',
 	'sbn.resources',
 	'sbn.services',
-	'sbn.packages',
+
 	'sbn.views',
 
     'ngRoute',
@@ -39,8 +39,6 @@ angular.module("sbn").config(
         $animateProvider.classNameFilter( /\bumb-animated\b/ );
     }
 );
-
-var packages = angular.module("sbn.packages", []);
 
 //this ensures we can inject our own views into templateCache and clear
 //the entire cache before the app runs, due to the module
