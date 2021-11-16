@@ -1,0 +1,94 @@
+﻿@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Recursos>
+@{
+	Layout = "master.cshtml";
+}
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 3rem;" >
+    <div class="titles">Recursos</div>
+    <div>En esta sección usted encontrará documentos científicos relacionados con la implementación de las SbN y sus beneficios para el medio ambiente</div>
+    
+    <div class="row">
+        <div class="col-md-4 px-5">
+            <input class="col-md-12 signup-input text-value input-search" type="search" id="mySearchText2" aria-label="Recipient's username" >
+        </div>
+    </div>
+    
+    
+    <section class="section">
+        <div class="row">
+        @{
+            var numberOfRecursos = 5; //Model.CasosAmostrar;
+            var startNodeId = Model.Id;
+            var startNode = Sbn.Content(startNodeId);
+            if (startNode == null){
+                  <div class="recursos">
+                      <h1>No hay recursos en este momento, intente después.</h1>
+                  </div>
+                  return;
+            }
+            
+            //Gets all recursos to calculate pages
+            var recursos = startNode.Children.OrderBy(x => x.CreateDate).ToList();
+            var numOfRecursos = recursos.Count;
+            var columns = 3;
+            int counter = 0;
+            int numOfRecursosByPage = 6;
+            
+            var pageCount = (int)Math.Ceiling((double)numOfRecursos / (double)numOfRecursosByPage);
+            //gets the page from the querystring and sets it to one if it is out of range
+            
+            var page = 1;
+            
+            if (!string.IsNullOrEmpty(Context.Request.Query["page"])){
+                int.TryParse(Context.Request.Query["page"], out page);
+                if (page <= 0 || page > pageCount){
+                    page = 1;
+                }
+            }
+            
+            //Gets the recursos for the current page
+            var pagedResources = recursos.Skip((page - 1) * numOfRecursosByPage).Take(numOfRecursosByPage).ToList();
+        
+            if (pagedResources.Count != null){
+                @foreach (ContentModels.Recurso recurso in pagedResources){
+                    <div class="col-md-12">
+                        <h2>@recurso.Nombre</h2>
+                        <div>@recurso.Detalle</div>
+                        <div class="blogpost-meta">
+                            <small class="blogpost-date">@recurso.CreateDate.ToShortDateString()</small>
+                        </div>
+                    </div>
+                }
+            }
+        }
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            @{        
+                if (pageCount > 1){
+                    <div class="pagination justify-content-center">
+                        <ul>
+                            @if (page > 1)
+                            {
+                                <li><a href="?page=@(page-1)">Anterior</a></li>
+                            }
+                            @for (int p = 1; p < pageCount + 1; p++)
+                            {
+                                <li class="@(p == page ? "active" : string.Empty)">
+                                    <a href="?page=@p">@p</a>
+                                </li>
+                            }
+                            @if (page < pageCount)
+                            {
+                                <li><a href="?page=@(page+1)">Siguiente</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+            </div>
+        </div>
+    </section>
+    
+</section>
