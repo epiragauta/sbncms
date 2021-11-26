@@ -1,0 +1,52 @@
+﻿@inherits Sbn.Cms.Web.Common.Views.SbnViewPage
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@{
+    string carouselId = "mainCarousel";
+    var carousel = Model.Value<IEnumerable<IPublishedElement>>(carouselId);
+}
+
+@if (carousel != null && carousel.Any())
+{
+    <div class="carousel slide tamanio" data-ride="carousel" id="@carouselId">
+        <div class="carousel-inner" >
+            @{
+                int slideCount = 0;
+                foreach (var slide in carousel){
+                    string title = slide.Value<string>("slideTitle");
+                    string subtitle = slide.HasValue("slideSubtitle") ? slide.Value<string>("slideSubtitle") : "";
+                    string imageUrl = slide.Value<IPublishedContent>("slideImage")?.GetCropUrl(1920,1080) ?? "/img/carousel.jpg";
+                    //IEnumerable<Link> links = slide.Value<IEnumerable<Link>>("slideLink");
+                    //Link link = links != null ? links.FirstOrDefault() : null;
+
+                    <div class="carousel-item @(slideCount == 0 ? "active" : "")" style="height:auto;" data-interval="15000">
+                        <div class="jumbotron carousel-hero" style="background-image:url('@(imageUrl)');">
+                            <a href="http://www.google.com">
+                                <div class="text-info-over-img"> 
+                                    <p class="carousel-title">@title</p>
+                                    <div class="border border-warning title-separator-main-carousel"></div>
+                                    <p class="carousel-subtitle">@subtitle</p>
+                                    <div class="div-btn-carousel">
+                                        <button type="button" class="btn btn-carousel" >Leer más</button>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    slideCount++;
+                }
+            }
+            <a class="carousel-control-prev" href="#@carouselId" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"  style="position: absolute;left: 2rem; background-image:url('/media/carousel/after.png');"></span>
+            </a>
+            <a class="carousel-control-next " href="#@carouselId" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"style="position: absolute;right: 2rem; background-image:url('/media/carousel/next.png');"></span>
+             </a>
+        </div>
+        <ol class="carousel-indicators">
+            @for (int i = 0; i < slideCount; i++)
+            {
+                <li data-target="#@carouselId" data-slide-to="@i" class="@(i == 0 ? "active" : null)"></li>
+            }
+        </ol>
+    </div>
+}

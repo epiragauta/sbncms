@@ -1,0 +1,139 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
+@import url(https://fonts.googleapis.com/css2?family=Work+Sans);
+@import url(https://fonts.googleapis.com/css2?family=Oxygen);
+
+div.jumbotron.carousel-hero {
+  color:#fff;
+  text-align:center;
+  background-size:cover;
+  background-position:center;
+  margin-bottom:0;
+  padding: 1px 0px;
+}
+
+h1.hero-title, h2.hero-title, h3.hero-title {
+  color: white; 
+    font-size: 27px;
+    font-family: 'Paytone One', sans-serif;
+}
+
+div.carousel-hero p {
+    text-shadow: 0 0 10px #000000;
+}
+
+div.carousel-hero h1 {
+    text-shadow: 0 0 20px #000000;
+}
+
+.carousel-inner{
+    padding-top:0px;
+}
+.carousel-control.right {
+	right: 20px;
+}
+
+.carousel-control.left {
+	left: 20px;
+}
+
+.text-info-over-img{
+ position:relative; 
+ background: linear-gradient(to right, #033003, #125312 50%, #125312 55%, #5be35d0d 95%);
+ top:0px;
+ height: 24rem;
+ padding-top: 2rem;
+ padding-bottom: 20px;
+ width:50%;
+ margin-top:-1px;
+ margin-bottom:-1px;
+}
+
+.carousel-indicators li {
+    width: 10px;
+    height: 10px;
+    margin-right: 7px;
+    margin-left: 7px;
+    border-radius: 50%;
+}
+
+.carousel-title{
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-top: 9rem;
+    margin-bottom: 13px;
+    text-align: left;
+    margin-left: 7rem;
+}
+
+.carousel-title{
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-top: 5rem !important;
+    margin-bottom: 13px;
+    text-align: left;
+    margin-left: 7rem;
+    color: #fff;
+    width: 50%;
+}
+
+p.carousel-subtitle {
+    margin-top: 2rem !important;
+    max-width: 600px;
+    margin-left: 7rem;
+    color: #fff;
+    font-size: 14px;
+    text-align:left;
+    width: 50%;
+}
+
+.div-btn-carousel{
+    text-align: left;
+    margin-left: 7rem;
+}
+.btn-carousel{
+    background-color:#dfe633;
+    border-radius: 8px 0 8px 0;
+    font-weight: 500;
+    width: 115px;
+    line-height: 1.1;
+}
+
+.carousel-control-2 {
+    display: inline-block;
+    height: 225px;
+    width: 42px;
+    z-index: 2;
+    background-color: #4d4d4d;
+}
+
+.carousel-control-2:hover {
+    background-color: #dfe633;
+}
+
+.carousel-prev-icon-2{
+    margin-top:6rem;
+}
+
+.border-bl-carousel{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: none;
+    margin: 86px auto 0 -55px;
+    background-color: #dfe633;
+    bottom: -15px;
+    left: 50px;
+}
+
+.border-tr-carousel{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    margin: 8px -48px 0 auto;
+    background-color: #dfe633;
+    top: -22px;
+    right: 100px;;
+}

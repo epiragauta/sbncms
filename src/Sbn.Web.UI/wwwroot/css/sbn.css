@@ -1,11 +1,36 @@
+body{
+    background-color:#f5f5f5 !important;
+}
+
+.frontpage{
+    background-color:#f5f5f5 !important;
+}
+.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{
+    color: #014235 !important;
+}
+
+.title-separator-main-carousel{
+    margin-left: 7rem;
+    width: 45%;
+}
+
+.card{
+    border-radius: 0.75rem;
+}
+
+.card-img-top{
+    border-radius: 0.75rem;
+}
+
 footer {
-  background: #bad405;
-  padding: 30px 0; 
+  background: #eeefe9;
+  color: #2c6e28;
+  font-weight: 500;
+  padding: 1px 0; 
 }
   footer .logo_footer {
     width: 190px;
     display: block;
-    margin: 0 0 20px; 
   }
     footer .logo_footer img {
       width: 100%; 
@@ -41,12 +66,12 @@ footer {
   footer .info_footer {
     font-size: 14px; }
     footer .info_footer strong {
-      color: #333333;
+      color: #266831;
       font-weight: 600;
       font-size: 14px; 
     }
     footer .info_footer a {
-      color: #333333;
+      color: #266831;
       font-size: 14px;
       overflow-wrap: break-word; 
         
@@ -62,10 +87,10 @@ footer {
         
     }
     footer .links_site a {
-      color: #333333;
+      color: #2c6e28;
+      font-weight: 500;
       display: block;
       font-size: 14px;
-      text-decoration: underline;
       margin: 16px 0; 
     }
   footer .box_tyc {
@@ -77,7 +102,8 @@ footer {
       } 
     }
     footer .box_tyc a {
-      color: #333333;
+      color: #2c6e28;
+      font-weight: 500;
       font-size: 14px; 
     }
 
@@ -88,7 +114,6 @@ footer {
   font-size: 12px;
   line-height: 14px;
   text-align: center;
-  padding-top: 10px; 
 }
 
  #holder {
@@ -228,6 +253,7 @@ footer {
     height: 28px;
     text-decoration: none;
     line-height: 30px;
+    */
 }
 
     .pagination li a.active, .pagination li a:hover {
@@ -240,9 +266,70 @@ footer {
         opacity:0.5;
     }
 
-        .pagination li a.disabled:hover {
-            cursor:default;
-            color: #a5a5a5;
-            background: #eee;
-            text-decoration: none;
-        }
+    .pagination li a.disabled:hover {
+        cursor:default;
+        color: #a5a5a5;
+        background: #eee;
+        text-decoration: none;
+    }
+    
+
+
+.btn-sbn-tools{
+    text-align: left;
+}
+
+.btn-sbn-tools {
+    background-color: #dfe633;
+    border-radius: 8px 0 8px 0;
+    font-weight: 500;
+    width: 115px;
+    font-size:13px;
+    line-height: 1.1;
+    height: 40px;
+}
+
+.btn-sbn-tools-2 {
+    background-color: #1a3f32;
+    color: #dfe633;
+    border-radius: 8px 0 8px 0;
+    font-weight: 500;
+    width: 115px;
+    font-size:13px;
+    line-height: 1.1;
+    height: 40px;
+}
+
+.btn-sbn-tools-2:hover {
+    color:#fff;
+}
+
+.curved-div svg {
+  display: block;
+}
+
+.curved-div {
+    position: relative;
+    padding: 2em;
+    left: 45%;
+    transform: translate(-50%, -70%);
+    opacity: 0.9;
+    z-index:-1;
+}
+ 
+.laptop-main-page{
+    position: relative;
+    padding: 2em;
+    left: 25%;
+    transform: translate(-48%, 2%);
+    opacity: 0.95;
+}  
+
+.border-sbn-tools{
+    margin-top:20px;
+    padding-bottom:20px;
+    border:3px solid !important;
+    border-color: #dfe633!important;
+    border-top-left-radius: 2rem!important;
+}
+    
