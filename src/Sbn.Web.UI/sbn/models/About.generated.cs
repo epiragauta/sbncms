@@ -18,14 +18,14 @@ using Sbn.Extensions;
 
 namespace Sbn.Cms.Web.Common.PublishedModels
 {
-	/// <summary>index</summary>
-	[PublishedModel("index")]
-	public partial class Index : PublishedContentModel
+	/// <summary>about</summary>
+	[PublishedModel("about")]
+	public partial class About : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
-		public new const string ModelTypeAlias = "index";
+		public new const string ModelTypeAlias = "about";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
@@ -34,27 +34,19 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Index, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<About, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public Index(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public About(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
 		}
 
 		// properties
-
-		///<summary>
-		/// que-es
-		///</summary>
-		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
-		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("queEs")]
-		public virtual global::Newtonsoft.Json.Linq.JToken QueEs => this.Value<global::Newtonsoft.Json.Linq.JToken>(_publishedValueFallback, "queEs");
 	}
 }

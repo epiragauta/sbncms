@@ -18,14 +18,14 @@ using Sbn.Extensions;
 
 namespace Sbn.Cms.Web.Common.PublishedModels
 {
-	/// <summary>index</summary>
-	[PublishedModel("index")]
-	public partial class Index : PublishedContentModel
+	/// <summary>Carousel Slide</summary>
+	[PublishedModel("carouselSlide")]
+	public partial class CarouselSlide : PublishedElementModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
-		public new const string ModelTypeAlias = "index";
+		public new const string ModelTypeAlias = "carouselSlide";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
@@ -34,14 +34,14 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Index, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<CarouselSlide, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public Index(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public CarouselSlide(IPublishedElement content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,11 +50,35 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// que-es
+		/// Slide Image
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("queEs")]
-		public virtual global::Newtonsoft.Json.Linq.JToken QueEs => this.Value<global::Newtonsoft.Json.Linq.JToken>(_publishedValueFallback, "queEs");
+		[ImplementPropertyType("slideImage")]
+		public virtual global::Sbn.Cms.Core.Models.MediaWithCrops SlideImage => this.Value<global::Sbn.Cms.Core.Models.MediaWithCrops>(_publishedValueFallback, "slideImage");
+
+		///<summary>
+		/// Slide Link
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("slideLink")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Sbn.Cms.Core.Models.Link> SlideLink => this.Value<global::System.Collections.Generic.IEnumerable<global::Sbn.Cms.Core.Models.Link>>(_publishedValueFallback, "slideLink");
+
+		///<summary>
+		/// Slide Subtitle
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("slideSubtitle")]
+		public virtual string SlideSubtitle => this.Value<string>(_publishedValueFallback, "slideSubtitle");
+
+		///<summary>
+		/// Slide Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+aba021f90748cc785ddef384796ecfcb829d9634")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("slideTitle")]
+		public virtual string SlideTitle => this.Value<string>(_publishedValueFallback, "slideTitle");
 	}
 }
