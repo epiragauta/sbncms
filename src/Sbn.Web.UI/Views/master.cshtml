@@ -3,7 +3,6 @@
 @{
 	Layout = null;
 }
-
 <!doctype html>
 <html>
 <head>
@@ -13,43 +12,32 @@
     <title>Name - Sitename</title>
     <meta name="description" content="">
     <meta name="author" content="">
+    <title>@Model.Name</title>
+    <link rel="stylesheet" href="@Url.Content("~/css/nicepage.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/home.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/sbn.css")" media="screen">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="screen">
+    <script type="text/javascript" src="@Url.Content("~/sbn/lib/jquery/jquery.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/nicepage.js")" defer=""></script>
+    
     @RenderSection("Header", required: false)
 </head>
 
 <body class="frontpage">
+    <header class="u-clearfix u-custom-color-3 u-header u-header" id="sec-ead9">
+        @Html.Partial("~/Views/Partials/Navigation/sbnHeader.cshtml")
+    </header>
     <div class="mobile-nav">
         <nav class="nav-bar">
-            TopNavigation
+            
         </nav>
     </div>
-
-    <header class="header">
-
-        <nav class="nav-bar top-nav">
-            TopNavigation
-        </nav>
-
-        <div class="mobile-nav-handler">
-            <div class="hamburger lines" id="toggle-nav">
-                <span></span>
-            </div>
-        </div>
-
-    </header>
 
     <main>
         @RenderBody()
     </main>
 
-    <footer class="section--themed">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 ta-center">
-                    Footer
-                </div>
-            </div>
-        </div>
-    </footer>
+
 </body>
 
 </html>

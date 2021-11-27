@@ -1,0 +1,28 @@
+﻿@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.CasoDeExito>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+}
+
+
+<section class="section container w3-border w3-container w3-round-xlarge" >
+    
+    <section class="section">
+        <div class="container">
+            <h2>@Model.Nombre</h2>
+            <div>@Model.Detalle</div>
+            <h4>Imagen</h4>
+            <img src="@Model.Imagen.LocalCrops.Src"  width="300" height="200">
+            <h4>Documentos</h4>
+            @foreach (var d in @Model.Documento)
+            {
+                <a target="_blank" href="@d.Url">Ver documento</a>
+            }
+            <div class="blogpost-meta">
+                <small class="blogpost-date">@Model.CreateDate.ToShortDateString()</small>
+            </div>
+        </div>
+     </section>
+</section>
+
+

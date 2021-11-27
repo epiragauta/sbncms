@@ -1,0 +1,138 @@
+﻿@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.CasosDeExito>
+@{
+	Layout = "master.cshtml";
+}
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 3rem;" >
+    <div class="titles">Casos de Exito</div>
+    
+    <div class="row">
+        <div class="col-md-4 px-5">
+          <label for="inputNameTypeEATExisting">Nacional</label>
+          <select class="select-contact" id="categoria">
+            <option selected>Seleccionar</option>
+            <option value="1">Técnico</option>
+            <option value="2">Juridico</option>
+            <option value="2">Otro</option>
+          </select>
+        </div>
+        <div class="col-md-4 px-5">
+          <label for="inputNameTypeEATExisting">Área temática</label>
+          <select class="select-contact" id="tipoEAT">
+            <option selected>Seleccionar</option>
+            <option value="1">Opción 1</option>
+            <option value="2">Opción 2</option>
+            <option value="3">Opción 3</option>
+            <option value="4">Opción 4</option>
+            <option value="5">Opción 5</option>
+          </select>
+        </div>
+        <div class="col-md-4 px-5">
+            <input class="col-md-12 signup-input text-value input-search" type="search" id="mySearchText2" aria-label="Recipient's username" >
+        </div>
+    </div>
+    <div class="row" style="display:none;">
+        <div class="col-md-8"></div>
+        <div class="col-md-2 text-right">
+    		<button type="button" class="btn btn-link font-weight-bold">
+    			Limpiar Filtros
+    		</button>
+    	</div>
+    	<div class="col-md-2 pt-1 pr-5">
+    		<button type="button" id="mySearchButton2" class="botones" style="width: 100%;height: 70%; padding:0;">
+    			Filtrar
+    		</button>
+    	</div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">¿Quieres compartir tu casos de éxito? Escribenos aqui</div>
+    </div>
+    
+    <section class="section">
+        <div class="row">
+        @{
+            var numberOfCases = 5; //Model.CasosAmostrar;
+            var startNodeId = Model.Id;
+            var startNode = Sbn.Content(startNodeId);
+            if (startNode == null){
+                  <div class="study-cases">
+                      <h1>No hay casos de estudio en este momento, intente después.</h1>
+                  </div>
+                  return;
+            }
+            
+            //Gets all study cases to calculate pages
+            var cases = startNode.Children.OrderBy(x => x.CreateDate).ToList();
+            var numOfCases = cases.Count;
+            var columns = 3;
+            int counter = 0;
+            int numOfCasesByPage = 6;
+            
+            var pageCount = (int)Math.Ceiling((double)numOfCases / (double)numOfCasesByPage);
+            //gets the page from the querystring and sets it to one if it is out of range
+            
+            var page = 1;
+            
+            if (!string.IsNullOrEmpty(Context.Request.Query["page"])){
+                int.TryParse(Context.Request.Query["page"], out page);
+                if (page <= 0 || page > pageCount){
+                    page = 1;
+                }
+            }
+            
+            //Gets the cases for the current page
+            var pagedCases = cases.Skip((page - 1) * numOfCasesByPage).Take(numOfCasesByPage).ToList();
+        
+        
+            if (pagedCases.Count != null){
+                @foreach (ContentModels.CasoDeExito caso in pagedCases){
+                    if (counter != 0 && counter % columns == 0){
+                        @:</div>
+                        @:<div class="row">
+                    }
+                    <div class="col-md-4">
+                        <h2>@caso.Nombre</h2>
+                        <div>@caso.Detalle</div>
+                        <h4>Imagen</h4>
+                        <img src="@caso.Imagen.LocalCrops.Src"  width="300" height="200">
+                        <h4>Documentos</h4>
+                        
+                        <div class="blogpost-meta">
+                            <small class="blogpost-date">@caso.CreateDate.ToShortDateString()</small>
+                        </div>
+                    </div>
+                    counter++;
+                }
+            }
+        }
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            @{        
+                if (pageCount > 1){
+                    <div class="pagination justify-content-center">
+                        <ul>
+                            @if (page > 1)
+                            {
+                                <li><a href="?page=@(page-1)">Anterior</a></li>
+                            }
+                            @for (int p = 1; p < pageCount + 1; p++)
+                            {
+                                <li class="@(p == page ? "active" : string.Empty)">
+                                    <a href="?page=@p">@p</a>
+                                </li>
+                            }
+                            @if (page < pageCount)
+                            {
+                                <li><a href="?page=@(page+1)">Siguiente</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+            </div>
+        </div>
+    </section>
+    
+</section>

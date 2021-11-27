@@ -1,0 +1,807 @@
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) { 
+    
+ }
+
+/*X-Large devices (large desktops, 1200px and up) 1366*/
+@media (min-width: 1200px) and (max-width: 1599px) { 
+    
+    .cicle_background{
+        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        height: 543px;
+        background-repeat: no-repeat;
+        z-index: 1;
+    }
+    
+    .data-d{
+        max-width: 30rem;
+    }
+
+    .diagram-name{
+        z-index: 2;
+        position: absolute;
+        top: 124px;
+        left: 54px;
+        width: 103px;
+        text-align: center;
+    }
+
+    .diagram-subtitle{
+        z-index: 2;
+        position: absolute;
+        top: 470px;
+        left: 54px;
+        text-align: center;
+    }
+
+    .diagram-center{
+        z-index: 2;
+        position: absolute;
+        top: 281px;
+        left: 203px;
+        width: 86px;
+        text-align: center;
+    }
+
+    .element-1{
+        z-index: 2;
+        position: absolute;
+        top: 100px;
+        left: 208px;
+    }
+
+    .element-2{
+        z-index: 2;
+        position: absolute;
+        top: 230px;
+        left: 355px;
+    }
+
+    .element-3{
+        z-index: 2;
+        position: absolute;
+        top: 365px;
+        left: 300px;
+    }
+
+    .element-4{
+        z-index: 2;
+        position: absolute;
+        top: 365px;
+        left: 62px;
+    }
+
+    .element-5{
+        z-index: 2;
+        position: absolute;
+        top: 230px;
+        left: 38px;
+    }
+
+    .element-1-label{
+        z-index: 2;
+        position: absolute;
+        top: 80px;
+        left: 236px;
+    }
+
+    .element-2-label{
+        z-index: 2;
+        position: absolute;
+        top: 209px;
+        left: 383px;
+    }
+
+    .element-3-label{
+        z-index: 2;
+        position: absolute;
+        top: 343px;
+        left: 334px;
+    }
+
+    .element-4-label{
+        z-index: 2;
+        position: absolute;
+        top: 343px;
+        left: 100px;
+    }
+
+    .element-5-label{
+        z-index: 2;
+        position: absolute;
+        top: 209px;
+        left: 69px;
+    }
+
+    .menu-dot-1{
+        z-index: 2;
+        position: absolute;
+        top: 50px;
+        left: 360px;
+    }
+
+    .menu-dot-2{
+        z-index: 2;
+        position: absolute;
+        top: 112px;
+        left: 414px;
+    }
+
+    .menu-dot-3{
+        z-index: 2;
+        position: absolute;
+        top: 188px;
+        left: 445px;
+    }
+
+    .menu-dot-4{
+        z-index: 2;
+        position: absolute;
+        top: 272px;
+        left: 445px;
+    }
+
+    .menu-dot-5{
+        z-index: 2;
+        position: absolute;
+        top: 348px;
+        left: 415px;
+    }
+
+    .menu-dot-6{
+        z-index: 2;
+        position: absolute;
+        top: 410px;
+        left: 368px;
+    }
+
+    .menu-text{
+        font-weight: 600;
+        color: #2b5251;
+        padding: 0;
+        margin: 0;
+        font-size: .85rem;
+        max-width: 172px;
+    }
+
+    .menu-text-1{
+        z-index: 2;
+        position: absolute;
+        top: 77px;
+        left: 416px;
+    }
+
+    .menu-text-2{
+        z-index: 2;
+        position: absolute;
+        top: 140px;
+        left: 467px;
+    }
+
+    .menu-text-3{
+        z-index: 2;
+        position: absolute;
+        top: 216px;
+        left: 500px;
+    }
+
+    .menu-text-4{
+        z-index: 2;
+        position: absolute;
+        top: 300px;
+        left: 500px;
+    }
+
+    .menu-text-5{
+        z-index: 2;
+        position: absolute;
+        top: 378px;
+        left: 467px;
+    }
+
+    .menu-text-6{
+        z-index: 2;
+        position: absolute;
+        top: 440px;
+        left: 423px;
+    }
+
+    .btn-d{
+        display:inline-block;
+        font-weight:400;
+        line-height:1.5;
+        color:#212529;
+        text-align:center;
+        text-decoration:none;
+        vertical-align:middle;
+        cursor:pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        user-select:none;
+        background-color:transparent;
+        border:1px solid transparent;
+        padding:.15rem .5rem;
+        font-size: .85rem;
+        border-radius:.80rem .0rem .80rem .0rem;
+        transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    }
+
+    .data-title-d{
+        color: #2b5251;
+    }
+
+    .cursor{
+        cursor:pointer;
+        cursor: hand
+    }
+
+    .nav-link-d{
+        display:block;
+    }
+
+    .nav-link-d:focus,.nav-link-d:hover{
+        color: #bcd601 !important;
+        text-decoration:none
+    }
+
+    .element-label{
+        color: #2b5251;
+        font-weight: 600;
+        font-size: .75rem;
+    }
+
+}
+
+/*XX-Large devices (large desktops, 1400px and up)*/
+@media (min-width: 1600px) and (max-width: 1919px) { 
+    
+    .cicle_background{
+        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        height: 643px;
+        background-repeat: no-repeat;
+        z-index: 1;
+    }
+    
+    .data-d{
+        max-width: 30rem;
+    }
+
+    .diagram-name{
+        z-index: 2;
+        position: absolute;
+        top: 149px;
+        left: 64px;
+        width: 119px;
+        text-align: center;
+    }
+
+    .diagram-subtitle{
+        z-index: 2;
+        position: absolute;
+        top: 550px;
+        left: 64px;
+        text-align: center;
+    }
+
+    .diagram-center{
+        z-index: 2;
+        position: absolute;
+        top: 336px;
+        left: 241px;
+        text-align: center;
+    }
+
+    .element-1{
+        z-index: 2;
+        position: absolute;
+        top: 122px;
+        left: 245px;
+    }
+
+    .element-2{
+        z-index: 2;
+        position: absolute;
+        top: 276px;
+        left: 423px;
+    }
+
+    .element-3{
+        z-index: 2;
+        position: absolute;
+        top: 433px;
+        left: 370px;
+    }
+
+    .element-4{
+        z-index: 2;
+        position: absolute;
+        top: 433px;
+        left: 86px;
+    }
+
+    .element-5{
+        z-index: 2;
+        position: absolute;
+        top: 276px;
+        left: 50px;
+    }
+
+    .element-1-label{
+        z-index: 2;
+        position: absolute;
+        top: 102px;
+        left: 274px;
+    }
+
+    .element-2-label{
+        z-index: 2;
+        position: absolute;
+        top: 255px;
+        left: 455px;
+    }
+
+    .element-3-label{
+        z-index: 2;
+        position: absolute;
+        top: 413px;
+        left: 400px;
+    }
+
+    .element-4-label{
+        z-index: 2;
+        position: absolute;
+        top: 413px;
+        left: 125px;
+    }
+
+    .element-5-label{
+        z-index: 2;
+        position: absolute;
+        top: 255px;
+        left: 83px;
+    }
+
+    .menu-dot-1{
+        z-index: 2;
+        position: absolute;
+        top: 62px;
+        left: 432px;
+    }
+
+    .menu-dot-2{
+        z-index: 2;
+        position: absolute;
+        top: 137px;
+        left: 495px;
+    }
+
+    .menu-dot-3{
+        z-index: 2;
+        position: absolute;
+        top: 224px;
+        left: 532px;
+    }
+
+    .menu-dot-4{
+        z-index: 2;
+        position: absolute;
+        top: 323px;
+        left: 534px;
+    }
+
+    .menu-dot-5{
+        z-index: 2;
+        position: absolute;
+        top: 415px;
+        left: 502px;
+    }
+
+    .menu-dot-6{
+        z-index: 2;
+        position: absolute;
+        top: 496px;
+        left: 440px;
+    }
+
+    .menu-text{
+        font-weight: 600;
+        color: #2b5251;
+        padding: 0;
+        margin: 0;
+        font-size: .85rem;
+        max-width: 280px;
+    }
+
+    .menu-text-1{
+        z-index: 2;
+        position: absolute;
+        top: 90px;
+        left: 484px;
+    }
+
+    .menu-text-2{
+        z-index: 2;
+        position: absolute;
+        top: 165px;
+        left: 550px;
+    }
+
+    .menu-text-3{
+        z-index: 2;
+        position: absolute;
+        top: 252px;
+        left: 587px;
+    }
+
+    .menu-text-4{
+        z-index: 2;
+        position: absolute;
+        top: 352px;
+        left: 589px;
+    }
+
+    .menu-text-5{
+        z-index: 2;
+        position: absolute;
+        top: 443px;
+        left: 555px;
+    }
+
+    .menu-text-6{
+        z-index: 2;
+        position: absolute;
+        top: 526px;
+        left: 498px;
+    }
+
+    .btn-d{
+        display:inline-block;
+        font-weight:400;
+        line-height:1.5;
+        color:#212529;
+        text-align:center;
+        text-decoration:none;
+        vertical-align:middle;
+        cursor:pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        user-select:none;
+        background-color:transparent;
+        border:1px solid transparent;
+        padding:.15rem .5rem;
+        font-size: .85rem;
+        border-radius:.80rem .0rem .80rem .0rem;
+        transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    }
+
+    .data-title-d{
+        color: #2b5251;
+    }
+
+    .cursor{
+        cursor:pointer;
+        cursor: hand
+    }
+
+    .nav-link-d{
+        display:block;
+    }
+
+    .nav-link-d:focus,.nav-link-d:hover{
+        color: #bcd601 !important;
+        text-decoration:none
+    }
+
+    .element-label{
+        color: #2b5251;
+        font-weight: 600;
+        font-size: .75rem;
+    }
+
+}
+
+/*XXX-Large devices (larger desktops, 1400px and up)*/
+@media (min-width: 1920px) { 
+    .cicle_background{
+        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        height: 753px;
+        background-repeat: no-repeat;
+        z-index: 1;
+    }
+    
+    .data-d{
+        max-width: 30rem;
+    }
+
+
+    .diagram-name{
+        z-index: 2;
+        position: absolute;
+        top: 173px;
+        left: 86px;
+        width: 119px;
+        text-align: center;
+    }
+
+    .diagram-subtitle{
+        z-index: 2;
+        position: absolute;
+        top: 647px;
+        left: 85px;
+        text-align: center;
+    }
+
+    .diagram-center{
+        z-index: 2;
+        position: absolute;
+        top: 398px;
+        left: 284px;
+        text-align: center;
+    }
+
+    .element-1{
+        z-index: 2;
+        position: absolute;
+        top: 140px;
+        left: 285px;
+    }
+
+    .element-2{
+        z-index: 2;
+        position: absolute;
+        top: 330px;
+        left: 500px;
+    }
+
+    .element-3{
+        z-index: 2;
+        position: absolute;
+        top: 525px;
+        left: 425px;
+    }
+
+    .element-4{
+        z-index: 2;
+        position: absolute;
+        top: 525px;
+        left: 120px;
+    }
+
+    .element-5{
+        z-index: 2;
+        position: absolute;
+        top: 330px;
+        left: 55px;
+    }
+
+    .element-1-label{
+        z-index: 2;
+        position: absolute;
+        top: 115px;
+        left: 321px;
+    }
+
+    .element-2-label{
+        z-index: 2;
+        position: absolute;
+        top: 305px;
+        left: 537px;
+    }
+
+    .element-3-label{
+        z-index: 2;
+        position: absolute;
+        top: 500px;
+        left: 467px;
+    }
+
+    .element-4-label{
+        z-index: 2;
+        position: absolute;
+        top: 500px;
+        left: 172px;
+    }
+
+    .element-5-label{
+        z-index: 2;
+        position: absolute;
+        top: 305px;
+        left: 100px;
+    }
+
+    .menu-dot-1{
+        z-index: 2;
+        position: absolute;
+        top: 82px;
+        left: 516px;
+    }
+
+    .menu-dot-2{
+        z-index: 2;
+        position: absolute;
+        top: 174px;
+        left: 591px;
+    }
+
+    .menu-dot-3{
+        z-index: 2;
+        position: absolute;
+        top: 274px;
+        left: 631px;
+    }
+
+    .menu-dot-4{
+        z-index: 2;
+        position: absolute;
+        top: 375px;
+        left: 636px;
+    }
+
+
+    .menu-dot-5{
+        z-index: 2;
+        position: absolute;
+        top: 474px;
+        left: 605px;
+    }
+
+    .menu-dot-6{
+        z-index: 2;
+        position: absolute;
+        top: 586px;
+        left: 525px;
+    }
+
+    .menu-text{
+        font-weight: 600;
+        color: #2b5251;
+        padding: 0;
+        margin: 0;
+        max-width: 280px;
+    }
+
+    .menu-text-1{
+        z-index: 2;
+        position: absolute;
+        top: 110px;
+        left: 580px;
+    }
+
+    .menu-text-2{
+        z-index: 2;
+        position: absolute;
+        top: 200px;
+        left: 650px;
+    }
+
+    .menu-text-3{
+        z-index: 2;
+        position: absolute;
+        top: 300px;
+        left: 688px;
+    }
+
+    .menu-text-4{
+        z-index: 2;
+        position: absolute;
+        top: 402px;
+        left: 691px;
+    }
+
+    .menu-text-5{
+        z-index: 2;
+        position: absolute;
+        top: 500px;
+        left: 660px;
+    }
+
+    .menu-text-6{
+        z-index: 2;
+        position: absolute;
+        top: 613px;
+        left: 585px;
+    }
+
+    .btn-d{
+        display:inline-block;
+        font-weight:400;
+        line-height:1.5;
+        color:#212529;
+        text-align:center;
+        text-decoration:none;
+        vertical-align:middle;
+        cursor:pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        user-select:none;
+        background-color:transparent;
+        border:1px solid transparent;
+        padding:.200rem .90rem;
+        font-size:1rem;
+        border-radius:.80rem .0rem .80rem .0rem;
+        transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    }
+
+    .data-title-d{
+        color: #2b5251;
+    }
+
+    .cursor{
+        cursor:pointer;
+        cursor: hand
+    }
+
+    .nav-link-d{
+        display:block;
+    }
+
+    .nav-link-d:focus,.nav-link-d:hover{
+        color: #bcd601 !important;
+        text-decoration:none
+    }
+
+    .element-label{
+        color: #2b5251;
+        font-weight: 600;
+        font-size: .85rem;
+    }
+
+}
+
+.img-d{
+    object-fit: cover;
+    border: 10px solid #E3E2E6;
+    box-shadow: 0 0 0 10px #F1F1F1, 
+                0 0 0 10px #F1F1F1;
+    margin-bottom: 15px;
+}
+
+.active-selected{
+    color: #bcd601 !important;
+}
+
+.noselect {
+    -webkit-touch-callout: none; 
+      -webkit-user-select: none; 
+       -khtml-user-select: none; 
+         -moz-user-select: none;
+          -ms-user-select: none; 
+              user-select: none;                          
+}
+
+.btn-outline-success-d{
+    color:#2b5251;
+    background-color: #fff;
+    font-weight: 600;
+}
+
+.btn-outline-success-d:hover{
+    color:#fff;
+    background-color:#bcd601;
+    border-color:#bcd601
+}
+
+.btn-check:focus+
+.btn-outline-success,
+.btn-outline-success:focus{
+    box-shadow:0 0 0 .25rem rgba(25,135,84,.5)
+}
+
+.btn-check:active+
+.btn-outline-success-d,
+.btn-check:checked+
+.btn-outline-success-d,
+.btn-outline-success-d.active,
+.btn-outline-success-d.dropdown-toggle.show,
+.btn-outline-success-d:active{
+    color:#fff;
+    background-color:#bcd601;
+    border-color:#bcd601
+}
+
+.btn-outline-success-d.disabled,
+.btn-outline-success-d:disabled{
+    color:#198754;
+    background-color:transparent
+}

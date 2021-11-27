@@ -36,7 +36,6 @@ function authMocks($httpBackend, mocksUtils) {
                 "forms",
                 "media",
                 "member",
-                "packages",
                 "settings",
                 "users"
             ],
