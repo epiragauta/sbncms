@@ -18,14 +18,14 @@ using Sbn.Extensions;
 
 namespace Sbn.Cms.Web.Common.PublishedModels
 {
-	/// <summary>home</summary>
-	[PublishedModel("home")]
-	public partial class Home : PublishedContentModel
+	/// <summary>Soportes-Bibliográficos</summary>
+	[PublishedModel("recursos1")]
+	public partial class Recursos1 : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
-		public new const string ModelTypeAlias = "home";
+		public new const string ModelTypeAlias = "recursos1";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
@@ -34,14 +34,14 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Home, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Recursos1, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public Home(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public Recursos1(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,11 +50,34 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// textEditor
+		/// descripcion
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("textEditor")]
-		public virtual global::Sbn.Cms.Core.Strings.IHtmlEncodedString TextEditor => this.Value<global::Sbn.Cms.Core.Strings.IHtmlEncodedString>(_publishedValueFallback, "textEditor");
+		[ImplementPropertyType("descripcion")]
+		public virtual string Descripcion => this.Value<string>(_publishedValueFallback, "descripcion");
+
+		///<summary>
+		/// Palabras claves
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("palabrasClaves")]
+		public virtual global::System.Collections.Generic.IEnumerable<string> PalabrasClaves => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "palabrasClaves");
+
+		///<summary>
+		/// Recursos a Mostrar
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[ImplementPropertyType("recursosAMostrar")]
+		public virtual decimal RecursosAmostrar => this.Value<decimal>(_publishedValueFallback, "recursosAMostrar");
+
+		///<summary>
+		/// Titulo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("titulo")]
+		public virtual string Titulo => this.Value<string>(_publishedValueFallback, "titulo");
 	}
 }

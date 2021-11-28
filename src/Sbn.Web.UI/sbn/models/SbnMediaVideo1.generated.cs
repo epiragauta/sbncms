@@ -18,14 +18,14 @@ using Sbn.Extensions;
 
 namespace Sbn.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Video</summary>
-	[PublishedModel("sbnMediaVideo")]
-	public partial class SbnMediaVideo : PublishedContentModel
+	/// <summary>Video de Capacitación</summary>
+	[PublishedModel("sbnMediaVideo1")]
+	public partial class SbnMediaVideo1 : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
-		public new const string ModelTypeAlias = "sbnMediaVideo";
+		public new const string ModelTypeAlias = "sbnMediaVideo1";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Media;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
@@ -34,20 +34,43 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<SbnMediaVideo, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<SbnMediaVideo1, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public SbnMediaVideo(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public SbnMediaVideo1(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
 		}
 
 		// properties
+
+		///<summary>
+		/// Descripción
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("descripcion")]
+		public virtual string Descripcion => this.Value<string>(_publishedValueFallback, "descripcion");
+
+		///<summary>
+		/// Nombre
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("nombre")]
+		public virtual string Nombre => this.Value<string>(_publishedValueFallback, "nombre");
+
+		///<summary>
+		/// ordenPresentación
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[ImplementPropertyType("ordenPresentacion")]
+		public virtual int OrdenPresentacion => this.Value<int>(_publishedValueFallback, "ordenPresentacion");
 
 		///<summary>
 		/// Tamaño: in bytes
@@ -71,5 +94,13 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
 		[ImplementPropertyType("sbnFile")]
 		public virtual string SbnFile => this.Value<string>(_publishedValueFallback, "sbnFile");
+
+		///<summary>
+		/// urlVideo
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("urlVideo")]
+		public virtual string UrlVideo => this.Value<string>(_publishedValueFallback, "urlVideo");
 	}
 }
