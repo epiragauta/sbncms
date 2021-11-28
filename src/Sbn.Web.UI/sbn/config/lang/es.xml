@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <language alias="es" intName="Spanish" localName="español" lcid="10" culture="es-ES">
   <creator>
-    <name>The Umbraco community</name>
-    <link>https://our.umbraco.com/documentation/Extending-Umbraco/Language-Files</link>
+    <name>The SBN community</name>
+    <link>https://our.sbn.com/documentation/Extending-Sbn/Language-Files</link>
   </creator>
   <area alias="actions">
     <key alias="assignDomain">Administrar dominios</key>
@@ -229,7 +229,7 @@
   <area alias="dashboard">
     <key alias="browser">Navega en tu sitio Web</key>
     <key alias="dontShowAgain">No volver a mostrar</key>
-    <key alias="nothinghappens">Si Umbraco no se ha abierto tendrás que permitir ventanas emergentes para este sitio Web</key>
+    <key alias="nothinghappens">Si SbN (CMS) no se ha abierto tendrás que permitir ventanas emergentes para este sitio Web</key>
     <key alias="openinnew">se ha abierto en una nueva ventana</key>
     <key alias="restart">Reinicio</key>
     <key alias="visit">Visita</key>
@@ -594,35 +594,35 @@
     <key alias="databaseErrorCannotConnect">El instalador no puede conectar con la base de datos.</key>
     <key alias="databaseFound">Tu base de datos ha sido encontrada y ha sido identificada como</key>
     <key alias="databaseHeader">Configuración de la base de datos</key>
-    <key alias="databaseInstall"><![CDATA[Pulsa el botón <strong> instalar </ strong> para instalar %0% la base de datos de Umbraco]]></key>
-    <key alias="databaseInstallDone"><![CDATA[Se ha copiado Umbraco %0% a la base de datos. Pulsa <strong>Próximo</strong> para continuar]]></key>
+    <key alias="databaseInstall"><![CDATA[Pulsa el botón <strong> instalar </ strong> para instalar %0% la base de datos de SbN (CMS)]]></key>
+    <key alias="databaseInstallDone"><![CDATA[Se ha copiado SbN (CMS) %0% a la base de datos. Pulsa <strong>Próximo</strong> para continuar]]></key>
     <key alias="databaseText"><![CDATA[Para completar este paso, debes conocer la información correspondiente a tu servidor de base de datos ("cadena de conexión").<br /> Por favor, contacta con tu ISP si es necesario. Si estás realizando la instalación en una máquina o servidor local, quizás necesites información de tu administrador de sistemas.]]></key>
-    <key alias="databaseUpgrade"><![CDATA[<p> Pincha en <strong>actualizar</strong> para actualizar la base de datos a Umbraco %0%</p> <p> Ningún contenido será borrado de la base de datos y seguirá funcionando después de la actualización </p> ]]></key>
+    <key alias="databaseUpgrade"><![CDATA[<p> Pincha en <strong>actualizar</strong> para actualizar la base de datos a SbN (CMS) %0%</p> <p> Ningún contenido será borrado de la base de datos y seguirá funcionando después de la actualización </p> ]]></key>
     <key alias="databaseUpgradeDone"><![CDATA[La base de datos ha sido actualizada a la versión 0%.<br />Pincha en <strong>Próximo</strong> para continuar. ]]></key>
     <key alias="databaseUpToDate"><![CDATA[La base de datos está actualizada. Pincha en <strong>próximo</strong> para continuar con el asistente de configuración]]></key>
     <key alias="defaultUserChangePass"><![CDATA[<strong>La contraseña del usuario por defecto debe ser cambiada</strong>]]></key>
-    <key alias="defaultUserDisabled"><![CDATA[<strong>El usuario por defecto ha sido deshabilitado o ha perdido el acceso a Umbraco!</strong></p><p>Pincha en <b>Próximo</b> para continuar.]]></key>
+    <key alias="defaultUserDisabled"><![CDATA[<strong>El usuario por defecto ha sido deshabilitado o ha perdido el acceso a SbN (CMS)!</strong></p><p>Pincha en <b>Próximo</b> para continuar.]]></key>
     <key alias="defaultUserPassChanged"><![CDATA[<strong>¡La contraseña del usuario por defecto ha sido cambiada desde que se instaló!</strong></p><p>No hay que realizar ninguna tarea más. Pulsa <strong>Siguiente</strong> para proseguir.]]></key>
     <key alias="defaultUserPasswordChanged">¡La contraseña se ha cambiado!</key>
     <key alias="greatStart">Ten un buen comienzo, visita nuestros videos de introducción</key>
     <key alias="None">No ha sido instalado.</key>
     <key alias="permissionsAffectedFolders">Archivos y directorios afectados</key>
-    <key alias="permissionsAffectedFoldersMoreInfo">Mas información en configurar los permisos para Umbraco aquí</key>
+    <key alias="permissionsAffectedFoldersMoreInfo">Mas información en configurar los permisos para SbN (CMS) aquí</key>
     <key alias="permissionsAffectedFoldersText">Necesitas dar permisos de modificación a ASP.NET para los siguientes archivos/directorios</key>
-    <key alias="permissionsAlmostPerfect"><![CDATA[<strong>¡Tu configuración de permisos es casi perfecta!</strong><br /><br /> Puedes ejecutar Umbraco sin problemas, pero no podrás instalar paquetes que es algo recomendable para explotar el potencial de Umbraco.]]></key>
+    <key alias="permissionsAlmostPerfect"><![CDATA[<strong>¡Tu configuración de permisos es casi perfecta!</strong><br /><br /> Puedes ejecutar SbN (CMS) sin problemas, pero no podrás instalar paquetes que es algo recomendable para explotar el potencial de SbN (CMS).]]></key>
     <key alias="permissionsHowtoResolve">Como Resolver</key>
     <key alias="permissionsHowtoResolveLink">Pulsa aquí para leer la versión de texto</key>
-    <key alias="permissionsHowtoResolveText"><![CDATA[Mira nuestros <strong>video tutoriales</strong> acerca de cómo configurar los permisos de los directorios para Umbraco o lee la versión de texto.]]></key>
-    <key alias="permissionsMaybeAnIssue"><![CDATA[<strong>¡La configuración de tus permisos podría ser un problema!</strong> <br/><br /> Puedes ejecutar Umbraco sin problemas, pero no serás capaz de crear directorios o instalar paquetes que es algo recomendable para explotar el potencial de Umbraco.]]></key>
-    <key alias="permissionsNotReady"><![CDATA[<strong>¡Tu configuración de permisos no está lista para Umbraco!</strong> <br /><br /> Para ejecutar Umbraco, necesitarás actualizar tu configuración de permisos.]]></key>
-    <key alias="permissionsPerfect"><![CDATA[<strong>¡Tu configuración de permisos es perfecta!</strong><br /><br /> ¡Estás listo para ejecutar Umbraco e instalar paquetes!]]></key>
+    <key alias="permissionsHowtoResolveText"><![CDATA[Mira nuestros <strong>video tutoriales</strong> acerca de cómo configurar los permisos de los directorios para SbN (CMS) o lee la versión de texto.]]></key>
+    <key alias="permissionsMaybeAnIssue"><![CDATA[<strong>¡La configuración de tus permisos podría ser un problema!</strong> <br/><br /> Puedes ejecutar SbN (CMS) sin problemas, pero no serás capaz de crear directorios o instalar paquetes que es algo recomendable para explotar el potencial de SbN (CMS).]]></key>
+    <key alias="permissionsNotReady"><![CDATA[<strong>¡Tu configuración de permisos no está lista para SbN (CMS)!</strong> <br /><br /> Para ejecutar SbN (CMS), necesitarás actualizar tu configuración de permisos.]]></key>
+    <key alias="permissionsPerfect"><![CDATA[<strong>¡Tu configuración de permisos es perfecta!</strong><br /><br /> ¡Estás listo para ejecutar SbN (CMS) e instalar paquetes!]]></key>
     <key alias="permissionsResolveFolderIssues">Resolviendo problemas con directorios</key>
     <key alias="permissionsResolveFolderIssuesLink">Sigue este enlace para más información sobre problemas con ASP.NET y creación de directorios</key>
     <key alias="permissionsSettingUpPermissions">Configurando los permisos de directorios</key>
     <key alias="permissionsText">Umbraco necesita permisos de lectura/escritura en algunos directorios para poder almacenar archivos tales como imágenes y PDFs. También almacena datos en la caché para mejorar el rendimiento de tu sitio web</key>
     <key alias="runwayFromScratch">Quiero empezar de cero</key>
     <key alias="runwayFromScratchText"><![CDATA[Tu sitio web está completamente vacío en estos momentos, lo cual es perfecto si quieres empezar de cero y crear tus propios tipos de documentos y plantillas (<a href="https://umbraco.tv/documentation/videos/for-site-builders/foundation/document-types">aprende cómo</a>). Todavía podrás elegir instalar Runway más adelante. Por favor ve a la sección del Desarrollador y elige Paquetes.]]></key>
-    <key alias="runwayHeader">Acabas de configurar una nueva plataforma Umbraco. ¿Qué deseas hacer ahora?</key>
+    <key alias="runwayHeader">Acabas de configurar una nueva plataforma SbN (CMS). ¿Qué deseas hacer ahora?</key>
     <key alias="runwayInstalled">Se ha instalado Runway</key>
     <key alias="runwayInstalledText"><![CDATA[Tienes puestos los cimientos. Selecciona los módulos que desees instalar sobre ellos.<br /> Esta es nuestra lista de módulos recomendados, selecciona los que desees instalar, o mira la <a href="#" onclick="toggleModules(); return false;" id="toggleModuleList">lista completa de módulos</a> ]]></key>
     <key alias="runwayOnlyProUsers">Sólo recomendado para usuarios expertos</key>
@@ -632,19 +632,19 @@
     <key alias="step1">Paso 1 de 5. Aceptar los términos de la licencia</key>
     <key alias="step2">Paso 2 de 5. Configuración de la base de datos</key>
     <key alias="step3">Paso 3 de 5. Autorizar / validar permiso en los archivos</key>
-    <key alias="step4">Paso 4 de 5. Configurar seguridad en Umbraco</key>
-    <key alias="step5">Paso 5 de 5. Umbraco está listo para ser usado</key>
-    <key alias="thankYou">Gracias por elegir Umbraco</key>
+    <key alias="step4">Paso 4 de 5. Configurar seguridad en SbN (CMS)</key>
+    <key alias="step5">Paso 5 de 5. SbN (CMS) está listo para ser usado</key>
+    <key alias="thankYou">Gracias por elegir SbN (CMS)</key>
     <key alias="theEndBrowseSite"><![CDATA[<h3>Navega a tu nuevo sitio</h3> Has instalado Runway, por qué no ves el aspecto de tu nuevo sitio web.]]></key>
-    <key alias="theEndFurtherHelp"><![CDATA[<h3>Más ayuda e información</h3> Consigue ayuda de nuestra premiada comunidad, navega por la documentación o mira algunos videos gratuitos de cómo crear un sitio sencillo, cómo utilizar los paquetes y una guía rápida de la terminología de Umbraco]]></key>
-    <key alias="theEndHeader">Umbraco %0% ha sido instalado y está listo para ser usado</key>
-    <key alias="theEndInstallSuccess"><![CDATA[Puedes <strong>empezar inmediatamente</strong> pulsando el botón "Lanzar Umbraco" de debajo. <br />Si eres <strong>nuevo con Umbraco</strong>, puedes encontrar cantidad de recursos en nuestras páginas de cómo empezar.]]></key>
-    <key alias="theEndOpenUmbraco"><![CDATA[<h3>Lanzar Umbraco</h3> Para administrar tu sitio web, simplemente abre el backoffice de Umbraco y empieza a añadir contenido, a actualizar plantillas y hojas de estilo o a añadir nueva funcionalidad]]></key>
+    <key alias="theEndFurtherHelp"><![CDATA[<h3>Más ayuda e información</h3> Consigue ayuda de nuestra premiada comunidad, navega por la documentación o mira algunos videos gratuitos de cómo crear un sitio sencillo, cómo utilizar los paquetes y una guía rápida de la terminología de SbN (CMS)]]></key>
+    <key alias="theEndHeader">SbN (CMS) %0% ha sido instalado y está listo para ser usado</key>
+    <key alias="theEndInstallSuccess"><![CDATA[Puedes <strong>empezar inmediatamente</strong> pulsando el botón "Lanzar SbN (CMS)" de debajo. <br />Si eres <strong>nuevo con SbN (CMS)</strong>, puedes encontrar cantidad de recursos en nuestras páginas de cómo empezar.]]></key>
+    <key alias="theEndOpenUmbraco"><![CDATA[<h3>Lanzar SbN (CMS)</h3> Para administrar tu sitio web, simplemente abre el backoffice de SbN (CMS) y empieza a añadir contenido, a actualizar plantillas y hojas de estilo o a añadir nueva funcionalidad]]></key>
     <key alias="Unavailable">No se ha podido establecer la conexión con la base de datos</key>
-    <key alias="Version3">Umbraco versión 3</key>
-    <key alias="Version4">Umbraco versión 4</key>
+    <key alias="Version3">SbN (CMS) versión 3</key>
+    <key alias="Version4">SbN (CMS) versión 4</key>
     <key alias="watch">Mirar</key>
-    <key alias="welcomeIntro"><![CDATA[El asistente de configuración te guiará en los pasos para instalar <strong>Umbraco %0%</strong> o actualizar la versión 3.0 a <strong>Umbraco %0%</strong>. <br /><br />  Pincha en <strong>"próximo"</strong> para empezar con el asistente de configuración.]]></key>
+    <key alias="welcomeIntro"><![CDATA[El asistente de configuración te guiará en los pasos para instalar <strong>SbN (CMS) %0%</strong> o actualizar la versión 3.0 a <strong>SbN (CMS) %0%</strong>. <br /><br />  Pincha en <strong>"próximo"</strong> para empezar con el asistente de configuración.]]></key>
   </area>
   <area alias="language">
     <key alias="cultureCode">Código de cultura</key>
@@ -655,14 +655,14 @@
     <key alias="renewSession">Renovar tu sesión para guardar sus cambios</key>
   </area>
   <area alias="login">
-    <key alias="greeting0">Feliz super domingo</key>
-    <key alias="greeting1">Feliz lunes</key>
-    <key alias="greeting2">Tremendo martes</key>
-    <key alias="greeting3">Maravilloso miércoles</key>
-    <key alias="greeting4">Fantástico jueves</key>
-    <key alias="greeting5">¡Ya es viernes!</key>
-    <key alias="greeting6">Resplandeciente sábado</key>
-    <key alias="instruction">Iniciar sesión</key>
+    <key alias="greeting0">Administrador SbN (CMS)</key>
+    <key alias="greeting1">Administrador SbN (CMS)</key>
+    <key alias="greeting2">Administrador SbN (CMS)</key>
+    <key alias="greeting3">Administrador SbN (CMS)</key>
+    <key alias="greeting4">Administrador SbN (CMS)</key>
+    <key alias="greeting5">Administrador SbN (CMS)</key>
+    <key alias="greeting6">Administrador SbN (CMS)</key>
+    <key alias="instruction">Administrador SbN (CMS)</key>
     <key alias="timeout">La sesión ha caducado</key>
     <key alias="bottomText"><![CDATA[<p style="text-align:right;">&copy; 2001 - %0% <br /><a href="https://umbraco.com" style="text-decoration: none" target="_blank" rel="noopener">umbraco.com</a></p> ]]></key>
     <key alias="forgottenPassword">¿Olvidaste tu contraseña?</key>
@@ -672,7 +672,7 @@
     <key alias="setPasswordInstruction">Por favor, introduce una nueva contraseña</key>
     <key alias="setPasswordConfirmation">Tu contraseña ha sido actualizada</key>
     <key alias="resetCodeExpired">El enlace pulsado es inválido o ha caducado</key>
-    <key alias="resetPasswordEmailCopySubject">Umbraco: Restaurar contraseña</key>
+    <key alias="resetPasswordEmailCopySubject">SbN (CMS): Restaurar contraseña</key>
     <key alias="resetPasswordEmailCopyFormat"><![CDATA[
         <html>
 			<head>
@@ -777,12 +777,12 @@
   <area alias="notifications">
     <key alias="editNotifications">Edita tu notificación para %0%</key>
     <key alias="mailBody">Hola %0% Esto es un e-mail automático para informarte que la tarea '%1%' ha sido realizada sobre la página '%2%' por el usuario '%3%' Vaya a http://%4%/#/content/content/edit/%5% para editarla. ¡Espero que tenga un buen día! Saludos del robot de Umbraco</key>
-    <key alias="mailBodyHtml"><![CDATA[<p>Hola %0%</p> <p>Esto es un e-mail generado automáticamente para informarle que la tarea <strong>'%1%'</strong> ha sido realizada sobre la página <a href="http://%4%/#/content/content/edit/%5%"><strong>'%2%'</strong></a> por el usuario <strong>'%3%'</strong> </p> <div style="margin: 8px 0; padding: 8px; display: block;"> <br /> <a style="color: white; font-weight: bold; background-color: #5372c3; text-decoration : none; margin-right: 20px; border: 8px solid #5372c3; width: 150px;" href="http://%4%/#/content/content/edit/%5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> &nbsp; <br /> </div> <p> <h3>Resumen de actualización:</h3> <table style="width: 100%;"> %6% </table> </p> <div style="margin: 8px 0; padding: 8px; display: block;"> <br /> <a style="color: white; font-weight: bold; background-color: #66cc66; text-decoration : none; margin-right: 20px; border: 8px solid #66cc66; width: 150px;" href="http://%4%/actions/publish.aspx?id=%5%">&nbsp;&nbsp;PUBLISH&nbsp;&nbsp;</a> &nbsp; <a style="color: white; font-weight: bold; background-color: #5372c3; text-decoration : none; margin-right: 20px; border: 8px solid #5372c3; width: 150px;" href="http://%4%/#/content/content/edit/%5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> &nbsp; <a style="color: white; font-weight: bold; background-color: #ca4a4a; text-decoration : none; margin-right: 20px; border: 8px solid #ca4a4a; width: 150px;" href="http://%4%/actions/delete.aspx?id=%5%">&nbsp;&nbsp;&nbsp;&nbsp;DELETE&nbsp;&nbsp;&nbsp;&nbsp;</a> <br /> </div> <p>¡Espero que tenga un buen día!<br /><br /> Saludos del robot Umbraco. </p>]]></key>
+    <key alias="mailBodyHtml"><![CDATA[<p>Hola %0%</p> <p>Esto es un e-mail generado automáticamente para informarle que la tarea <strong>'%1%'</strong> ha sido realizada sobre la página <a href="http://%4%/#/content/content/edit/%5%"><strong>'%2%'</strong></a> por el usuario <strong>'%3%'</strong> </p> <div style="margin: 8px 0; padding: 8px; display: block;"> <br /> <a style="color: white; font-weight: bold; background-color: #5372c3; text-decoration : none; margin-right: 20px; border: 8px solid #5372c3; width: 150px;" href="http://%4%/#/content/content/edit/%5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> &nbsp; <br /> </div> <p> <h3>Resumen de actualización:</h3> <table style="width: 100%;"> %6% </table> </p> <div style="margin: 8px 0; padding: 8px; display: block;"> <br /> <a style="color: white; font-weight: bold; background-color: #66cc66; text-decoration : none; margin-right: 20px; border: 8px solid #66cc66; width: 150px;" href="http://%4%/actions/publish.aspx?id=%5%">&nbsp;&nbsp;PUBLISH&nbsp;&nbsp;</a> &nbsp; <a style="color: white; font-weight: bold; background-color: #5372c3; text-decoration : none; margin-right: 20px; border: 8px solid #5372c3; width: 150px;" href="http://%4%/#/content/content/edit/%5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;EDIT&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a> &nbsp; <a style="color: white; font-weight: bold; background-color: #ca4a4a; text-decoration : none; margin-right: 20px; border: 8px solid #ca4a4a; width: 150px;" href="http://%4%/actions/delete.aspx?id=%5%">&nbsp;&nbsp;&nbsp;&nbsp;DELETE&nbsp;&nbsp;&nbsp;&nbsp;</a> <br /> </div> <p>¡Espero que tenga un buen día!<br /><br /> Saludos del robot SbN (CMS). </p>]]></key>
     <key alias="mailSubject">[%0%] Notificación acerca de %1% realizado en %2%</key>
     <key alias="notifications">Notificaciones</key>
   </area>
   <area alias="packager">
-    <key alias="chooseLocalPackageText"><![CDATA[Elige un paquete de tu máquina, seleccionando el botón Examinar<br />y localizando el paquete. Los paquetes de Umbraco normalmente tienen la extensión ".umb" o ".zip".]]></key>
+    <key alias="chooseLocalPackageText"><![CDATA[Elige un paquete de tu máquina, seleccionando el botón Examinar<br />y localizando el paquete. Los paquetes de SbN (CMS) normalmente tienen la extensión ".umb" o ".zip".]]></key>
     <key alias="packageLicense">Licencia</key>
     <key alias="installedPackages">Paquetes instalados</key>
     <key alias="noPackages">No tienes instalado ningún paquete</key>
@@ -804,7 +804,7 @@
     <key alias="packageDownloads">Descargas</key>
     <key alias="packageLikes">Me Gusta</key>
     <key alias="packageCompatibility">Compatibilidad</key>
-    <key alias="packageCompatibilityDescription">Este paquete es compatible con las siguientes versiones de Umbraco, declaradas según miembros de la comunidad. No se puede garantizar compatibilidad completa para versiones declaradas debajo del 100%</key>
+    <key alias="packageCompatibilityDescription">Este paquete es compatible con las siguientes versiones de SbN (CMS), declaradas según miembros de la comunidad. No se puede garantizar compatibilidad completa para versiones declaradas debajo del 100%</key>
     <key alias="packageExternalSources">Fuentes externas</key>
     <key alias="packageAuthor">Autor</key>
     <key alias="packageDocumentation">Documentación</key>
@@ -830,7 +830,7 @@
   </area>
   <area alias="publicAccess">
     <key alias="paAdvanced">Protección basada en roles</key>
-    <key alias="paAdvancedHelp"><![CDATA[Si deseas controlar el acceso a la página usando autenticación basada en roles,<br /> usando los grupos de miembros de Umbraco.]]></key>
+    <key alias="paAdvancedHelp"><![CDATA[Si deseas controlar el acceso a la página usando autenticación basada en roles,<br /> usando los grupos de miembros de UmSbN (CMS)braco.]]></key>
     <key alias="paAdvancedNoGroups">Necesitas crear un grupo de miembros antes de poder usar autenticación basada en roles</key>
     <key alias="paErrorPage">Página de error</key>
     <key alias="paErrorPageHelp">Usada cuando alguien hace login, pero no tiene acceso</key>
@@ -920,7 +920,7 @@
     <key alias="help" version="7.0">Ayuda</key>
   </area>
   <area alias="help">
-    <key alias="theBestUmbracoVideoTutorials">Los mejores tutoriales en video para Umbraco</key>
+    <key alias="theBestUmbracoVideoTutorials">Los mejores tutoriales en video para SbN (CMS)</key>
   </area>
   <area alias="settings">
     <key alias="defaulttemplate">Plantilla por defecto</key>
@@ -1034,7 +1034,7 @@
             donde necesites una forma de proporcionar parámetros,
             como galerías, formularios y listas.
         </key>
-    <key alias="insertPageField">Insertar campo de página de Umbraco</key>
+    <key alias="insertPageField">Insertar campo de página de SbN (CMS)</key>
     <key alias="insertPageFieldDesc">Muestra el valor de una propiedad de la página actual, con opciones para modificar el valor o usar valores alternativos.</key>
     <key alias="insertPartialView">Vista parcial</key>
     <key alias="insertPartialViewDesc">
@@ -1092,7 +1092,7 @@
     <key alias="orderBy">ordenar por</key>
     <key alias="ascending">ascendente</key>
     <key alias="descending">descendente</key>
-    <key alias="quickGuide">Guía rápida sobre las etiquetas de plantilla de Umbraco</key>
+    <key alias="quickGuide">Guía rápida sobre las etiquetas de plantilla de USbN (CMS)mbraco</key>
     <key alias="template">Plantilla</key>
   </area>
   <area alias="grid">
@@ -1216,16 +1216,17 @@
     <key alias="DownloadXmlDTD">Descargar xml DTD</key>
     <key alias="fields">Campos</key>
     <key alias="includeSubpages">Incluir subpáginas</key>
-    <key alias="mailBody"><![CDATA[
+    <key alias="mailBody">
+  <![CDATA[
         Hola %0%.
 
         Este mail se ha generado automáticamente para informale que %2% has solicitado que el documento '%1%' sea traducido en '%5%'.
 
-        Para editarlo, vaya a la dirección http://%3%/translation/details.aspx?id=%4% o inicia sesión en Umbraco y ve a http://%3% para ver las tareas pendientes de traducir.
+        Para editarlo, vaya a la dirección http://%3%/translation/details.aspx?id=%4% o inicia sesión en SbN (CMS) y ve a http://%3% para ver las tareas pendientes de traducir.
 
         Espero que tenga un buen dia.
 
-        Saludos de parte de el robot de Umbraco
+        Saludos de parte de el robot de SbN (CMS)
     ]]></key>
     <key alias="noTranslators">No se encontraron usuarios traductores. Por favor, crea un usuario traductor antes de empezar a mandar contenido para tu traducción</key>
     <key alias="pageHasBeenSendToTranslation">La página '%0%' se ha mandado a traducción</key>
@@ -1291,10 +1292,10 @@
     <key alias="noLockouts">no ha sido bloqueado</key>
     <key alias="noPasswordChange">La contraseña no se ha cambiado</key>
     <key alias="confirmNewPassword">Confirma nueva contraseña</key>
-    <key alias="changePasswordDescription">Puedes cambiar tu contraseña para acceder al 'back office' de Umbraco rellenando el siguiente formulario y haciendo clic en el botón 'Cambiar contraseña'</key>
+    <key alias="changePasswordDescription">Puedes cambiar tu contraseña para acceder al 'back office' de SbN (CMS) rellenando el siguiente formulario y haciendo clic en el botón 'Cambiar contraseña'</key>
     <key alias="contentChannel">Canal de contenido</key>
     <key alias="createAnotherUser">Crear otro usuario</key>
-    <key alias="createUserHelp">Crear nuevos usuarios para darles acceso a Umbraco. Cuando un nuevo usuario es creado, una nueva contraseña será generada y la podrás compartir con el usuario.</key>
+    <key alias="createUserHelp">Crear nuevos usuarios para darles acceso a SbN (CMS). Cuando un nuevo usuario es creado, una nueva contraseña será generada y la podrás compartir con el usuario.</key>
     <key alias="descriptionField">Campo descriptivo</key>
     <key alias="disabled">Deshabilitar usuario</key>
     <key alias="documentType">Tipo de documento</key>
@@ -1304,7 +1305,7 @@
     <key alias="goToProfile">Ir a perfil de usuario</key>
     <key alias="groupsHelp">Añadir grupos para asignar acceso y permisos</key>
     <key alias="inviteAnotherUser">Invitar otro usuario</key>
-    <key alias="inviteUserHelp">Invita nuevos usuarios para darles acceso a Umbraco. Un email de invitación será enviado al usuario con información sobre cómo acceder a Umbraco.</key>
+    <key alias="inviteUserHelp">Invita nuevos usuarios para darles acceso a SbN (CMS). Un email de invitación será enviado al usuario con información sobre cómo acceder a Umbraco.</key>
     <key alias="language">Idioma</key>
     <key alias="languageHelp">Establecer el idioma que verás en menús y diálogos</key>
     <key alias="lastLockoutDate">Última fecha bloqueado</key>
@@ -1316,7 +1317,7 @@
     <key alias="mediastartnodes">Nodos de inicio para Medios</key>
     <key alias="mediastartnodeshelp">Limitar la biblioteca de medios a los siguientes nodos de inicio</key>
     <key alias="modules">Secciones</key>
-    <key alias="noConsole">Deshabilitar acceso a Umbraco</key>
+    <key alias="noConsole">Deshabilitar acceso a SbN (CMS)</key>
     <key alias="noLogin">no se ha conectado aún</key>
     <key alias="oldPassword">Contraseña antigua</key>
     <key alias="password">Contraseña</key>
@@ -1354,8 +1355,8 @@
     <key alias="userPermissions">Permisos de usuarios</key>
     <key alias="usergroup">Grupo de usuario</key>
     <key alias="userInvited">ha sido invitado</key>
-    <key alias="userInvitedSuccessHelp">Se ha enviado una invitación al nuevo usuario con detalles sobre cómo acceder a Umbraco.</key>
-    <key alias="userinviteWelcomeMessage">¡Hola y bienvenido a Umbraco!. En un minuto todo estará listo para empezar, sólo necesitamos que configures tu contraseña y una imagen para tu avatar.</key>
+    <key alias="userInvitedSuccessHelp">Se ha enviado una invitación al nuevo usuario con detalles sobre cómo acceder a SbN (CMS).</key>
+    <key alias="userinviteWelcomeMessage">¡Hola y bienvenido a SbN (CMS)!. En un minuto todo estará listo para empezar, sólo necesitamos que configures tu contraseña y una imagen para tu avatar.</key>
     <key alias="userinviteAvatarMessage">Sube una foto para que otros usuarios te reconozcan más fácilmente.</key>
     <key alias="writer">Redactor</key>
     <key alias="change">Cambiar</key>
@@ -1366,8 +1367,9 @@
     <key alias="createUser">Crear usuario</key>
     <key alias="sendInvite">Enviar invitación</key>
     <key alias="backToUsers">Volver a usuarios</key>
-    <key alias="inviteEmailCopySubject">Umbraco: Invitación</key>
-    <key alias="inviteEmailCopyFormat"><![CDATA[
+    <key alias="inviteEmailCopySubject">SbN (CMS): Invitación</key>
+    <key alias="inviteEmailCopyFormat">
+                              <![CDATA[
         <html>
 			<head>
 				<meta name='viewport' content='width=device-width'>
@@ -1407,7 +1409,7 @@
 															Hi %0%,
 														</h1>
 														<p style='color: #392F54; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0 0 15px;'>
-															Has sido invitado por <a href="mailto:%1%" style="text-decoration: underline; color: #392F54; -ms-word-break: break-all; word-break: break-all;">%1%</a> a Umbraco Administración.
+															Has sido invitado por <a href="mailto:%1%" style="text-decoration: underline; color: #392F54; -ms-word-break: break-all; word-break: break-all;">%1%</a> a SbN (CMS) Administración.
 														</p>
 														<p style='color: #392F54; font-family: sans-serif; font-size: 14px; font-weight: normal; margin: 0 0 15px;'>
 															Mensaje de <a href="mailto:%1%" style="text-decoration: none; color: #392F54; -ms-word-break: break-all; word-break: break-all;">%1%</a>:
@@ -1525,10 +1527,11 @@
     <key alias="smtpMailSettingsConnectionSuccess">Los valores SMTP están configurados correctamente y el servicio opera con normalidad.</key>
     <key alias="notificationEmailsCheckSuccessMessage"><![CDATA[Email de notificación has sido configurado como <strong>%0%</strong>.]]></key>
     <key alias="notificationEmailsCheckErrorMessage"><![CDATA[El email de notificación está todavía configurado en tuvalor por defecto: <strong>%0%</strong>.]]></key>
-    <key alias="scheduledHealthCheckEmailBody"><![CDATA[<html><body><p>Los resultados de los Chequeos de Salud de Umbraco programados para ejecutarse el %0% a las %1% son:</p>%2%</body></html>]]></key>
-    <key alias="scheduledHealthCheckEmailSubject">Status de los Chequeos de Salud de Umbraco: %0%</key>
+    <key alias="scheduledHealthCheckEmailBody"><![CDATA[<html><body><p>Los resultados de los Chequeos de Salud de SbN (CMS) programados para ejecutarse el %0% a las %1% son:</p>%2%</body></html>]]></key>
+    <key alias="scheduledHealthCheckEmailSubject">Status de los Chequeos de Salud de SbN (CMS): %0%</key>
   </area>
   <area alias="redirectUrls">
+    <key alias="redirectUrlManagement">Gestionar Redireccionamiento URLs</key>
     <key alias="disableUrlTracker">Desactivar URL tracker</key>
     <key alias="enableUrlTracker">Activar URL tracker</key>
     <key alias="originalUrl">URL Original</key>
@@ -1552,5 +1555,17 @@
   <area alias="logViewer">
     <key alias="selectAllLogLevelFilters">Seleccionar todo</key>
     <key alias="deselectAllLogLevelFilters">Deseleccionar todo</key>
+  </area>
+  <area alias="dashboardTabs">
+    <key alias="contentIntro">Inicio</key>
+    <key alias="contentRedirectManager">Gestionar Redireccionamientos</key>
+    <key alias="mediaFolderBrowser">Contenido</key>
+    <key alias="settingsWelcome">Bienvenido</key>
+    <key alias="settingsExamine">Gestion Examinar</key>
+    <key alias="settingsPublishedStatus">Estado Publicación</key>
+    <key alias="settingsModelsBuilder">Construir Modelos</key>
+    <key alias="settingsHealthCheck">Verificar Estado</key>
+    <key alias="settingsProfiler">Perfilamiento</key>
+    <key alias="memberIntro">Inicio</key>    
   </area>
 </language>

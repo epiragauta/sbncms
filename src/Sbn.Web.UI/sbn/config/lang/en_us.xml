@@ -2705,10 +2705,9 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
     </key>
   </area>
   <area alias="startupDashboard">
-    <key alias="fallbackHeadline">Welcome to The Friendly CMS</key>
-    <key alias="fallbackDescription">Thank you for choosing Umbraco - we think this could be the beginning of something
-      beautiful. While it may feel overwhelming at first, we've done a lot to make the learning curve as smooth and fast
-      as possible.
+    <key alias="fallbackHeadline">Administración de las Soluciones basadas en la Naturaleza</key>
+    <key alias="fallbackDescription">
+      Aplicación Web para la creación y administración de contenido para las Soluciones basadas an la Naturaleza.
     </key>
   </area>
   <area alias="formsDashboard">

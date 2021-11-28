@@ -49,39 +49,16 @@ function startUpDynamicContentController($q, $timeout, $scope, dashboardResource
                 title: "Documentation",
                 description: "Find the answers to your Sbn questions",
                 url: "https://our.sbn.com/documentation/?utm_source=core&utm_medium=dashboard&utm_content=text&utm_campaign=documentation/"
-            },
-            {
-                title: "Community",
-                description: "Find the answers or ask your Sbn questions",
-                url: "https://our.sbn.com/?utm_source=core&utm_medium=dashboard&utm_content=text&utm_campaign=our_forum"
-            },
-            {
-                title: "Sbn.tv",
-                description: "Tutorial videos (some are free, some are on subscription)",
-                url: "https://sbn.tv/?utm_source=core&utm_medium=dashboard&utm_content=text&utm_campaign=tutorial_videos"
-            },
-            {
-                title: "Training",
-                description: "Real-life training and official Sbn certifications",
-                url: "https://sbn.com/training/?utm_source=core&utm_medium=dashboard&utm_content=text&utm_campaign=training"
             }
         ],
         articles: [
             {
-                title: "Sbn.TV - Learn from the source!",
-                description: "Sbn.TV will help you go from zero to Sbn hero at a pace that suits you. Our easy to follow online training videos will give you the fundamental knowledge to start building awesome Sbn websites.",
+                title: "Titulo",
+                description: "Descripcion",
                 img: "views/dashboard/default/sbntv.png",
-                url: "https://sbn.tv/?utm_source=core&utm_medium=dashboard&utm_content=image&utm_campaign=tv",
-                altText: "Sbn.TV - Hours of Sbn Video Tutorials",
-                buttonText: "Visit Sbn.TV"
-            },
-            {
-                title: "Our Sbn - The Friendliest Community",
-                description: "Our Sbn - the official community site is your one stop for everything Sbn. Whether you need a question answered or looking for cool plugins, the world's best and friendliest community is just a click away.",
-                img: "views/dashboard/default/oursbn.png",
-                url: "https://our.sbn.com/?utm_source=core&utm_medium=dashboard&utm_content=image&utm_campaign=our",
-                altText: "Our Sbn",
-                buttonText: "Visit Our Sbn"
+                url: "https://ecopetrol.com.co",
+                altText: "Sbn",
+                buttonText: "Visitar SbN"
             }
         ]
     };
