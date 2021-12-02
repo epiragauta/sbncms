@@ -332,4 +332,13 @@ footer {
     border-color: #dfe633!important;
     border-top-left-radius: 2rem!important;
 }
+
+.sbn-figures-info{
+    margin-left: auto; 
+    margin-right: auto;    
+    color: #2096BF;
+    font-size: 11px;
+    text-align: center;
+}
+
     

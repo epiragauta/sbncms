@@ -1,0 +1,13 @@
+﻿@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.SolucionesBasadasEnLaNaturaleza>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+}
+<section class="section container w3-container w3-round-xlarge" style="padding-top:3rem !important;">
+    <div class="container">
+        <h3>@Model.Nombre</h3>
+        <div>@Model.Descripcion</div>
+        <div>@Model.Objetivos</div>
+    </div>
+    @Html.GetGridHtml(Model, "gridContenido", "bootstrap3-fluid")
+</section>

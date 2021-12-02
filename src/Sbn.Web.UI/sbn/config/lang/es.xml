@@ -9,8 +9,10 @@
     <key alias="auditTrail">Historial</key>
     <key alias="browse">Nodo de Exploración</key>
     <key alias="changeDocType">Cambiar tipo de documento</key>
+    <key alias="changeDataType">Cambiar tipo de dato</key>
     <key alias="copy">Copiar</key>
     <key alias="create">Crear</key>
+    <key alias="export">Exportar</key>
     <key alias="createPackage">Crear Paquete</key>
     <key alias="createGroup">Crear grupo</key>
     <key alias="delete">Borrar</key>
@@ -30,9 +32,16 @@
     <key alias="refreshNode">Recargar Nodos</key>
     <key alias="republish">Republicar sitio completo</key>
     <key alias="rename" version="7.3.0">Renombrar</key>
+    <key alias="remove">Remover</key>
     <key alias="restore" version="7.3.0">Restaurar</key>
+    <key alias="chooseWhereToCopy">Elige donde copiar</key>
     <key alias="chooseWhereToMove">Elige dónde mover</key>
     <key alias="toInTheTreeStructureBelow">En el árbol de contenido</key>
+    <key alias="infiniteEditorChooseWhereToCopy">Elige donde copiar la selección</key>
+    <key alias="infiniteEditorChooseWhereToMove">Elige donde mover la selección</key>
+    <key alias="wasMovedTo">fue movido a</key>
+    <key alias="wasCopiedTo">fue copiado a</key>
+    <key alias="wasDeleted">fue eliminado</key>
     <key alias="rights">Permisos</key>
     <key alias="rollback">Deshacer</key>
     <key alias="sendtopublish">Enviar a Publicar</key>
@@ -44,6 +53,7 @@
     <key alias="setPermissions">Establecer permisos</key>
     <key alias="unlock">Desbloquear</key>
     <key alias="createblueprint">Crear Plantilla de Contenido</key>
+    <key alias="resendInvite">Reenviar invitación</key>
   </area>
   <area alias="actionCategories">
     <key alias="content">Contenido</key>
@@ -70,6 +80,10 @@
     <key alias="translate">Permitir acceso para traducir un nodo</key>
     <key alias="update">Permitir acceso para guardar un nodo</key>
     <key alias="createblueprint">Permitir acceso para crear una Plantilla de Contenido</key>
+  </area>
+  <area alias="apps">
+    <key alias="umbContent">Contenido</key>
+    <key alias="umbInfo">Info</key>
   </area>
   <area alias="assignDomain">
     <key alias="permissionDenied">Permiso denegado.</key>
@@ -116,9 +130,12 @@
     <key alias="listNumeric">Lista Numérica</key>
     <key alias="macroInsert">Insertar macro</key>
     <key alias="pictureInsert">Insertar imagen</key>
+    <key alias="publishAndClose">Publicar y cerrar</key>
+    <key alias="publishDescendants">Publicar con descendientes</key>
     <key alias="relations">Editar relaciones</key>
     <key alias="returnToList">Volver al listado</key>
     <key alias="save">Guardar</key>
+    <key alias="saveAndClose">Guardar y cerrar</key>
     <key alias="saveAndPublish">Guardar y publicar</key>
     <key alias="saveToPublish">Guardar y enviar para aprobación</key>
     <key alias="saveListView">Guardar vista de lista</key>
@@ -127,9 +144,15 @@
     <key alias="styleChoose">Elegir estilo</key>
     <key alias="styleShow">Mostrar estilos</key>
     <key alias="tableInsert">Insertar tabla</key>
+    <key alias="generateModelsAndClose">Generr modelos y cerrar</key>
     <key alias="saveAndGenerateModels">Guardar y generar modelos</key>
     <key alias="undo">Deshacer</key>
     <key alias="redo">Rehacer</key>
+    <key alias="deleteTag">Eliminar tag</key>
+    <key alias="confirmActionCancel">Cancelar</key>
+    <key alias="confirmActionConfirm">Confirmar</key>
+    <key alias="morePublishingOptions">Más opciones de publicación</key>
+    <key alias="submitChanges">Enviar</key>
   </area>
   <area alias="content">
     <key alias="isPublished" version="7.2">Está publicado</key>
@@ -158,14 +181,18 @@
     <key alias="membergroup">Miembro de Grupo</key>
     <key alias="memberrole">Rol</key>
     <key alias="membertype">Tipo de miembro</key>
+    <key alias="noChanges">Sin cambios</key>
     <key alias="noDate">Sin fecha</key>
     <key alias="nodeName">Título de la página</key>
+    <key alias="noMediaLink">Este elemento no tiene enlace</key>
+    <key alias="noProperties">No existe contenido asociado</key>
     <key alias="otherElements">Propiedades</key>
     <key alias="parentNotPublished">Este documento ha sido publicado pero no es visible porque el padre '%0%' no esta publicado</key>
     <key alias="parentNotPublishedAnomaly">Ups: este documento está publicado pero no está en la caché (error interno)</key>
     <key alias="getUrlException">No se pudo obtener la URL</key>
     <key alias="routeError">Este documento está publicado pero tu URL colisionará con contenido %0%</key>
     <key alias="publish">Publicar</key>
+    <key alias="published">Publicado</key>
     <key alias="publishStatus">Estado de la Publicación</key>
     <key alias="releaseDate">Publicar el</key>
     <key alias="unpublishDate">Retirar publicación el</key>
@@ -204,6 +231,16 @@
   </area>
   <area alias="media">
     <key alias="clickToUpload">Haz clic para subir archivos</key>
+    <key alias="orClickHereToUpload">o clic aqui para seleccionar un archivo</key>
+    <key alias="disallowedFileType">No es posible subir este archivo, al parecer, la extensión no es apropiada</key>
+    <key alias="invalidFileName">No es posible subir este archivo, el nombre no es válido</key>
+    <key alias="maxFileSize">Tamaño máximo del archivo es</key>
+    <key alias="mediaRoot">Dir principal</key>
+    <key alias="moveToSameFolderFailed">Carpera origen y destino no pueden ser iguales</key>
+    <key alias="createFolderFailed">Error al crear la carpeta dentro de la carpeta padre con id%0%</key>
+    <key alias="renameFolderFailed">Error al renombrar la carpeta con id %0%</key>
+    <key alias="dragAndDropYourFilesIntoTheArea">Arraste y suelte su(s) archivo(s) en esta área</key>
+    <key alias="uploadNotAllowed">Subir archivo no esta permitido en esta ubicación</key>
   </area>
   <area alias="member">
     <key alias="createNewMember">Crear nuevo miembro</key>
@@ -225,6 +262,21 @@
     <key alias="newPartialViewFromSnippet">Nueva vista parcial desde snippet</key>
     <key alias="newPartialViewMacroFromSnippet">Nueva vista parcial de macro desde snippet</key>
     <key alias="newPartialViewMacroNoMacro">Nueva vista parcial de macro (sin macro)</key>
+    <key alias="documentTypeWithTemplate">Tipo de documento con plantilla</key>
+    <key alias="documentTypeWithTemplateDescription">La definición de datos para una página de contenido que puede ser creada por los editores en el árbol de contenido y es directamente accesible a través de una URL.</key>
+    <key alias="documentType">Tipo de documento</key>
+    <key alias="documentTypeDescription"> La definición de datos para un componente de contenido que pueden crear los editores en el árbol de contenido y ser elegido en otras páginas pero no tiene URL directa.
+    </key>
+    <key alias="elementType">Tipo de Elemento</key>
+    <key alias="elementTypeDescription">Define el esquema para un conjunto repetitivo de propiedades, por ejemplo, en un 'Bloque Editor de propiedades Lista' o 'Contenido anidado'.
+    </key>
+    <key alias="composition">Composición</key>
+    <key alias="compositionDescription">Defines un conjunto de propiedades reutilizables que se pueden incluir en la definición de varios otros tipos de documentos. Por ejemplo, un conjunto de 'Configuración de página común'.
+    </key>
+    <key alias="folder">Carpeta</key>
+    <key alias="folderDescription">Usado para organizar los tipos de documento, composiciones y tipos de elementos creados en este Árbol de tipo de documento.
+    </key>
+      
   </area>
   <area alias="dashboard">
     <key alias="browser">Navega en tu sitio Web</key>
@@ -366,6 +418,8 @@
     <key alias="email">Introduce tu email....</key>
     <key alias="enterMessage">Introduce un mensaje...</key>
     <key alias="usernameHint">Tu nombre de usuario normalmente es tu e-mail</key>
+    <key alias="enterAlias">Ingrese alias...</key>
+    <key alias="generatingAlias">Generar alias...</key>
   </area>
   <area alias="editcontenttype">
     <key alias="createListView" version="7.2">Crear un tipo de listado personalizado</key>
@@ -655,14 +709,14 @@
     <key alias="renewSession">Renovar tu sesión para guardar sus cambios</key>
   </area>
   <area alias="login">
-    <key alias="greeting0">Administrador SbN (CMS)</key>
-    <key alias="greeting1">Administrador SbN (CMS)</key>
-    <key alias="greeting2">Administrador SbN (CMS)</key>
-    <key alias="greeting3">Administrador SbN (CMS)</key>
-    <key alias="greeting4">Administrador SbN (CMS)</key>
-    <key alias="greeting5">Administrador SbN (CMS)</key>
-    <key alias="greeting6">Administrador SbN (CMS)</key>
-    <key alias="instruction">Administrador SbN (CMS)</key>
+    <key alias="greeting0">Administrador SbN</key>
+    <key alias="greeting1">Administrador SbN</key>
+    <key alias="greeting2">Administrador SbN</key>
+    <key alias="greeting3">Administrador SbN</key>
+    <key alias="greeting4">Administrador SbN</key>
+    <key alias="greeting5">Administrador SbN</key>
+    <key alias="greeting6">Administrador SbN</key>
+    <key alias="instruction">Administrador SbN</key>
     <key alias="timeout">La sesión ha caducado</key>
     <key alias="bottomText"><![CDATA[<p style="text-align:right;">&copy; 2001 - %0% <br /><a href="https://umbraco.com" style="text-decoration: none" target="_blank" rel="noopener">umbraco.com</a></p> ]]></key>
     <key alias="forgottenPassword">¿Olvidaste tu contraseña?</key>
@@ -1272,7 +1326,11 @@
     <key alias="scripts">Scripts</key>
     <key alias="stylesheets">Hojas de estilo</key>
     <key alias="templates">Plantillas</key>
+    <key alias="logViewer">Ver Log</key>
     <key alias="users">Usuarios</key>
+    <key alias="settingsGroup">Ajustes</key>
+    <key alias="templatingGroup">Plantillas</key>
+    <key alias="relationType">Relaciones</key>
   </area>
   <area alias="update">
     <key alias="updateAvailable">Existe una nueva actualización</key>
@@ -1567,5 +1625,37 @@
     <key alias="settingsHealthCheck">Verificar Estado</key>
     <key alias="settingsProfiler">Perfilamiento</key>
     <key alias="memberIntro">Inicio</key>    
+  </area>
+  <area alias="settingsDashboard">
+    <key alias="start">Ajustes de Contenido</key>
+    <key alias="startDescription">
+      Este módulo contiene herramientas para la configuración de las herramientas del SbN (CMS).      
+    </key>
+    <key alias="more">Herramientas para:</key>
+    <key alias="bulletPointOne">
+      <![CDATA[
+            Tipos de Documento
+        ]]>
+    </key>
+    <key alias="bulletPointTwo">
+      <![CDATA[
+            Tipos de medios
+        ]]>
+    </key>
+    <key alias="bulletPointThree">
+      <![CDATA[
+            Tipos de datos
+        ]]>
+    </key>
+    <key alias="bulletPointFour">
+      <![CDATA[
+            Plantillas (Hojas de estilo)
+        ]]>
+    </key>
+    <key alias="bulletPointFive">
+      <![CDATA[
+            Macros y Scripts (Javascript)
+        ]]>
+    </key>
   </area>
 </language>

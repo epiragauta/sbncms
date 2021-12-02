@@ -18,14 +18,14 @@ using Sbn.Extensions;
 
 namespace Sbn.Cms.Web.Common.PublishedModels
 {
-	/// <summary>Referencia Bibliográfica</summary>
-	[PublishedModel("recurso1")]
-	public partial class Recurso1 : PublishedContentModel
+	/// <summary>Soluciones basadas en la Naturaleza</summary>
+	[PublishedModel("solucionesBasadasEnLaNaturaleza")]
+	public partial class SolucionesBasadasEnLaNaturaleza : PublishedContentModel
 	{
 		// helpers
 #pragma warning disable 0109 // new is redundant
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
-		public new const string ModelTypeAlias = "recurso1";
+		public new const string ModelTypeAlias = "solucionesBasadasEnLaNaturaleza";
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
@@ -34,14 +34,14 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 			=> PublishedModelUtility.GetModelContentType(publishedSnapshotAccessor, ModelItemType, ModelTypeAlias);
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[return: global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<Recurso1, TValue>> selector)
+		public static IPublishedPropertyType GetModelPropertyType<TValue>(IPublishedSnapshotAccessor publishedSnapshotAccessor, Expression<Func<SolucionesBasadasEnLaNaturaleza, TValue>> selector)
 			=> PublishedModelUtility.GetModelPropertyType(GetModelContentType(publishedSnapshotAccessor), selector);
 #pragma warning restore 0109
 
 		private IPublishedValueFallback _publishedValueFallback;
 
 		// ctor
-		public Recurso1(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
+		public SolucionesBasadasEnLaNaturaleza(IPublishedContent content, IPublishedValueFallback publishedValueFallback)
 			: base(content, publishedValueFallback)
 		{
 			_publishedValueFallback = publishedValueFallback;
@@ -50,23 +50,31 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 		// properties
 
 		///<summary>
-		/// Autor
+		/// Desafio
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("autor")]
-		public virtual string Autor => this.Value<string>(_publishedValueFallback, "autor");
+		[ImplementPropertyType("desafio")]
+		public virtual global::System.Collections.Generic.IEnumerable<string> Desafio => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "desafio");
 
 		///<summary>
-		/// URL
+		/// Descripción
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("documento")]
-		public virtual global::System.Collections.Generic.IEnumerable<global::Sbn.Cms.Core.Models.Link> Documento => this.Value<global::System.Collections.Generic.IEnumerable<global::Sbn.Cms.Core.Models.Link>>(_publishedValueFallback, "documento");
+		[ImplementPropertyType("descripcion")]
+		public virtual string Descripcion => this.Value<string>(_publishedValueFallback, "descripcion");
 
 		///<summary>
-		/// Título
+		/// gridContenido
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("gridContenido")]
+		public virtual global::Newtonsoft.Json.Linq.JToken GridContenido => this.Value<global::Newtonsoft.Json.Linq.JToken>(_publishedValueFallback, "gridContenido");
+
+		///<summary>
+		/// Nombre
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
@@ -74,19 +82,35 @@ namespace Sbn.Cms.Web.Common.PublishedModels
 		public virtual string Nombre => this.Value<string>(_publishedValueFallback, "nombre");
 
 		///<summary>
-		/// Publicador
+		/// Objetivos
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("publicador")]
-		public virtual string Publicador => this.Value<string>(_publishedValueFallback, "publicador");
+		[ImplementPropertyType("objetivos")]
+		public virtual string Objetivos => this.Value<string>(_publishedValueFallback, "objetivos");
 
 		///<summary>
-		/// Año de Publicación
+		/// Problema
 		///</summary>
 		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
 		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
-		[ImplementPropertyType("year")]
-		public virtual string Year => this.Value<string>(_publishedValueFallback, "year");
+		[ImplementPropertyType("problema")]
+		public virtual global::System.Collections.Generic.IEnumerable<string> Problema => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "problema");
+
+		///<summary>
+		/// ReferenciasBibliograficas
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("referenciasBibliograficas")]
+		public virtual global::System.Collections.Generic.IEnumerable<global::Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> ReferenciasBibliograficas => this.Value<global::System.Collections.Generic.IEnumerable<global::Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>>(_publishedValueFallback, "referenciasBibliograficas");
+
+		///<summary>
+		/// Servicios Ecosistémicos
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Sbn.ModelsBuilder.Embedded", "9.1.0+80d72b2eb0e3b88e18b27100726da1525e75ede7")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("serviciosEcosistemicos")]
+		public virtual global::System.Collections.Generic.IEnumerable<string> ServiciosEcosistemicos => this.Value<global::System.Collections.Generic.IEnumerable<string>>(_publishedValueFallback, "serviciosEcosistemicos");
 	}
 }
