@@ -3,53 +3,35 @@
 @{
 	Layout = "master.cshtml";
 }
+<link rel="stylesheet" href="@Url.Content("~/css/sbn-casos-de-exito.css")" media="screen">
+<script type="text/javascript" src="@Url.Content("~/scripts/sbn-casos-de-exito.js")"></script>
+
+<div class="casos-de-exito-background-header">
+    <div class="casos-de-exito-background-header-overcolor"></div>
+</div>
 <section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 3rem;" >
-    <div class="titles">Casos de Exito</div>
     
-    <div class="row">
-        <div class="col-md-4 px-5">
-          <label for="inputNameTypeEATExisting">Nacional</label>
-          <select class="select-contact" id="categoria">
-            <option selected>Seleccionar</option>
-            <option value="1">Técnico</option>
-            <option value="2">Juridico</option>
-            <option value="2">Otro</option>
-          </select>
-        </div>
-        <div class="col-md-4 px-5">
-          <label for="inputNameTypeEATExisting">Área temática</label>
-          <select class="select-contact" id="tipoEAT">
-            <option selected>Seleccionar</option>
-            <option value="1">Opción 1</option>
-            <option value="2">Opción 2</option>
-            <option value="3">Opción 3</option>
-            <option value="4">Opción 4</option>
-            <option value="5">Opción 5</option>
-          </select>
-        </div>
-        <div class="col-md-4 px-5">
-            <input class="col-md-12 signup-input text-value input-search" type="search" id="mySearchText2" aria-label="Recipient's username" >
+    <div class="text-center casos-de-exito-header"><h2 style="color:#fff !important;">Casos de éxito</h2></div>
+    
+    <div class="row" style="margin-left: 4px;">
+        <div class="col-md-4">
+            <select class="custom-select mb-3" aria-label="Default select example">
+              <option selected>Seleccione una opción</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
         </div>
     </div>
-    <div class="row" style="display:none;">
-        <div class="col-md-8"></div>
-        <div class="col-md-2 text-right">
-    		<button type="button" class="btn btn-link font-weight-bold">
-    			Limpiar Filtros
-    		</button>
-    	</div>
-    	<div class="col-md-2 pt-1 pr-5">
-    		<button type="button" id="mySearchButton2" class="botones" style="width: 100%;height: 70%; padding:0;">
-    			Filtrar
-    		</button>
-    	</div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">¿Quieres compartir tu casos de éxito? Escribenos aqui</div>
+
+    <div class="row" style="margin-left: 20px;">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Buscar Casos de éxito" aria-label="Buscar Casos de éxito" aria-describedby="basic-addon1">
+        </div>
     </div>
     
-    <section class="section">
-        <div class="row">
+    <section class="section section-casos-de-exito">
+        <div class="row row-casos-de-exito">
         @{
             var numberOfCases = 5; //Model.CasosAmostrar;
             var startNodeId = Model.Id;
@@ -88,17 +70,23 @@
                 @foreach (ContentModels.CasoDeExito caso in pagedCases){
                     if (counter != 0 && counter % columns == 0){
                         @:</div>
-                        @:<div class="row">
+                        @:<div class="row row-casos-de-exito">
                     }
                     <div class="col-md-4">
-                        <h2>@caso.Nombre</h2>
-                        <div>@caso.Detalle</div>
-                        <h4>Imagen</h4>
-                        <img src="@caso.Imagen.LocalCrops.Src"  width="300" height="200">
-                        <h4>Documentos</h4>
-                        
-                        <div class="blogpost-meta">
-                            <small class="blogpost-date">@caso.CreateDate.ToShortDateString()</small>
+                        <div class="active card-casos-de-exito">
+                            <img src="@caso.Imagen.LocalCrops.Src" class="card-img-casos-de-exito" alt="img1">
+                            <div class="overlay">
+                                <span>
+                                    <div class="card-body card-text-overlay">
+                                        <h5 class="card-title text-center">@caso.Nombre</h5>
+                                        <p class="card-text">@caso.Detalle</p>
+                                    </div>
+                                </span>
+                                <div class="cart-download-icon"><i class="bi bi-download"></i></div>
+                            </div>
+                            <div class="card-title-main">
+                                <h5 class="card-title text-center">@caso.Nombre</h5>
+                            </div>
                         </div>
                     </div>
                     counter++;
@@ -107,7 +95,7 @@
         }
             
         </div>
-        <div class="row">
+        <div class="row" style="padding-top:25px;">
             <div class="col-md-12">
             @{        
                 if (pageCount > 1){
@@ -115,7 +103,7 @@
                         <ul>
                             @if (page > 1)
                             {
-                                <li><a href="?page=@(page-1)">Anterior</a></li>
+                                <li><a href="?page=@(page-1)">&lt</a></li>
                             }
                             @for (int p = 1; p < pageCount + 1; p++)
                             {
@@ -125,7 +113,7 @@
                             }
                             @if (page < pageCount)
                             {
-                                <li><a href="?page=@(page+1)">Siguiente</a></li>
+                                <li><a href="?page=@(page+1)">&gt</a></li>
                             }
                         </ul>
                     </div>
