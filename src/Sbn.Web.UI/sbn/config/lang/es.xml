@@ -709,14 +709,14 @@
     <key alias="renewSession">Renovar tu sesión para guardar sus cambios</key>
   </area>
   <area alias="login">
-    <key alias="greeting0">Administrador SbN</key>
-    <key alias="greeting1">Administrador SbN</key>
-    <key alias="greeting2">Administrador SbN</key>
-    <key alias="greeting3">Administrador SbN</key>
-    <key alias="greeting4">Administrador SbN</key>
-    <key alias="greeting5">Administrador SbN</key>
-    <key alias="greeting6">Administrador SbN</key>
-    <key alias="instruction">Administrador SbN</key>
+    <key alias="greeting0">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="greeting1">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="greeting2">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="greeting3">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="greeting4">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="greeting5">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="greeting6">Plataforma de Soluciones basadas en la Naturaleza</key>
+    <key alias="instruction">Autenticarse</key>
     <key alias="timeout">La sesión ha caducado</key>
     <key alias="bottomText"><![CDATA[<p style="text-align:right;">&copy; 2001 - %0% <br /><a href="https://umbraco.com" style="text-decoration: none" target="_blank" rel="noopener">umbraco.com</a></p> ]]></key>
     <key alias="forgottenPassword">¿Olvidaste tu contraseña?</key>

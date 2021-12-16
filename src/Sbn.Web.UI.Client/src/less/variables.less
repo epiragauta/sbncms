@@ -2,7 +2,7 @@
 // Variables
 // --------------------------------------------------
 
-@sbn-background-color:#0f6e13;
+@sbn-background-color:#0a3f0a;
 
 // Global values
 // --------------------------------------------------
@@ -11,7 +11,7 @@
 // Grays
 // -------------------------
 @black:                 #000;
-@blackLight:			#1D1D1D;
+@blackLight:			      #1D1D1D;
 @grayDarker:            #222;
 @grayDark:              #343434;
 @gray:                  #555;
@@ -43,7 +43,7 @@
 
 // UI Colors
 @red-d1:                #F02E28;
-@red:                   #D42054;// updated 2019
+@red:                   #E2574C; // #D42054;// updated 2019
 @red-l1:			    #e22c60;// updated 2019
 @red-l2:			    #FE8B88;
 @red-l3:			    #FFB2B0;
@@ -58,11 +58,12 @@
 @yellow-washed:		    #FFFAEB;
 
 @green-d1:              #1FB572;
-@green:                 #2bc37c;// updated 2019
-@green-l1:			    #4ECF95;
-@green-l2:			    #79E1B2;
-@green-l3:			    #A6F0CF;
-@green-washed:		    #EBFFF6;
+@green:                 @sbn-background-color; // #2bc37c;// updated 2019
+@green-l1:			        #4ECF95;
+@green-l2:			        #79E1B2;
+@green-l3:			        #A6F0CF;
+@green-washed:		      #EBFFF6;
+@green-lima:            #BAD405;
 
 // Grayscale
 @gray-1:                #1E1C1C;
@@ -110,18 +111,18 @@
 // Brand colors
 // -------------------------
 
-//@blueLight:               #4f89de;
-@blue:                  #2E8AEA;
-@blueMid:               #2152A3;// updated 2019
-@blueMidLight:          #6ab4f0;
-@blueDark:              #3544b1;// updated 2019
-@blueExtraDark:         #1b264f;// added 2019
-@blueLight:             #ADD8E6;
-@blueNight:             #162335;// added 2019
+//@blueLight:           #C5E1A5    #4f89de;
+@blue:                  #04C004; //#2E8AEA;
+@blueMid:               #229222; //#2152A3;// updated 2019
+@blueMidLight:          #2CBB2C; //#6ab4f0;
+@blueDark:              #106410; //#3544b1;// updated 2019
+@blueExtraDark:         #0a3f0a;  // #1b264f;// added 2019
+@blueLight:             #C5E1A5;  // #ADD8E6;
+@blueNight:             #1B5E20;  //#162335;// added 2019
 //@orange:              #f79c37;// updated 2019
-@pink:                  #D93F4C;// #C3325F;// update 2019
-@pinkLight:             #f5c1bc;// added 2019
-@pinkExtraLight:        #fee4e1;// added 2020
+@pink:                  #C2DA3F; //#D93F4C;// #C3325F;// update 2019
+@pinkLight:             #f5c1bc; // added 2019
+@pinkExtraLight:        #DBEA91;  //#fee4e1;// added 2020
 @pinkRedLight:          #ff8a89;// added 2019
 @brown:                 #9d8057;// added 2019
 @brownLight:            #e4e0dd;// added 2019
@@ -151,7 +152,7 @@
 
 //@ui-active:           #346ab3;
 @ui-active:             @pinkExtraLight;
-@ui-active-border:      @pinkLight;
+@ui-active-border:      @green-lima;
 @ui-active-blur:        @brownLight;
 @ui-active-type:        @blueExtraDark;
 @ui-active-type-hover:  @blueMid;
@@ -163,11 +164,11 @@
 @ui-selected-border:           @blueDark;
 @ui-selected-border-hover:     darken(@blueDark, 10%);
 
-@ui-light-border:           @pinkLight;
+@ui-light-border:           @green-lima;
 @ui-light-type:             @gray-3;
 @ui-light-type-hover:       @blueMid;
 
-@ui-light-active-border:      @pinkLight;
+@ui-light-active-border:      @green-lima;
 @ui-light-active-type:        @blueMid;
 @ui-light-active-type-hover:  @blueMidLight;
 
@@ -226,7 +227,7 @@
 
 // Typography
 // -------------------------
-@sansFontFamily:        "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@sansFontFamily:        Roboto, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
