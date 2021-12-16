@@ -25,7 +25,7 @@ $(document).ready(function() {
             $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background_active.svg')`}); 
         }else{
             $(`#diagram-subtitle`).html('');
-            $('.cicle_background').css({'background-image': `url('./media/assets/img/ciclo/cicle_background.svg')`}); 
+            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background.svg')`}); 
         }
         $(`#element-${selected}`).addClass("active");
         for (let index = 0; index < dataDiagram[selected-1].steps.length; index++) {
@@ -79,4 +79,6 @@ $(document).ready(function() {
             $(`#element-${index+1}`).removeClass("active");
         }
     }
+    
+    $('.carousel').carousel('pause');
 });
