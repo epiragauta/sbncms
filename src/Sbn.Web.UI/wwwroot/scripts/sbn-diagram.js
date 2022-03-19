@@ -10,75 +10,126 @@ $(document).ready(function() {
         for (let index = 0; index < dataDiagram.length; index++) {
             $(`#element-${index+1}-label`).html(dataDiagram[index].step);
             $(`#element-${index+1}`).html(dataDiagram[index].name);
+            $(`#element-m-${index+1}`).html(dataDiagram[index].name); //mobile label
         }
 
         $(`#diagram-name`).html(InfoDiagram[0].name);
         $(`#diagram-center`).html(InfoDiagram[0].center);
+        //$(`#diagram-center-m`).html(InfoDiagram[0].center);
         onInit();
     }
-
-    $(`button[id^='element-']`).mouseover(function(e) {
-        removeClassAll();
-        selected = e.target.id.substr(-1);
-        if(selected == 5){
-            $(`#diagram-subtitle`).html(InfoDiagram[0].subtitle);
-            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background_active.svg')`}); 
-        }else{
-            $(`#diagram-subtitle`).html('');
-            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background.svg')`}); 
-        }
-        $(`#element-${selected}`).addClass("active");
-        for (let index = 0; index < dataDiagram[selected-1].steps.length; index++) {
-            $(`#menu-dot-${index+1}`).html(dot);
-            $(`#menu-text-${index+1}`).html(dataDiagram[selected-1].steps[index].name);           
-        }
-        removeClassSelection();
-    });
-
-    $(`a[id^='menu-text-']`).mouseover(function(e) {
-        removeClassSelection();
-        let item = e.target.id.substr(-1);
-        $(`#menu-text-${item}`).addClass("active-selected");
-        $(`#menu-dot-${item}`).html(activeDot);
-        $(`#title-d`).html(dataDiagram[selected-1].steps[item-1].name)
-        $(`#text-d`).html(dataDiagram[selected-1].steps[item-1].text)
-        $(`#img-d`).attr("src",dataDiagram[selected-1].steps[item-1].img);
-        //$('#img-d').css({'background-image': `url('${dataDiagram[selected-1].steps[item-1].img}')`}); 
-    });
 
     function onInit(){
         removeClassAll();
         selected = 1;
         let item = 1;
         $(`#element-${selected}`).addClass("active");
+        $(`#element-m-${selected}`).addClass("active text-white active-selected-m");
         for (let index = 0; index < dataDiagram[selected-1].steps.length; index++) {
             $(`#menu-dot-${index+1}`).html(dot);
             $(`#menu-text-${index+1}`).html(dataDiagram[selected-1].steps[index].name);           
         }
         removeClassSelection();
-        $(`#menu-text-${item}`).addClass("active-selected");
+        $(`#menu-text-${item}`).addClass(`active-selected-${item}`);
         $(`#menu-dot-${item}`).html(activeDot);
         $(`#title-d`).html(dataDiagram[selected-1].steps[item-1].name)
         $(`#text-d`).html(dataDiagram[selected-1].steps[item-1].text)
         $(`#img-d`).attr("src",dataDiagram[selected-1].steps[item-1].img);
+        loadMenuTextMobile();
+
+    }
+    
+    $(".diagram-center").click(function(e){
+        window.location="/implementar-sbn-2/";
+        
+    })
+
+    $(`button[id^='element-']`).mouseover(function(e) {
+        selectedMenu(e);
+    });
+
+    $(`a[id^='menu-text-']`).mouseover(function(e) {
+        loadMenuText(e);
+    });
+
+    $(`a[id^='element-m-']`).click(function(e) {
+        selectedMenu(e);
+        loadMenuTextMobile();
+
+    });
+
+    function loadMenuText(e){
+        console.log("loadMenuText", e);
+        removeClassSelection();
+        let item = e.target.id.substr(-1);
+        $(`#menu-text-${item}`).addClass(`active-selected-${item}`);
+        $(`#menu-dot-${item}`).html(activeDot);
+        $(`#title-d`).html(dataDiagram[selected-1].steps[item-1].name.replace("-",""))
+        $(`#text-d`).html(dataDiagram[selected-1].steps[item-1].text)
+        $(`#img-d`).attr("src",dataDiagram[selected-1].steps[item-1].img);
+    }
+
+    function loadMenuTextMobile(){
+        for (let imenu = 0; imenu < dataDiagram[selected-1].steps.length; imenu++) {
+            //$('.carousel-indicators').append('<li data-target="#carouselIndicators" data-slide-to="'+ imenu + '"></li>');
+            $('.carousel-indicators li:first-child').addClass('active');
+            $('#cards-carousel div:first-child').addClass('active');
+            $(`#cards-carousel`).append(`
+                    <div class="carousel-item ${ imenu === 0  ? 'active' : '' }" >
+                        <div class="card">
+                            <img class="card-img-top img-d-m" src="${dataDiagram[selected-1].steps[imenu].img}" height="220">
+                            <div class="card-body">
+                            <h5 class="card-title">${dataDiagram[selected-1].steps[imenu].name}</h5>
+                            <p class="card-text">${dataDiagram[selected-1].steps[imenu].text}</p>
+                            </div>
+                        </div>
+                    </div>
+                `)
+        }
+    }
+      
+    function selectedMenu(e){
+        console.log("selectedMenu", e);
+        removeClassAll();
+        selected = e.target.id.substr(-1);
+        if(selected == 5){
+            //$(`#diagram-subtitle`).html(InfoDiagram[0].subtitle);
+            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background_active.svg')`}); 
+        }else{
+            $(`#diagram-subtitle`).html('');
+            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background.svg')`}); 
+        }
+        //$(`#element-${selected}`).addClass("active");
+        $(`#element-m-${selected}`).addClass("active text-white active-selected-m");
+        for (let index = 0; index < dataDiagram[selected-1].steps.length; index++) {
+            $(`#menu-dot-${index+1}`).html(dot);
+            $(`#menu-text-${index+1}`).html(dataDiagram[selected-1].steps[index].name);           
+        }
+        removeClassSelection();
     }
 
     function removeClassSelection(){
-        if(selected != null){
+        console.log("removeClassSelection");
+        if(selected !== null){
             for (let index = 0; index < dataDiagram[selected-1].steps.length; index++) {
                 $(`#menu-dot-${index+1}`).html(dot);
-                $(`#menu-text-${index+1}`).removeClass("active-selected");
+                $(`#menu-text-${index+1}`).removeClass(`active-selected-${index+1}`);
             }
         }
     }
 
     function removeClassAll(){
+        console.log("removeClassAll");
+        $('#cards-carousel').empty();
+        //$('.carousel-indicators').empty();
         for (let index = 0; index <= 6; index++) {
             $(`#menu-text-${index+1}`).empty();
             $(`#menu-dot-${index+1}`).empty();
             $(`#element-${index+1}`).removeClass("active");
+            $(`#element-m-${index+1}`).removeClass("active text-white active-selected-m");
+            $(`#menu-text-${index+1}`).removeClass(`active-selected-${index+1}`);
         }
     }
+
     
-    $('.carousel').carousel('pause');
 });

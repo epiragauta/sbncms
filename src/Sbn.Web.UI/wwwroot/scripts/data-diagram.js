@@ -1,7 +1,7 @@
 let InfoDiagram = [{
     "name": "Aprendizaje para la innovación",
     "subtitle" : "Manejo adaptativo",
-    "center": "Ciclo de proyecto",
+    "center": "", /*"Ciclo de proyecto",*/
 }];   
 
 let dataDiagram = [{
@@ -56,7 +56,7 @@ let dataDiagram = [{
         },
         {
             "id": 2,
-            "name": "Generación de mecanismos de participación y gobernanza",
+            "name": "Generación de mecanismos de           participación y gobernanza",
             "text": "Proceso a través del cual se concertan y definen los procedimientos, canales e instancias de participación e interlocución para la toma de decisiones, como plataforma de gobernanza socio-institucional de la SbN.",
             "img" : "/media/assets/img/ciclo/02_B.jpg"
         },

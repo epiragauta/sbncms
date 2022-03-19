@@ -1,71 +1,139 @@
 body{
-    background-color:#f5f5f5 !important;
+    background-color:#E6E6E6 !important;
+    font-family: Roboto,sans-serif !important;
 }
 
 .frontpage{
-    background-color:#f5f5f5 !important;
+    background-color:#E6E6E6 !important;
 }
+
+.search-bar-input{
+    position:absolute;
+    top:5rem;
+}
+
+.sbn-navbar{
+    padding:0px;
+    border-top: 2px solid;
+    border-top-color:#008E65;
+    background-color:#0a3f0a;
+}
+
+.sbn-navbar a{
+    color: #fff;    
+    font-size:12px;
+    font-weight:600;
+}
+
+.sbn-menu-navbar .navbar-nav{
+    min-height:86px;
+}
+
+.sbn-navbar .nav-item{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sbn-navbar .nav-item:hover{
+    background-color: #BAD405;
+    color: #014235;  
+}
+
+
 .h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{
-    color: #014235 !important;
+    color: #0a3f0a !important;
 }
+
+.green-line-separator{
+    border-top: solid 2px;
+    color: #bad405;
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+
 
 .title-separator-main-carousel{
     margin-left: 7rem;
     width: 45%;
 }
 
+.title-separator-secondary-carousel{
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
 .card{
     border-radius: 0.75rem;
 }
 
-.card-img-top{
-    border-radius: 0.75rem;
-}
-
-.card-text-desafios{
-    width: 18rem;
-    height:30rem;
-}
-
 .card-text-impl-sbn{
-    height:30rem;
+    height:100%;
+    
 }
+
+.circle-img-card{
+    width: 10rem;
+    height: 10rem;
+}
+
 
 .custom-circle-image {
-  width: 9vw; /* note i used vw not px for better responsive */
+  width: 10vw; /* note i used vw not px for better responsive */
+  height: 10vw;
+}
+
+.custom-circle-image-role {
+  width: 12vw; /* note i used vw not px for better responsive */
   height: 9vw;
 }
 
 .custom-circle-image-min {
   position: absolute;
-    width: 4vw;
-    height: 4vw;
-    top: 7vw;
+    width: 3.5rem;     /* 4vw */
+    height: 3.5rem; 
+    top: 9vw;
     right: 3vw;
+}
+
+.border-warning{
+    border-color:#BAD405!important
+}
+
+.border-carousel-slide{
+    border-color:#ffff!important
+}
+
+.curved-border{
+    border-radius: 8px 8px 8px 8px;
 }
 
 .card-margin-top-sbn{
     margin-top:25px;
 }
 
-.card-title{
-    padding-left: 2.2rem;
-    padding-right: 2.2rem;
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: visible;
 }
 
-.card-text{
-    padding-top:20px;
-    border-top: 3px solid #dee2e6!important;
-    padding-left:2.3rem;
-    padding-right:2.3rem;
-    font-size:12px;
+.card-body{
+    overflow: hidden;
+}
+
+.card-header{
+    background-color:#BAD405 !important;
+    padding: 0.75rem 1.25rem !important;
+    margin-bottom:1rem;
+    border-radius: 5px !important; 
 }
 
 .btn-card-impl-sbn {
     position: absolute;
     left: 33.3%;
     color: #fff;
-    background-color: 0a3f0a;  /* #dfe633 */
+    background-color: #0a3f0a;  /* #BAD405 */
     border-radius: 8px 0 8px 0;
     font-weight: 600;
     width: 115px;
@@ -75,9 +143,27 @@ body{
     bottom: -12px;
 }
 
+.carousel-control-next,.carousel-control-prev{
+    position:absolute;
+    top:0;
+    bottom:0;
+    z-index:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    width:5%;
+    color:#fff;
+    text-align:center;
+    opacity:.5;
+    transition:opacity .15s ease}
+    
+.carousel-control-prev-icon-green{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23BAD405' viewBox='0 0 8 8'%3e%3cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3e%3c/svg%3e")}
+
+.carousel-control-next-icon-green{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23BAD405' viewBox='0 0 8 8'%3e%3cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3e%3c/svg%3e")}
+
 .btn-card-impl-sbn:hover {
-    color: 0a3f0a;
-    background-color: #dfe633;  
+    color: #0a3f0a;
+    background-color: #BAD405;  
 }
 
 .img-d {
@@ -88,10 +174,11 @@ body{
 }
 
 footer {
-  background: #eeefe9;
+  background: #fff;
   color: #2c6e28;
-  font-weight: 500;
+  font-weight: 600;
   padding: 1px 0; 
+  line-height: 1.5;
 }
   footer .logo_footer {
     width: 190px;
@@ -139,42 +226,63 @@ footer {
       color: #266831;
       font-size: 14px;
       overflow-wrap: break-word; 
-        
     }
   footer .links_site {
     text-align: right;
-    margin-top: 40px; 
   }
     @media screen and (max-width: 768px) {
       footer .links_site {
         text-align: left; 
       } 
-        
+      .search-bar-input {
+            position: absolute !important;
+            top: 20rem !important;
+            left: 4rem !important;
+        }
+        .header-search{
+            max-width: 300px !important;
+        }
     }
     footer .links_site a {
       color: #2c6e28;
-      font-weight: 500;
+      font-weight: 600;
       display: block;
       font-size: 14px;
-      margin: 16px 0; 
+      margin: 12px 0; 
+      line-height: 1.5;
     }
   footer .box_tyc {
     text-align: right;
-    margin: 22px 0; }
+    margin: 16px 0; }
     @media screen and (max-width: 768px) {
       footer .box_tyc {
         text-align: left;
-      } 
+      }
+        .mx-auto-main-bar{
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+        }
+      .sbn-navbar a {
+         font-size: 11px;
+      }
+      .sbn-logo-image-navbar{
+            position: absolute;
+            width: 45px !important;
+            left: 5px !important;
+            top: 35px !important;
+        }
     }
     footer .box_tyc a {
       color: #2c6e28;
-      font-weight: 500;
-      font-size: 14px; 
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
 .copyright {
   height: 35px;
-  background-color: #E6E6E6;
+  background-color: #fff;
   color: #333333;
   font-size: 12px;
   line-height: 14px;
@@ -238,6 +346,7 @@ footer {
 }
 
 
+
 /* -- PAGINATION -- */
 
 .pagination {
@@ -265,65 +374,16 @@ footer {
     background: #eee;
     display: block;
     float: left;
-    min-width: 28px;
+    width: 28px;
     height: 28px;
     text-decoration: none;
     line-height: 30px;
 }
-
-    .pagination li a.active, .pagination li a:hover {
-        background: #00a1f1;
-        color: #fff;
-    }
-
-    .pagination li a.disabled {
-        cursor:default;
-        opacity:0.5;
-    }
-
-        .pagination li a.disabled:hover {
-            cursor:default;
-            color: #a5a5a5;
-            background: #eee;
-            text-decoration: none;
-        }
-/* -- PAGINATION -- */
-
-.pagination {
-    float: left;
-    width: 100%;
-}
-
-.pagination ul {
-    list-style: none;
-    margin: 0;
-    padding: 0px 0px 0px 0px;
-    position: relative;
-    text-align: center;
-}
-
-.pagination li {
-    margin-left: 1px;
-    padding: 0;
-    display: inline-block;
-}
-
-.pagination li a {
-    color: #555;
-    text-align: center;
-    background: #eee;
-    display: block;
-    float: left;
-    /*width: 28px;
-    height: 28px;
-    text-decoration: none;
-    line-height: 30px;
-    */
-}
-
-    .pagination li a.active, .pagination li a:hover {
-        background: #00a1f1;
-        color: #fff;
+    
+    .pagination li a.active, .pagination li.active, .pagination li a:hover {
+        background: #e6e6e6;
+        color: #0a3f0a;
+        font-weight:600;
     }
 
     .pagination li a.disabled {
@@ -344,27 +404,6 @@ footer {
     text-align: left;
 }
 
-.btn-sbn-tools {
-    background-color: #dfe633;
-    border-radius: 8px 0 8px 0;
-    font-weight: 500;
-    width: 115px;
-    font-size:13px;
-    line-height: 1.1;
-    height: 40px;
-}
-
-.btn-sbn-tools-2 {
-    background-color: #1a3f32;
-    color: #dfe633;
-    border-radius: 8px 0 8px 0;
-    font-weight: 500;
-    width: 115px;
-    font-size:13px;
-    line-height: 1.1;
-    height: 40px;
-}
-
 .btn-sbn-tools-2:hover {
     color:#fff;
 }
@@ -373,37 +412,47 @@ footer {
   display: block;
 }
 
-.curved-div {
-    position: relative;
-    padding: 2em;
-    left: 45%;
-    transform: translate(-50%, -70%);
-    opacity: 0.9;
-    z-index:-1;
-}
- 
-.laptop-main-page{
-    position: relative;
-    padding: 2em;
-    left: 25%;
-    transform: translate(-48%, 2%);
-    opacity: 0.95;
-}  
-
 .border-sbn-tools{
     margin-top:20px;
-    padding-bottom:20px;
+    padding-bottom:3rem;
     border:3px solid !important;
-    border-color: #dfe633!important;
+    border-color: #BAD405!important;
     border-top-left-radius: 2rem!important;
+    width: 500px;
+    position: absolute;
+    right: -2rem;
+    padding-left:5%;
+}
+
+.sbn-imagen-size{
+    margin-bottom:2rem !important;
+    padding-top: 10px;
+    max-width:500px;
+    margin:auto;
 }
 
 .sbn-figures-info{
     margin-left: auto; 
     margin-right: auto;    
-    color: #2096BF;
+    color: #0a3f0a;
     font-size: 11px;
     text-align: center;
+}
+
+.sbn-card-desafios-size{
+    width: 18rem;
+    height:7rem;
+    border-radius:0.5rem !important;
+}
+
+.sbn-card-display{
+    align-items: center;
+    justify-content: center;
+    margin-bottom:1rem;
+}
+
+.sbn-nav-bar-responsive{
+    padding-left:0rem !important;
 }
 
 .card-casos-de-exito{
@@ -419,50 +468,142 @@ footer {
     opacity: 0;
     z-index:99;
     transition: opacity 250ms ease-in-out;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .card-casos-de-exito:hover .overlay{
   opacity:0.97;
 }
 
+.card-casos-de-exito-sbn{
+    padding:5px;
+}
+
+.card-casos-de-exito-sbn .overlay {
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    width: 250px;
+    height: 250px;
+    background: #b8cf00;
+    opacity: 0;
+    z-index:99;
+    transition: opacity 250ms ease-in-out;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-casos-de-exito-sbn:hover .overlay{
+  opacity:0.97;
+}
+
 .card-text-overlay{
-    margin-top:150px;
+    margin-top:0px;
+    text-align:center;
 }
 
 .card-text-overlay h5{
     color:#fff !important;
 }
 
-.cart-download-icon{
+.card-text-overlay-sbn{
+    margin-top:0px;
+    text-align:center;
+}
+
+.card-text-overlay-sbn h5{
+    color:#fff !important;
+    font-size:0.85rem;
+}
+
+.card-text-overlay-sbn p{
+    font-size:0.75rem;
+}
+
+.cart-download-icon {
     position: absolute;
     right: 10px;
     bottom: 5px;
-    color: #fff;
+    color: #fff !important;
     font-size:2rem;
     cursor:pointer;
 }
 
-.card-img-casos-de-exito{
-    width:340px;
-    height:340px;
+.cart-download-icon a{
+    color: #fff !important;
+}
+
+.header-search-icon{
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    color: #fff !important;
+    font-size:2rem;
+    cursor:pointer;
+}
+
+
+.card-img-casos-de-exito-sbn{
+    width:250px;
+    height:250px;
     overflow: hidden;
     object-fit: cover;
 }
 
 .card-title-main{
     position:absolute;
-    background-color : 0a3f0a;
+    background-color : #0a3f0a;
     color: #fff !important;
     bottom:5px;
     left:20px;
     width:340px;
     opacity: 0.8;
+    height: 25%;
+}
+.card-title-main-sbn{
+    position:absolute;
+    background-color : #0a3f0a;
+    color: #fff !important;
+    bottom:5px;
+    left:20px;
+    width:250px;
+    opacity: 0.8;
+    height: 35%;
+}
+.card-title-center{
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .card-title-main h5{
     color: #fff !important;
-    margin-top:16px;
-    margin-left:17px;
+    margin-top:1px;
+    margin-left:0px;
+}
+
+.card-title-center-sbn{
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+}
+
+.card-title-main-sbn h5{
+    color:#fff !important;
+    margin-top:1px;
+    margin-left:0px;
 }
 
 .casos-de-exito-header{
@@ -474,9 +615,17 @@ footer {
     position: absolute;
     /*background-color: #438711;*/
     width: 100%;
-    top: 89px;
+    
     height: 300px;
     background: url('/media/jlvothty/ddeb880b61a02925f681e22b8b2690d75d0373d6552c4c6fbb5e60d7e3f5e916052990d1c543eac1b463b2a5b35b5dfebdc205cecabea27721661b_1280.jpg') #00ff0055;
+}
+.casos-de-exito-background-header2{
+    position: absolute;
+    /*background-color: #438711;*/
+    width: 100%;
+    
+    height: 300px;
+    background: url('/media/vseg3udx/tnc19001_180824_1695.jpg') #00ff0055;
 }
 
 .casos-de-exito-background-header-overcolor{
@@ -507,4 +656,1649 @@ footer {
     padding-bottom:35px;
     width:107%;
 }
+
+.btn-toolbar1{
+    padding-bottom:5px;
+}
+
+.tittle-sbn2{
+    font-weight:bold !important;
+    margin-top:2rem;
+    font-size:22px;
+}
+
+.bold-text-sbn{
+    color:#0a3f0a !important;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.normal-text-sbn{
+    color:#212529 !important;
+    font-size:1rem;
+    font-weight:normal;
+}
+
+.normal-text-sbn-2{
+    color:#0a3f0a !important;
+    font-size:1rem;
+    font-weight:normal;
+}
+
+.button-text-sbn{
+    color:#0a3f0a !important;
+    font-size:12px;
+    font-weight:normal;
+}
+
+.float-button{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#BAD405;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+	box-shadow: 2px 2px 3px #999;
+}
+
+.sbn-title-area-aplicacion{
+    padding:0.75rem;
+}
+.sbn-personal-apoyo{
+    width:95%;
+}
+.table th{
+    border:2px solid #dee2e6;
+}
+.table td{
+    border:2px solid #dee2e6;
+}
+
+
+@media (min-width: 320px) {
+    .sbn-logo-image-navbar{
+        position: absolute;
+        width: 60px;
+        left: 1px;
+        top: 3rem;
+    }
     
+    .laptop-main-page{
+        position: relative;
+        padding: 1em;
+        left: 1px;
+        transform: translate(-1%, 2%);
+        opacity: 1;
+    }
+    .panel-info-and-video{
+        height: 32rem;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .video-container video{
+        position: absolute;
+        top: 20rem;
+        left: 1px;
+        width: 100%;
+    }
+    
+    .video-container img{
+        display:none;
+    }
+    .buton-video-container{
+        padding-left:3rem;
+    }
+    .home-exploration-panel{
+        font-size:1.6rem;
+        padding-left:.5rem;
+    }
+    .btn-sbn-tools {
+        background-color: #BAD405;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    
+    .btn-sbn-tools-2 {
+        background-color: #0a3f0a;
+        color: #BAD405;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+        border-color:#BAD405;
+    }
+    .btn-sbn-tools-3{
+        background-color: #fff;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .btn-sbn-tools-4 {
+        background-color: #0a3f0a;
+        color: #fff;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .curved-div {
+        display:none;
+    }
+    .min-background-color{
+        background-color:#E6E6E6 ;
+    }
+    .card-text-overlay{
+        margin-top:0px;
+        text-align:center;
+        font-size:13px;
+    }
+    .card-text-overlay h5{
+        
+        font-size:15px;
+    }
+    .card-img-casos-de-exito{
+        width:100%;
+        height:auto;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .card-casos-de-exito{
+        padding:5px;
+    }
+    .card-casos-de-exito .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: -webkit-fill-available;
+        height:97%;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2.5rem;
+        overflow: hidden;
+    }
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        opacity: 0.8;
+        height: 30%;
+        margin-right: 2.5rem;
+        width: -webkit-fill-available;
+    }
+    .card-title-main h5{
+        font-size:14px !important;
+    }
+    .sbn-objetivos-img{
+        width:50%;
+    }
+    .sbn-tips{
+        margin-top: 20%;
+        margin-left: 15%;
+    }
+    
+    .border-card-text{
+        margin:0rem;
+    }
+    
+    .toolbox-border{
+        padding:1.2rem;
+        background: #70998ae3;
+    }
+    .sbn-desafio-img{
+        width:50%;
+        margin:auto;
+    }
+    .table-width-sbn{
+        width:80%;
+    }
+    .card-casos-de-exito-sbn{
+        padding:5px;
+    }
+    
+    .card-casos-de-exito-sbn .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: -webkit-fill-available;
+        height: 97%;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2.5rem;
+        overflow:hidden;
+    }
+    .card-title-main-sbn{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:-webkit-fill-available;
+        opacity: 0.8;
+        height: 35%;
+        margin-right: 2.5rem;
+    }
+    .card-img-casos-de-exito-sbn{
+        width:-webkit-fill-available;
+        height:100%;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .sbn-img-resource{
+        display:none;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767){
+    .sbn-logo-navbar {
+        position: absolute;
+        top: 2rem;
+        left: 5rem;
+    }
+    .laptop-main-page{
+        position: relative;
+        padding: 2em;
+        left: 1px;
+        transform: translate(-13%, 2%);
+        opacity: 1;
+    }  
+    .sbn-logo-image-navbar{
+        width: 60px;
+        margin-top: -5px;
+    }
+    .sbn-image-navbar{
+        display: block;
+        position: absolute;
+        white-space: nowrap;
+        margin: 12px auto 0 -50px;
+    }
+    .sbn-menu-navbar ul li a{
+        padding: 12px 20px;
+    }
+    .panel-info-and-video{
+        height: 43rem;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .video-container video{
+        position: absolute;
+        top: 450px;
+        left: 23%;
+        width:500px;
+    }
+    .video-container img{
+        width:410px;
+        display:none;
+    }
+    .home-exploration-panel{
+        margin-top:20px;
+        margin-bottom:5rem;
+        text-align: center;
+        width: 75%;
+    }
+    .btn-sbn-tools {
+        background-color: #BAD405;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    
+    .btn-sbn-tools-2 {
+        background-color: #0a3f0a;
+        color: #BAD405;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+        border-color:#BAD405;
+    }
+    .btn-sbn-tools-3{
+        background-color: #fff;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .btn-sbn-tools-4 {
+        background-color: #0a3f0a;
+        color: #fff;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .curved-div {
+        position: relative;
+        padding: 0.1em;
+        left: 45%;
+        transform: translate(-50%, -70%);
+        opacity: 0.99;
+        z-index:-1;
+    }
+    .buton-video-container{
+        padding-left:0rem;
+         margin-left: -35px;
+    }
+    .card-text-overlay{
+        margin-top:0px;
+        text-align:center;
+        font-size:1rem;
+    }
+    .card-text-overlay h5{
+        
+        font-size:1.25rem;
+    }
+    .card-img-casos-de-exito{
+        width:450px;
+        height:450px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .card-casos-de-exito{
+        padding:5px;
+    }
+    .card-casos-de-exito .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 450px;
+        height:450px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        opacity: 0.8;
+        height: 30%;
+        margin-right: 1.3rem;
+        width: 450px;
+    }
+    .card-title-main h5{
+        font-size:16px;
+    }
+    .sbn-objetivos-img{
+        width:50%;
+    }
+    .sbn-tips{
+        margin-top: 20%;
+        margin-left: 45%;
+    }
+    .border-card-text{
+        margin:2rem;
+    }
+    .toolbox-border{
+        padding:1.2rem;
+        background: #70998ae3;
+    }
+    .sbn-desafio-img{
+        width:50%;
+        margin:auto;
+    }
+    .table-width-sbn{
+        width:100%;
+    }
+    .card-casos-de-exito-sbn{
+        padding:5px;
+    }
+    
+    .card-casos-de-exito-sbn .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 350px;
+        height: 350px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main-sbn{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:350px;
+        opacity: 0.8;
+        height: 35%;
+        margin-right: 1.3rem;
+    }
+    .card-img-casos-de-exito-sbn{
+        width:350px;
+        height:350px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .sbn-img-resource{
+        display:none;
+    }
+    
+}
+@media (min-width: 768px) and (max-width: 959px) {
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 0.2rem !important;
+        padding-left: 0.1rem !important;
+    }
+    .mx-auto-main-bar{
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .header-search{
+        max-width: 650px !important;
+    }
+    .sbn-navbar a {
+        font-size: 10.4px;
+        font-weight: 700;
+    }
+    .sbn-logo-navbar {
+        position: absolute;
+        top: 1px;
+        left: 3rem;
+    }
+    .sbn-logo-image-navbar{
+        width: 60px;
+        margin-top: -2rem;
+    }
+    .laptop-main-page{
+        position: relative;
+        padding: 2em;
+        left: 8rem;
+        transform: translate(-48%, 20%);
+        opacity: 0.99;
+    }  
+    .sbn-image-navbar{
+        display: block;
+        position: absolute;
+        white-space: nowrap;
+        margin: 12px auto 0 -50px;
+    }
+    .sbn-navbar .nav-item {
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+    .sbn-menu-navbar ul li a{
+        padding: 36px 20px 21px 20px;
+    }
+    .panel-info-and-video{
+        height: 20rem;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .video-container video{
+        position: absolute;
+        top: 10px;
+        left: 103px;
+        width:260px;
+        height:200px;
+    }
+    .video-container img{
+        width:410px;
+        display:block;
+    }
+    .home-exploration-panel{
+        margin-top:20px;
+        margin-bottom:5rem;
+        text-align: center;
+        width: 75%;
+    }
+    .btn-sbn-tools {
+        background-color: #BAD405;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 100px;
+        font-family: Roboto,sans-serif !important;
+        font-size:11px;
+        line-height: 1.1;
+        height: 43px;
+    }
+    
+    .btn-sbn-tools-2 {
+        background-color: #0a3f0a;
+        color: #BAD405;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 85px;
+        font-size:11px;
+        line-height: 1.1;
+        height: 43px;
+        border-color:#BAD405;
+    }
+    .btn-sbn-tools-3{
+        background-color: #fff;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .btn-sbn-tools-4 {
+        background-color: #0a3f0a;
+        color: #fff;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .curved-div {
+        position: relative;
+        padding: 0.1em;
+        left: 45%;
+        transform: translate(-50%, -70%);
+        opacity: 0.99;
+        z-index:-1;
+        display: block;
+        width:114%;
+    }
+    .buton-video-container{
+        padding-left:0rem;
+         margin-left: -35px;
+    }
+    .min-background-color{
+        background-color:#fff ;
+    }
+    .border-sbn-tools{
+        margin-top:20px;
+        padding-bottom:3rem;
+        border:3px solid !important;
+        border-color: #BAD405!important;
+        border-top-left-radius: 2rem!important;
+        width: 500px;
+        position: absolute;
+        right: -8rem;
+    }
+    .card-text-overlay{
+        margin-top:0px;
+        text-align:center;
+        font-size:13px;
+    }
+    .card-text-overlay h5{
+        
+        font-size:15px;
+    }
+    .card-img-casos-de-exito{
+        width:195px;
+        height:195px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .card-casos-de-exito{
+        padding:5px;
+    }
+    .card-casos-de-exito .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 195px;
+        height:195px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        opacity: 0.8;
+        height: 30%;
+        margin-right: 1.3rem;
+        width: 195px;
+    }
+    .card-title-main h5{
+        font-size:13px !important;
+    }
+    .toolbox-right-panel{
+     padding-left: 0px;
+     padding-right: 0px;
+     color:#0a3f0a;
+    }
+    .sbn-objetivos-img{
+        width:100%;
+    }
+    .sbn-tips{
+        margin-top: 20%;
+        margin-left: 65%;
+    }
+    .border-card-text{
+        margin:0rem;
+    }
+    .toolbox-border{
+        padding:1.2rem;
+        background: #70998ae3;
+    }
+    .sbn-desafio-img{
+        width:100%;
+        margin:auto;
+    }
+    .table-width-sbn{
+        width:80%;
+    }
+    .card-casos-de-exito-sbn{
+        padding:5px;
+    }
+    
+    .card-casos-de-exito-sbn .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 170px;
+        height: 170px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main-sbn{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:170px;
+        opacity: 0.8;
+        height: 35%;
+        margin-right: 1.3rem;
+    }
+    .card-img-casos-de-exito-sbn{
+        width:170px;
+        height:170px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .sbn-img-resource{
+        display:inline;
+    }
+}
+@media (min-width: 960px) and (max-width: 1199px){
+    .sbn-navbar .nav-item {
+        padding-left: 7px !important;
+        padding-right: 7px !important;
+    }
+    .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 0.2rem !important;
+        padding-left: 0.1rem !important;
+    }
+    .mx-auto-main-bar{
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .header-search{
+        max-width: 800px !important;
+    }
+    .sbn-navbar a {
+        font-size: 11px;
+        font-weight: 700;
+    }
+    .sbn-logo-navbar {
+        position: absolute;
+        top: 1px;
+        left: 4rem;
+    }
+    .sbn-logo-image-navbar{
+        width: 90px;
+        margin-top: -3.5rem;
+    }
+    .laptop-main-page{
+        position: relative;
+        padding: 2em;
+        left: 16rem;
+        transform: translate(-48%, 15%);
+        opacity: 0.99;
+    }  
+    .sbn-image-navbar{
+        display: block;
+        position: absolute;
+        white-space: nowrap;
+        margin: 12px auto 0 -50px;
+    }
+    .sbn-menu-navbar ul li a{
+        padding: 36px 20px 21px 20px;
+    }
+    .panel-info-and-video{
+        height: 16rem;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .video-container video{
+        position: absolute;
+        top: 24px;
+        left: 99px;
+        width:240px;
+        height:165px;
+    }
+    .video-container img{
+        width:380px;
+        display:block;
+    }
+    .home-exploration-panel{
+        margin-top:20px;
+        margin-bottom:1rem;
+        text-align: center;
+        width: 95%;
+    }
+    .curved-div {
+        position: relative;
+        padding: 0.1em;
+        left: 45%;
+        transform: translate(-50%, -70%);
+        opacity: 0.99;
+        z-index:-1;
+        display: block;
+        width:114%;
+    }
+    .buton-video-container{
+        padding-left:0rem;
+         margin-left: -35px;
+    }
+    .min-background-color{
+        background-color:#fff ;
+    }
+    .border-sbn-tools{
+        margin-top:20px;
+        padding-bottom:3rem;
+        border:3px solid !important;
+        border-color: #BAD405!important;
+        border-top-left-radius: 2rem!important;
+        width: 500px;
+        position: absolute;
+        right: -2rem;
+    }
+    .card-text-overlay{
+        margin-top:0px;
+        text-align:center;
+        font-size:13px;
+    }
+    .card-text-overlay h5{
+        
+        font-size:15px;
+    }
+    .card-img-casos-de-exito{
+        width:275px;
+        height:275px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .card-casos-de-exito{
+        padding:5px;
+    }
+    .card-casos-de-exito .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 275px;
+        height:275px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        opacity: 0.8;
+        height: 30%;
+        margin-right: 1.25rem;
+        width: 275px;
+    }
+    .card-title-main h5{
+        font-size:14px !important;
+    }
+    .toolbox-right-panel{
+     padding-left: 2.1rem;
+     padding-right: 2.1rem;
+     color:#0a3f0a;
+    }
+    .sbn-tips{
+        margin-top: 20%;
+        margin-left: 65%;
+    }
+    .border-card-text{
+        margin:1rem;
+    }
+    .toolbox-border{
+        padding:1rem 0.1rem 1rem 1rem;
+        background: #70998ae3;
+    }
+    .table-width-sbn{
+        width:100%;
+    }
+    .card-casos-de-exito-sbn{
+        padding:5px;
+    }
+    
+    .card-casos-de-exito-sbn .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 225px;
+        height: 225px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main-sbn{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:225px;
+        opacity: 0.8;
+        height: 35%;
+        margin-right: 1.25rem;
+    }
+    .card-img-casos-de-exito-sbn{
+        width:225px;
+        height:225px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .sbn-img-resource{
+        display:inline;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1399px){
+    .mx-auto-main-bar{
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .sbn-logo-navbar {
+        position: absolute;
+        top: 1px;
+        left: 6rem;
+    }
+    .sbn-logo-image-navbar{
+        width: 90px;
+        margin-top: -3.5rem;
+    }
+    .sbn-image-navbar{
+        display: block;
+        position: absolute;
+        white-space: nowrap;
+        margin: 12px auto 0 -50px;
+    }
+    .sbn-menu-navbar ul li a{
+        padding: 36px 20px 21px 20px;
+    }
+    .laptop-main-page{
+        position: relative;
+        padding: 2em;
+        left: -9rem;
+        transform: translate(-1%, 8%);
+        opacity: 0.99;
+    } 
+    .panel-info-and-video{
+        height: 18rem;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .video-container video{
+        position: absolute;
+        top: 10px;
+        left: 130px;
+        width:345px;
+        height:260px;
+    }
+    .home-exploration-panel{
+        margin-top:20px;
+        margin-bottom:5rem;
+        text-align: center;
+        width: 75%;
+    }
+    .video-container img{
+        width:550px;
+        display:block;
+    }
+    .btn-sbn-tools {
+        background-color: #BAD405;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    
+    .btn-sbn-tools-2 {
+        background-color: #0a3f0a;
+        color: #BAD405;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+        border-color:#BAD405;
+    }
+    .btn-sbn-tools-3{
+        background-color: #fff;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .btn-sbn-tools-4 {
+        background-color: #0a3f0a;
+        color: #fff;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .curved-div {
+        position: relative;
+        padding: 0px;
+        left: 0px;
+        transform: translate(0px, -70%);
+        opacity: 0.99;
+        z-index:-1;
+        display: block;
+        margin-left:-16px;
+        margin-right:-14px;
+        background: url('/media/assets/img/achurado.svg') ;
+    }
+    .buton-video-container{
+        padding-left:0rem;
+         margin-left: -35px;
+    }
+    .min-background-color{
+        background-color:#fff ;
+    }
+    .card-text-overlay{
+        margin-top:0px;
+        text-align:center;
+        font-size:1rem;
+    }
+    .card-text-overlay h5{
+        color:#fff !important;
+        font-size:1.25rem;
+    }
+    .card-img-casos-de-exito{
+        width:340px;
+        height:340px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:340px;
+        opacity: 0.8;
+        height: 25%;
+    }
+    .card-casos-de-exito{
+        padding:5px;
+    }
+    .card-casos-de-exito .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 340px;
+        height: 340px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:340px;
+        opacity: 0.8;
+        height: 25%;
+    }
+    .card-title-main h5{
+        font-size:16px !important;
+    }
+    .sbn-tips{
+        margin-top: 20%;
+        margin-left: 75%;
+        
+    }
+    .border-card-text{
+        margin:2rem;
+    }
+    .card-casos-de-exito-sbn{
+        padding:5px;
+    }
+    
+    .card-casos-de-exito-sbn .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 275px;
+        height: 275px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .card-title-main-sbn{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:275px;
+        opacity: 0.8;
+        height: 35%;
+        margin-right: 0rem;
+    }
+    .card-img-casos-de-exito-sbn{
+        width:275px;
+        height:275px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .sbn-img-resource{
+        display:inline;
+    }
+}
+@media (min-width: 1400px) {
+    .mx-auto-main-bar{
+        display: flex;
+        align-items: center;
+        margin: 0 auto;
+    }
+    .sbn-logo-navbar {
+        position: absolute;
+        top: 1px;
+        left: 8rem;
+    }
+    .sbn-logo-image-navbar{
+        width: 90px;
+        margin-top: -3.5rem;
+    }
+    .sbn-image-navbar{
+        display: block;
+        position: absolute;
+        white-space: nowrap;
+        margin: 12px auto 0 -50px;
+    }
+    .sbn-menu-navbar ul li a{
+        padding: 36px 20px 21px 20px;
+    }
+    .laptop-main-page{
+        position: relative;
+        padding: 2em;
+        left: -9rem;
+        transform: translate(-1%, 8%);
+        opacity: 0.99;
+    }
+    .panel-info-and-video{
+        height: 20rem;
+        background-color: #fff;
+        opacity: 0.9;
+    }
+    .video-container video{
+        position: absolute;
+        top: 10px;
+        left: 130px;
+        width:345px;
+        height:260px;
+    }
+    .home-exploration-panel{
+        margin-top:20px;
+        margin-bottom:5rem;
+        text-align: center;
+        width: 75%;
+    }
+    .video-container img{
+        width:550px;
+        display:block;
+    }
+    .btn-sbn-tools {
+        background-color: #BAD405;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    
+    .btn-sbn-tools-2 {
+        background-color: #0a3f0a;
+        color: #BAD405;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+        border-color:#BAD405;
+    }
+    .btn-sbn-tools-3{
+        background-color: #fff;
+        color: #1a3f32;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-family: Roboto,sans-serif !important;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .btn-sbn-tools-4 {
+        background-color: #0a3f0a;
+        color: #fff;
+        border-radius: 8px 0 8px 0;
+        font-weight: 600;
+        width: 115px;
+        font-size:12px;
+        line-height: 1.1;
+        height: 40px;
+    }
+    .curved-div {
+        position: relative;
+        padding: 0.1em;
+        left: -19px;
+        transform: translate(1%, -86%);
+        opacity: 0.99;
+        z-index:-1;
+        /*width: 101%;*/
+        display: block;
+        margin-left:-16px;
+        margin-right:-14px;
+        background: url('/media/assets/img/achurado.svg') ;
+    }
+    .buton-video-container{
+        padding-left:0rem;
+         margin-left: -35px;
+    }
+    .min-background-color{
+        background-color:#fff ;
+    }
+    .sbn-tips{
+        margin-top: 20%;
+        margin-left: 80%;
+        
+    }
+    .card-img-casos-de-exito{
+        width:340px;
+        height:340px;
+        overflow: hidden;
+        object-fit: cover;
+    }
+    .card-casos-de-exito{
+        padding:5px;
+    }
+    .card-casos-de-exito .overlay {
+        position: absolute;
+        top: 5px;
+        left: 20px;
+        width: 340px;
+        height: 340px;
+        background: #b8cf00;
+        opacity: 0;
+        z-index:99;
+        transition: opacity 250ms ease-in-out;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+    .sbn-img-resource{
+        display:inline;
+    }
+    .card-title-main{
+        position:absolute;
+        background-color : #0a3f0a;
+        color: #fff !important;
+        bottom:5px;
+        left:20px;
+        width:340px;
+        opacity: 0.8;
+        height: 25%;
+    }
+}
+
+.recurso-titulo, .recurso-titulo a{
+    color: #0a3f0a;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.recurso-descripcion p{
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: 500; 
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.recurso-mas-info{
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500; 
+    line-height: 1.2;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255,255,255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 1em 0;
+    color: inherit;
+    font-size: 0.875em !important;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+
+.swal2-html-container {
+    z-index: 1;
+    justify-content: center;
+    margin: 1em 1.6em 0.3em;
+    padding: 0;
+    overflow: auto;
+    color: inherit;
+    font-size: 0.8em !important;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.swal2-confirm{
+    background:#0a3f0a !important;
+    color:#fff;
+    font-size: 0.875em !important;
+    font-weight: 600;
+}
+
+.swal2-deny{
+    background:#0a3f0a !important;
+    color:#fff;
+    font-size: 0.875em !important;
+    font-weight: 600;
+}
+
+.container-caja-herramientas{
+ margin-left:3rem;   
+ margin-right:3rem;
+ color: #0a3f0a;
+}
+.sbn-text-container{
+    margin:2rem;
+}
+
+.sbn-text-container2{
+    margin:1rem;
+}
+
+.sbn-color-box{
+    background:#BAD405; 
+    color:#1a3f32; 
+    font-weight:bold;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    font-size:22px;
+    border-radius:10px;
+}
+
+.sbn-color-box p{
+    font-family: sans-serif !important;
+}
+
+.sbn-color-box2{
+    background:#B5B0AD; 
+    color:#1a3f32; 
+    font-weight:bold;
+    margin-top:1rem;
+    margin-bottom:1rem;
+    font-size:22px;
+    border-radius:10px;
+}
+
+.sbn-color-box2 p{
+    font-family: sans-serif !important;
+}
+
+.sbn-color-box3{
+    background:#fff; 
+    color:#0a3f0a; 
+    margin-top:1rem;
+    margin-bottom:1rem;
+    font-size:22px;
+    border-radius:10px;
+    border: solid;
+    border-color: #8080805e;
+    border-width: 2px;
+}
+
+.sbn-color-box3 p{
+    font-family: sans-serif !important;
+    
+}
+
+.sbn-text-box-grey{
+    border-radius: 10px;
+    border: solid;
+    border-color: #B5B0AD;
+    margin-bottom:1rem;
+    border-width: 1px;
+    padding: 1rem;
+}
+
+.sbn-text-box-grey-2{
+    border-radius: 10px;
+    border: solid;
+    border-color: #B5B0AD;
+    margin-bottom:1rem;
+    border-width: 1px;
+    padding: 1rem;
+    height:400px;
+}
+
+.btn-sbn-tools-width{
+    width:175px !important;
+    text-align:center;
+}
+.sbn-separador{
+    border-top: solid 2px;
+    color: #B5B0AD; 
+    margin-top: 1rem; 
+    margin-bottom: 1.2rem;
+}
+
+.menu-vertical-tab{
+    /*background: #a8cbb6bf;*/
+    font-weight: 600;
+    color: #0a3f0a !important;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+}
+
+.nav-pills .nav-link, .nav-pills .show>.nav-link {
+    color: #0a3f0a;
+    background-color: #a8cbb614;
+    
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #0a3f0a;
+    background-color: #fff;
+    border-top-left-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
+    border-top-right-radius: 0.1rem !important;
+    border-bottom-right-radius: 0.1rem !important;
+}
+
+
+.vline-right-panel{
+    border-left: solid 2px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-left-color: #e6e6e6;
+}
+
+
+.calification-right-panel{
+    margin-top:2rem;
+}
+
+.calification-check{
+    font-size:0.9rem;
+    color:#333;
+    margin-top:.85rem;
+}
+
+.calification-check p{
+    margin-top:.75rem;
+}
+
+.section-toolbox-2{
+    width: 100%;
+    background: url('/media/uakiabre/8d00a82c3da843dc7dd74161c03266c9_original.jpg') #00ff0055;
+    background-size: cover;
+}
+.parallax{
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.btn-sbn-white{
+    border-radius: 0.75rem;
+    width: 175px;
+    color: #0a3f0a;
+    line-height: 1.1;
+    font-weight: 600;
+    background: #fff;
+    border-color: #fff;
+}
+
+.has-search .form-control {
+    padding-left: 2.375rem;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+}
+
+.sdg img {
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16) , 0 2px 10px 0 rgba(0,0,0,.12);
+    transition: all .3s ease-out;
+    margin: .625rem 0;
+    height: auto;
+}
+
+.sdg img:hover {
+    box-shadow: 0 5px 11px 0 rgba(0,0,0,.5) , 0 4px 15px 0 rgba(0,0,0,.5)
+}
+
+.sdg .has-tip {
+    border: 0;
+    cursor: pointer;
+}
+
+.sdg .img-gray {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    opacity: 0.25;
+}
+
+@media print, screen and (min-width: 40em) {
+    .sdg img {
+        margin: .9375rem 0;
+    }
+}
+
+.sbn-filters{
+    height:100px;       
+    overflow: auto;
+}
+
+.sbn-filters-hg {
+    height: 255px;
+    overflow: auto;
+    font-size: small;
+}
+
+.sbn-hide{
+    display:none;
+}
+
+.container-desafios{
+    background: url('/media/assets/img/achurado.svg') #00ff0055;
+}
+
+.show-header-sbn{
+    display:flex;    
+}
+
+.hide-header-sbn{
+    display:none;
+}
+
+.sbn-resource-hide{
+    display:none;
+}
+
+
+.sbn-bibliografia{
+    padding-bottom:10px;
+}
+
+.header-search{
+    margin-top: -25px;
+    margin-left: 10px;
+    max-width: 1000px;
+    display:none;
+}
+
+.bi-search{
+    cursor:pointer;    
+}
+
+.img-colaboradores{
+    object-fit: contain;
+}
+
+.row-form-input {
+    margin-right: 0px;
+    margin-left: 0px;
+}
