@@ -3,30 +3,30 @@
 @{
 	Layout = null;
 }
+
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Name - Sitename</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@Model.Name</title>
-    <link rel="stylesheet" href="@Url.Content("~/css/nicepage.css")" media="screen">
-    <link rel="stylesheet" href="@Url.Content("~/css/home.css")" media="screen">
+    
     <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")" media="screen">
     <link rel="stylesheet" href="@Url.Content("~/css/sbn.css")" media="screen">
     <link rel="stylesheet" href="@Url.Content("~/css/carousel-multiple-cols.css")">
     <link rel="stylesheet" href="@Url.Content("~/css/carousel-hero.css")" />
     <link rel="stylesheet" href="@Url.Content("~/css/sbn-diagram.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/libs/sweetalert2.min.css")" media="screen">
     
     <script type="text/javascript" src="@Url.Content("~/sbn/lib/jquery/jquery.min.js")"></script>
     <script class="u-script" type="text/javascript" src="@Url.Content("~/scripts/bootstrap.min.js")" defer=""></script>
     <script type="text/javascript" src="@Url.Content("~/scripts/nicepage.js")" defer=""></script>
     <script type="text/javascript" src="@Url.Content("~/scripts/data-diagram.js")" defer=""></script>
     <script type="text/javascript" src="@Url.Content("~/scripts/sbn-diagram.js")" defer=""></script>
-    
+    <script type="text/javascript" src="@Url.Content("~/scripts/libs/sweetalert2.all.min.js")" defer=""></script>
 
 </head>
 
@@ -46,12 +46,18 @@
     </section>
     
     <div class="top-content">
-        <div class="container-fluid" style="background-color:#f5f5f5">
+        <div class="container-fluid" style="background-color:#e6e6e6;">
             <div style="position: relative;top:-5rem;left:-1rem">
                 <a style="margin-top: 9.5rem;" class="carousel-control-2 carousel-control-prev" href="#carousel-desafios" role="button" data-slide="prev">
                     <span class="carousel-prev-icon-2 carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>    
+            </div>
+            <div style="position: relative;top:12.2rem;right:-1rem">
+                <a style="margin-top: -8rem;" class="carousel-control-2 carousel-control-next" href="#carousel-desafios" role="button" data-slide="next">
+                    <span class="carousel-prev-icon-2 carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
             <div class="container">
                 <div id="carousel-desafios" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -61,10 +67,10 @@
                         <div class="carousel-item col-12 active" data-interval="false">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/1.jpg")" alt="Card image cap">
+                                    <div class="card text-center card-text-desafios">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/mitigacion-adaptacion-cambio-climatico.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Cambio climático</h5>
+                                        <h5 class="card-title text-center">Mitigación y adaptación al cambio climático</h5>
                                         <p class="card-text">Debemos implementar acciones de mitigación, es decir, reducir las emisiones de gases de efecto invernadero a la atmosfera. Texto adicional de prueba</p>
                                         
                                       </div>
@@ -72,9 +78,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/2.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/degradacion-ambiental-perdida-biodiversidad.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Ecosistemas y biodiversidad</h5>
+                                        <h5 class="card-title text-center">Degradación ambiental y pérdida de la biodiversidad</h5>
                                         <p class="card-text">La degradación de los ecosistemas significa que, por efecto de la transformación de áreas naturales.</p>
                                         
                                       </div>
@@ -82,7 +88,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/3.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/seguridad-alimentaria.png")" alt="Card image cap">
                                       <div class="card-body">
                                         <h5 class="card-title text-center">Seguridad alimentaria</h5>
                                         <p class="card-text">Este desafío tiene una relación directa con los cambios en el sistema climático, ya que dichos cambios alteran el ciclo del agua.</p>
@@ -96,9 +102,9 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/4.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/desarrollo-economico-social.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Seguridad alimentaria</h5>
+                                        <h5 class="card-title text-center">Desarrollo económico y social</h5>
                                         <p class="card-text">Este desafío tiene una relación directa con los cambios en el sistema climático, ya que dichos cambios alteran el ciclo del agua, el cual también afecta los ciclos biológicos de las especies de animales y plantas, variedades agrícolas incluidas.</p>
                                         
                                       </div>
@@ -106,9 +112,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/5.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/reduccion-riesgos-desastres.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Card title</h5>
+                                        <h5 class="card-title text-center">Reducción del riesgo de desastres</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         
                                       </div>
@@ -116,9 +122,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/6.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/seguridad-del-agua.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Card title</h5>
+                                        <h5 class="card-title text-center">Seguridad del agua</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         
                                       </div>
@@ -130,9 +136,9 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/7.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/desarrollo-economico-social.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Card title</h5>
+                                        <h5 class="card-title text-center">Desarrollo económico y social</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         
                                       </div>
@@ -140,9 +146,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="card card-text-desafios">
-                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/backgrounds/8.jpg")" alt="Card image cap">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/reduccion-riesgos-desastres.png")" alt="Card image cap">
                                       <div class="card-body">
-                                        <h5 class="card-title text-center">Card title</h5>
+                                        <h5 class="card-title text-center">Reducción del riesgo de desastres</h5>
                                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                                         
                                       </div>
@@ -153,12 +159,7 @@
                     </div>
                 </div>
             </div>
-            <div style="position: relative;top:-17.4rem;right:-1rem">
-                <a style="margin-top: -8rem;" class="carousel-control-2 carousel-control-next" href="#carousel-desafios" role="button" data-slide="next">
-                    <span class="carousel-prev-icon-2 carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>
+            
         </div>
     </div>
     <div style="padding:20px"></div>    
@@ -274,8 +275,8 @@
             </div>
         </div>
     </div>
-    
-    <div class="row clearfix">
+    <div style="padding:40px;background-color:#fff;"></div>   
+    <div class="row clearfix"  style="background-color:#fff;">
         <div class="col-md-12 column">
             <div style="margin-top:20px;margin-bottom:28px;">
                 <h3 style="text-align: center;">Ciclo de proyecto para la implementación de las <strong>SbN</strong></h3>
@@ -283,9 +284,30 @@
         </div>
     </div>
     
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="container-fluid">
+    <!-- Ciclo del Proyecto -->
+    <div class="container mt-2 mb-2 d-block d-md-none d-lg-none d-xl-none" style="background-color:#fff;">
+        <p class="h2" id="diagram-center-m"></p>
+        <hr>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" id="element-m-1"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-2"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-3"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-4"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-5"></a>
+        </div>
+        <div id="carouselControls" class="carousel slide mt-2" data-ride="carousel">
+            <div class="carousel-inner" id="cards-carousel"></div>
+            <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="container-fluid d-none d-md-block d-lg-block d-xl-block" style="background-color:#fff;">
         <div class="row align-items-center">
             <div class="col cicle_background">
                 <span class="diagram-name element-label noselect" id="diagram-name"></span>
@@ -327,8 +349,9 @@
                 <span class="menu-dot-6" id="menu-dot-6"></span>
                 <a class="menu-text menu-text-6 nav-link-d cursor" id="menu-text-6"></a>
             </div>
-            <div class="col d-flex justify-content-center">
+            <div class="col d-flex justify-content-center diagram-panel-info">
                 <div class="text-center data-d">
+                    
                     <img class="text-d rounded-circle img-d" id="img-d" width="190" height="190">
                     <hr>
                     <h4 class="text-d data-title-d" id="title-d"></h4>
@@ -338,31 +361,29 @@
             </div>
         </div>
     </div>
-        </div>
-    </div>
     
-    <div class="container-fluid" style="height: 25rem;">
-        <div style="margin-top:25px;">
+    <div class="container-fluid panel-info-and-video">
+        <div style="padding-top:25px;">
             <div class="row clearfix">
                 <div class="col-md-12 column">
                     <div class="row">
-                        <div class="col-md-4 offset-md-1">
+                        <div class="col-md-5 offset-md-1">
                             <div>
                                 <div class="rounded-top border-sbn-tools">
-                                    <h4 style="margin-top:20px;margin-bottom:5rem;text-align: center;width: 75%;">Explora aquí las principales funcionalidades de este sitio:</h4>
+                                    <h4 class="home-exploration-panel">Explora aquí las principales funcionalidades de este sitio:</h4>
                                     <div class="row">
-                                        <div class="col-md-3 offset-md-1">
-                                            <div class="btn-toolbar" role="toolbar" aria-label="Basic example">
+                                        <div class="col-md-4 text-center">
+                                            <div class="btn-toolbar1" role="toolbar" aria-label="Basic example">
                                               <button type="button" class="btn btn-sbn-tools">Asistente selección SbN</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="btn-toolbar" role="toolbar" aria-label="Basic example">
+                                        <div class="col-md-4 text-center">
+                                            <div class="btn-toolbar1" role="toolbar" aria-label="Basic example">
                                               <button type="button" class="btn btn-sbn-tools">Caja de herramientas</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <div class="btn-toolbar" role="toolbar" aria-label="Basic example">
+                                        <div class="col-md-4 text-center">
+                                            <div class="btn-toolbar1" role="toolbar" aria-label="Basic example">
                                               <button type="button" class="btn btn-sbn-tools-2">Videos SbN</button>
                                             </div>
                                         </div>
@@ -372,8 +393,12 @@
                         </div>
                         <div class="col-md-4">
                             <div class="laptop-main-page">
-                                <div class="lapto-container" style="margin-top:1;padding-bottom:1px;">
-                                    <img style="width:95%" src='/media/assets/img/laptop-png-computer.png' alt="video">
+                                <div class="video-container" style="margin-top:1;padding-bottom:1px;">
+                                    <video controls="controls"/> 
+                                        <source src="/media/n0cpc5hj/sbn_intro_v2_min.mp4" 
+                                            type="video/mp4"> 
+                                    </video> 
+                                    <img src='/media/assets/img/background-laptop.svg' alt="video">
                                 </div>        
                             </div>
                         </div>

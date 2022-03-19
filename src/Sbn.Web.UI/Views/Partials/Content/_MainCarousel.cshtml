@@ -1,5 +1,6 @@
 ﻿@inherits Sbn.Cms.Web.Common.Views.SbnViewPage
 @using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Core.Models;
 @{
     string carouselId = "mainCarousel";
     var carousel = Model.Value<IEnumerable<IPublishedElement>>(carouselId);
@@ -7,20 +8,20 @@
 
 @if (carousel != null && carousel.Any())
 {
-    <div class="carousel slide tamanio" data-ride="carousel" id="@carouselId">
-        <div class="carousel-inner" >
+    <div class="carousel slide" data-ride="carousel" id="@carouselId">
+        <div class="carousel-inner">
             @{
                 int slideCount = 0;
                 foreach (var slide in carousel){
                     string title = slide.Value<string>("slideTitle");
                     string subtitle = slide.HasValue("slideSubtitle") ? slide.Value<string>("slideSubtitle") : "";
                     string imageUrl = slide.Value<IPublishedContent>("slideImage")?.GetCropUrl(1920,1080) ?? "/img/carousel.jpg";
-                    //IEnumerable<Link> links = slide.Value<IEnumerable<Link>>("slideLink");
-                    //Link link = links != null ? links.FirstOrDefault() : null;
+                    Link link = slide.Value<Link>("slideLink");
+                    String UrlLink = link != null ? link.Url : "https://www.ecopetrol.com";
 
-                    <div class="carousel-item @(slideCount == 0 ? "active" : "")" style="height:auto;" data-interval="15000">
+                    <div class="carousel-item @(slideCount == 0 ? "active" : "")" style="height:auto;">
                         <div class="jumbotron carousel-hero" style="background-image:url('@(imageUrl)');">
-                            <a href="http://www.google.com">
+                            <a href="@UrlLink" target="_blank">
                                 <div class="text-info-over-img"> 
                                     <p class="carousel-title">@title</p>
                                     <div class="border border-warning title-separator-main-carousel"></div>

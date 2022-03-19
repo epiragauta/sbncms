@@ -1,35 +1,96 @@
 ﻿@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
-@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.CasosDeExito>
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.CasosDeExito>;
+@using Sbn.Cms.Core.Services;
+@using Sbn.Cms.Core.PropertyEditors;
+@using Newtonsoft.Json;
+@using System.Collections;
+@using System.Collections.Generic;
+@inject IDataTypeService DataTypeService;
 @{
 	Layout = "master.cshtml";
 }
 <link rel="stylesheet" href="@Url.Content("~/css/sbn-casos-de-exito.css")" media="screen">
 <script type="text/javascript" src="@Url.Content("~/scripts/sbn-casos-de-exito.js")"></script>
 
-<div class="casos-de-exito-background-header">
+<div class="casos-de-exito-background-header" style="z-index:-1;">
     <div class="casos-de-exito-background-header-overcolor"></div>
 </div>
-<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 3rem;" >
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 4rem 1rem 2rem;" >
     
-    <div class="text-center casos-de-exito-header"><h2 style="color:#fff !important;">Casos de éxito</h2></div>
-    
-    <div class="row" style="margin-left: 4px;">
-        <div class="col-md-4">
-            <select class="custom-select mb-3" aria-label="Default select example">
-              <option selected>Seleccione una opción</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-        </div>
+    <div class="text-center casos-de-exito-header" style="color:#fff width:108% ;">
+        <h2 style=" color:#fff !important;width:108%;">Casos de éxito</h2>
     </div>
-
-    <div class="row" style="margin-left: 20px;">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Buscar Casos de éxito" aria-label="Buscar Casos de éxito" aria-describedby="basic-addon1">
-        </div>
-    </div>
+    @{
+    var query = "";
+    var value = "";
+    var search = "";
+    var defaultSelected = "selected";
     
+    if (!string.IsNullOrEmpty(Context.Request.Query["query"]) && !string.IsNullOrEmpty(Context.Request.Query["value"])){
+        query = Context.Request.Query["query"];
+        value = Context.Request.Query["value"];
+        defaultSelected = "";
+    }else if (!string.IsNullOrEmpty(Context.Request.Query["search"])){
+        search = Context.Request.Query["search"];
+    }
+    
+    var startNodeSbNs = Sbn.Content(1251); // 1251 corresponde al ID de lis tipos de SbN
+    var sbns = startNodeSbNs.Children.OrderBy(x => x.Value<string>("nombre")).ToList();
+    var challenge =  (ValueListConfiguration)DataTypeService.GetDataType(-43).Configuration; // ID Lista de Desafios
+    var countries =  (ValueListConfiguration)DataTypeService.GetDataType(1320).Configuration;  // ID Lista de Paises
+    
+    <form name="query-form" method="get" style="width: 108%;">
+        <input type="hidden" id="query" value="@query">
+        <input type="hidden" id="value" value="@value">
+        
+        <div class="row">
+            <div class="col-md-4">
+                <select id="select-sbn" class="custom-select mb-3" aria-label="Seleccionar una SbN">
+                    <option value="-1">Seleccione una SbN</option>
+                    <option value="ALL">Todos</option>
+                    @foreach (ContentModels.Sbn2 sbn in sbns){
+                        var ces = @sbn.CasosDeExito;
+                        var ceIds = "";
+                        if (ces != null){
+                            @foreach (var c in ces){
+                                ceIds += c.Id + ",";
+                            }
+                            if (ceIds != ""){
+                                ceIds = ceIds.Substring(0,ceIds.Length-1);
+                                <option value="@ceIds">@sbn.Nombre</option>
+                            }
+                        }
+                    }
+                </select>
+            </div>
+            
+            <div class="col-md-4">
+                <select id="select-challenge" class="custom-select mb-3" aria-label="Seleccionar un desafío">
+                    <option value="-1">Seleccione un desafío</option>    
+                    <option value="ALL">Todos</option>
+                @foreach (var item in challenge.Items){
+                    <option value="@item.Value">@item.Value</option>
+                }
+                </select>
+            </div>
+            
+            <div class="col-md-4">
+                <select id="select-country" class="custom-select mb-3" aria-label="Seleccionar un país">
+                    <option value="-1">Seleccione un país</option> 
+                    <option value="ALL">Todos</option>
+                @foreach (var item in countries.Items){
+                    <option value="@item.Value">@item.Value</option>
+                }
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+              <input type="text" id="search-sbn" class="form-control" placeholder="Buscar Casos de éxito" aria-label="Buscar Casos de éxito" aria-describedby="Buscar Casos de éxito">
+            </div>
+        </div>
+    </form>
+    }
     <section class="section section-casos-de-exito">
         <div class="row row-casos-de-exito">
         @{
@@ -37,14 +98,60 @@
             var startNodeId = Model.Id;
             var startNode = Sbn.Content(startNodeId);
             if (startNode == null){
-                  <div class="study-cases">
-                      <h1>No hay casos de estudio en este momento, intente después.</h1>
-                  </div>
-                  return;
+              <div class="study-cases">
+                  <h1>No hay casos de estudio en este momento, intente después.</h1>
+              </div>
+              return;
             }
             
             //Gets all study cases to calculate pages
-            var cases = startNode.Children.OrderBy(x => x.CreateDate).ToList();
+            var cases = startNode.Children.OrderBy(x => ((ContentModels.CasoDeExito)x).OrderPresentacion).ToList();
+            
+            //var casoExito = (ContentModels.CasoDeExito)cases[0];
+            if (value != "ALL"){
+                if (query != "" && value != ""){
+                    List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arrayCases = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+                    if (query == "desafio"){
+                        @foreach(ContentModels.CasoDeExito caso in cases){
+                            if (caso.Desafio != null){
+                                @foreach(var desafio in caso.Desafio){
+                                    if (desafio == value){
+                                        arrayCases.Add(caso);
+                                    }
+                                }
+                            }
+                        }
+                    }else if (query == "pais"){
+                        @foreach(ContentModels.CasoDeExito caso in cases){
+                            if (caso.Pais != null){
+                                @foreach(var pais in caso.Pais){
+                                    if (pais == value){
+                                        arrayCases.Add(caso);
+                                    }
+                                }
+                            }
+                        }
+                    }else if (query == "sbn"){
+                        @foreach(ContentModels.CasoDeExito caso in cases){
+                            var sId = caso.Id.ToString();
+                            var iOf = value.IndexOf(sId);
+                            if (iOf != -1){
+                                arrayCases.Add(caso);
+                            }
+                        }
+                    }
+                    cases = arrayCases;
+                }else if (search != ""){
+                    List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arrayCases = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+                    @foreach(ContentModels.CasoDeExito caso in cases){
+                        if (caso.Nombre.ToUpper().Contains(search.ToUpper())){
+                            arrayCases.Add(caso);
+                        }
+                    }
+                    cases = arrayCases;
+                }
+            }
+            
             var numOfCases = cases.Count;
             var columns = 3;
             int counter = 0;
@@ -64,7 +171,11 @@
             
             //Gets the cases for the current page
             var pagedCases = cases.Skip((page - 1) * numOfCasesByPage).Take(numOfCasesByPage).ToList();
-        
+            
+            //Type type = casoExito.GetType();
+            //foreach (var prop in type.GetProperties()){
+            //}
+            
         
             if (pagedCases.Count != null){
                 @foreach (ContentModels.CasoDeExito caso in pagedCases){
@@ -74,19 +185,22 @@
                     }
                     <div class="col-md-4">
                         <div class="active card-casos-de-exito">
-                            <img src="@caso.Imagen.LocalCrops.Src" class="card-img-casos-de-exito" alt="img1">
-                            <div class="overlay">
-                                <span>
-                                    <div class="card-body card-text-overlay">
-                                        <h5 class="card-title text-center">@caso.Nombre</h5>
-                                        <p class="card-text">@caso.Detalle</p>
+                                <img src="@caso.Imagen.LocalCrops.Src" class="card-img-casos-de-exito" alt="img1">
+                                <div class="overlay">
+                                    <span>
+                                        <div class="card-body card-text-overlay">
+                                            <h5 class="card-title text-center ">@caso.Nombre</h5>
+                                            <p class="card-text">@caso.Detalle</p>
+                                        </div>
+                                    </span>
+                                    <div class="cart-download-icon">
+                                        <a href="@caso.Documento.Url" target="blank"><i class="bi bi-download"></i></a>
                                     </div>
-                                </span>
-                                <div class="cart-download-icon"><i class="bi bi-download"></i></div>
-                            </div>
-                            <div class="card-title-main">
-                                <h5 class="card-title text-center">@caso.Nombre</h5>
-                            </div>
+                                </div>
+                                <div class="card-title-main">
+                                    <h5 class="card-title text-center card-title-center" style="margin: 3px; font-size: 16px;">@caso.Nombre</h5>
+                                </div>
+                            
                         </div>
                     </div>
                     counter++;
@@ -97,28 +211,22 @@
         </div>
         <div class="row" style="padding-top:25px;">
             <div class="col-md-12">
-            @{        
-                if (pageCount > 1){
-                    <div class="pagination justify-content-center">
-                        <ul>
-                            @if (page > 1)
-                            {
-                                <li><a href="?page=@(page-1)">&lt</a></li>
-                            }
-                            @for (int p = 1; p < pageCount + 1; p++)
-                            {
-                                <li class="@(p == page ? "active" : string.Empty)">
-                                    <a href="?page=@p">@p</a>
-                                </li>
-                            }
-                            @if (page < pageCount)
-                            {
-                                <li><a href="?page=@(page+1)">&gt</a></li>
-                            }
-                        </ul>
-                    </div>
-                }
+        @{
+            if (pageCount > 1){
+                <div class="pagination justify-content-center">
+                    <ul>
+                        <li><a class="@(page == 1 ? "disabled" : string.Empty)" href="?page=@(page-1)">&lt;</a></li>
+                        @for (int p = 1; p < pageCount + 1; p++)
+                        {
+                            <li class="@(p == page ? "active" : string.Empty)">
+                                <a href="?page=@p">@p</a>
+                            </li>
+                        }
+                        <li><a class="@(page == pageCount ? "disabled" : string.Empty)" href="?page=@(page-1)">&gt;</a></li>
+                    </ul>
+                </div>
             }
+        }
             </div>
         </div>
     </section>

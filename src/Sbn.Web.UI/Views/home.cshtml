@@ -1,10 +1,668 @@
-﻿@using Sbn.Cms.Web.Common.PublishedModels;
+﻿@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Web.Common.PublishedModels;
 @inherits Sbn.Cms.Web.Common.Views.SbnViewPage
 @{
-	Layout = "master.cshtml";
+	Layout = null;
 }
 
-<section class="section section">
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@Model.Name</title>
     
-</section>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/sbn.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/carousel-multiple-cols.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/carousel-hero.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/sbn-diagram.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/libs/sweetalert2.min.css")" media="screen">
+    
+    <script type="text/javascript" src="@Url.Content("~/sbn/lib/jquery/jquery.min.js")"></script>
+    <script class="u-script" type="text/javascript" src="@Url.Content("~/scripts/bootstrap.min.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/data-diagram.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/sbn-diagram.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/libs/sweetalert2.all.min.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/sbn.js")" defer=""></script>
+    
+    <script type="text/javascript">
+        
+        var welcome = "Plataforma con métodos y herramientas para la formulación, implementación y monitoreo " +
+                    "de proyectos de soluciones basadas en naturaleza (SBN) para la conservación de " + 
+                    "biodiversidad, cambio climático (adaptación y mitigación) y seguridad hídrica, como " +
+                    "aporte al fortalecimiento de capacidades de Ecopetrol y otros socios estratégicos.";
+        
+        $(document).ready(function(){
+            if (localStorage.getItem("sbnWelcome") == undefined){
+                Swal.fire({
+                    title: 'BIENVENIDO',
+                    text: welcome,
+                    confirmButtonText: "INGRESAR",
+                    confirmButtonColor: "#0a3f0a",
+                    buttonsStyling: false,
+                }).then((result) =>{
+                    if (result.isConfirmed) {
+                        //Swal.fire('Saved!', '', 'success');
+                        //return;
+                        (async () => {
+                            let html = `<div class="form-group row row-form-input">
+                                            <label style="text-align: left;" class="col-sm-4 col-form-label">Nombre completo: *</label>
+                                            <div class="col-sm-7">
+                                                <input type="text" id="swal-input1" class="form-control input-lg" name="fullname_" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row row-form-input">
+                                            <label style="text-align: left;" class="col-sm-4 col-form-label">Sector: *</label>
+                                            <div class="col-sm-7">
+                                                <select class="form-control" id="sector-select">
+                                                  <option>ONG</option>
+                                                  <option>Investigación</option>
+                                                  <option>Productivo</option>
+                                                  <option>Otro</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row row-form-input">
+                                            <label style="text-align: left;" class="col-sm-4 col-form-label">Organizacion: *</label>
+                                            <div  class="col-sm-7">
+                                                <input type="text" id="swal-input2" class="form-control input-lg" name="organizacion_" value="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row row-form-input">
+                                            <label style="text-align: left;" class="col-sm-4 col-form-label">Correo electrónico: *</label>
+                                            <div  class="col-sm-7">
+                                                <input type="text" id="swal-input2" class="form-control input-lg" name="email_" value="">
+                                            </div>
+                                        </div>`;    
+                            const { value: formValues } = await Swal.fire({
+                              title: 'Comparte tus datos con nosotros',
+                              html: html,
+                              focusConfirm: false,
+                              showDenyButton: true,
+                              confirmButtonText: "COMPARTIR DATOS",
+                              denyButtonText: "AHORA NO",
+                              width: 600,
+                              preConfirm: () => {
+                                return [
+                                  document.getElementById('swal-input1').value,
+                                  document.getElementById('swal-input2').value
+                                ]
+                              }
+                            })
+                            
+                            if (formValues) {
+                              Swal.fire("Gracias!")
+                            }
+                            
+                            })()
+                    }
+                });
+                localStorage.setItem("sbnWelcome", "true");
+                //$("#ModalShareForm").modal('show');
+            }
+        })
+    </script>
 
+</head>
+
+<body class="frontpage">
+    <header class="u-clearfix u-custom-color-3 u-header u-header" id="sec-ead9">
+        @Html.Partial("~/Views/Partials/Navigation/sbnHeader.cshtml")
+    </header>
+    <div class="mobile-nav">
+        <nav class="nav-bar">
+        </nav>
+    </div>
+    
+    @Html.Partial("Partials/Content/_MainCarousel")
+    
+    <section class="section container" style="padding-top:3rem !important;padding-bottom:2rem !important;">
+        @Html.GetGridHtml(Model, "queEs", "bootstrap3-fluid")
+    </section>
+    
+    <div class="top-content d-none d-sm-none d-md-block">
+        <div class="container-fluid container-desafios" style="background-color:#e6e6e6;">
+            <div style="position: relative;top:-5rem;left:-1rem">
+                <a style="margin-top: 17.2rem;" class="carousel-control-2 carousel-control-prev" href="#carousel-desafios" role="button" data-slide="prev">
+                    <span class="carousel-prev-icon-2 carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>    
+            </div>
+            <div style="position: relative;top:12.2rem;right:-0.8rem">
+                <a class="carousel-control-2 carousel-control-next" href="#carousel-desafios" role="button" data-slide="next">
+                    <span class="carousel-prev-icon-2 carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="container">
+                <div class="text-center" style="padding-bottom:2.5rem !important;"><h3>Desafíos socioambientales a los que responden las SbN</h3></div>
+                <div id="carousel-desafios" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="border-bl-carousel"></div>
+                    <div class="border-tr-carousel"></div>
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <div class="carousel-item col-12 active" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href="/desafios/#Mitigacion">
+                                    <div class="card text-center card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_adaptacion.png")" alt="Card image cap">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Adaptación al cambio climático</div>
+                                        <!--<p class="card-text">Debemos implementar acciones de mitigación, es decir, reducir las emisiones de gases de efecto invernadero a la atmosfera. Texto adicional de prueba</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href ="/desafios/#degradacion">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/degradacion-ambiental-perdida-biodiversidad.svg")" alt="Degradación ambiental">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Degradación ambiental y pérdida de la biodiversidad</div>
+                                        <!--<p class="card-text">La degradación de los ecosistemas significa que, por efecto de la transformación de áreas naturales.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href="/desafios/#seguridadAlimentaria">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/seguridad-alimentaria.svg")" alt="Seguridad alimentaria">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Seguridad alimentaria</div>
+                                        <!--<p class="card-text">Este desafío tiene una relación directa con los cambios en el sistema climático, ya que dichos cambios alteran el ciclo del agua.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="carousel-item col-12" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href ="/desafios/#desarrollo">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_desarrollo.png")" alt="desarrollo economico social">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Desarrollo económico y social</div>
+                                        <!--<p class="card-text">Este desafío tiene una relación directa con los cambios en el sistema climático, ya que dichos cambios alteran el ciclo del agua, el cual también afecta los ciclos biológicos de las especies de animales y plantas, variedades agrícolas incluidas.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href ="/desafios/#riesgo">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/reduccion-riesgos-desastres.svg")" alt="reduccion-riesgos-desastres">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Reducción del riesgo de desastres</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href ="/desafios/#seguridad">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_agua.png")" alt="seguridad-del-agua">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Seguridad Hídrica</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href ="/desafios/#salud">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_salud.png")" alt="desarrollo-economico-social">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Salud humana</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a style="text-decoration:none;" href ="/desafios/#gases">
+                                    <div class="card card-text-desafios" style="padding-top: 2rem;">
+                                      <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_mitigacion.png")" alt="reduccion-riesgos-desastres">
+                                      <div class="card-body">
+                                        <div class="card-title text-center">Mitigación de gases efecto invernadero</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                      </div>
+                                    </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <!-- carousel responsive -->
+    <div class="top-content d-md-none d-lg-none">
+        <div class="container-fluid container-desafios" style="background-color:#e6e6e6;">
+            <div style="position: relative;top:-5rem;left:-1rem">
+                <a style="margin-top: 17.2rem;" class="carousel-control-2 carousel-control-prev" href="#carousel-desafios-2" role="button" data-slide="prev">
+                    <span class="carousel-prev-icon-2 carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>    
+            </div>
+            <div style="position: relative;top:12.2rem;right:-0.8rem">
+                <a class="carousel-control-2 carousel-control-next" href="#carousel-desafios-2" role="button" data-slide="next">
+                    <span class="carousel-prev-icon-2 carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+            <div class="container  ">
+                <div class="text-center" style="padding-bottom:2.5rem !important;"><h3>Desafíos sociales a los que responden las SbN</h3></div>
+                <div id="carousel-desafios-2" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="border-bl-carousel"></div>
+                    <div class="border-tr-carousel"></div>
+                    <div class="carousel-inner row w-100 mx-auto" role="listbox">
+                        <div class="carousel-item col-12 active" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card text-center card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_mitigacion.png")" alt="Adaptación al cambio climático">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Adaptación al cambio climático</div>
+                                        <!--<p class="card-text">Debemos implementar acciones de mitigación, es decir, reducir las emisiones de gases de efecto invernadero a la atmosfera. Texto adicional de prueba</p>-->
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12 " data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_degradacion.png")" alt="Degradación ambiental y pérdida de la biodiversidad">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Degradación ambiental y pérdida de la biodiversidad</div>
+                                        <!--<p class="card-text">La degradación de los ecosistemas significa que, por efecto de la transformación de áreas naturales.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12 " data-interval="false">
+                            <div class="row">        
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_alimento.png")" alt="Seguridad alimentaria">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Seguridad alimentaria</div>
+                                        <!--<p class="card-text">Este desafío tiene una relación directa con los cambios en el sistema climático, ya que dichos cambios alteran el ciclo del agua.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/desarrollo-economico-social.png")" alt="Desarrollo económico y social">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Desarrollo económico y social</div>
+                                        <!--<p class="card-text">Este desafío tiene una relación directa con los cambios en el sistema climático, ya que dichos cambios alteran el ciclo del agua, el cual también afecta los ciclos biológicos de las especies de animales y plantas, variedades agrícolas incluidas.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                        <div class="carousel-item col-12 " data-interval="false">
+                            <div class="row">        
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/iconos_uicn_prevencion_riesgo.png")" alt="Reducción del riesgo a desastres">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Reducción del riesgo a desastres</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12 " data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/seguridad-del-agua.png")" alt="Seguridad hídrica">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Seguridad hídrica</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/desarrollo-economico-social.png")" alt="Salud humana">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Salud humana</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item col-12" data-interval="false">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card card-text-desafios">
+                                    <img class="card-img-top" src="@Url.Content("~/media/assets/img/desafios/reduccion-riesgos-desastres.png")" alt="Mitigación de gases efecto invernadero">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">Mitigación de gases efecto invernadero</div>
+                                        <!--<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                                        
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- carousel responsive end-->
+    <div class="container-fluid">
+        <div style="padding-top:20px"></div>   
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div style="margin-top:80px;margin-bottom:40px;">
+                    <h3 style="text-align: center;">Casos de éxito</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="top-content">
+        <div class="container-fluid">
+            <div id="carousel-casos" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner-mc row w-100 mx-auto" role="listbox">
+                    @{
+                        var startNodeCases = Sbn.Content(1090);
+                        var cases = startNodeCases.Children.OrderBy(x => x.CreateDate).ToList();
+                        var activeClss = "active";
+                        @foreach (ContentModels.CasoDeExito caso in cases){
+                            <div class="carousel-item carousel-item-casos col-12 col-sm-6 col-md-4 col-lg-3 carousel-casos @activeClss" data-interval="false"><a href="/casos-de-exito/">
+                                @if (@caso.Imagen != null && @caso.Imagen != null){
+                                    <img src="@caso.Imagen.LocalCrops.Src" class="img-carousel-caso-exito img-fluid mx-auto d-block" alt="img-@caso.Nombre">
+                                }
+                                <div class="overlay">
+                                    <span>
+                                        <div class="card-body"> 
+                                            <h5 class="card-title text-center">@caso.Nombre</h5>
+                                            <div class="border border-carousel-slide title-separator-secondary-carousel"></div>
+                                            <!-- <p class="card-text">@caso.Detalle</p> -->
+                                        </div> 
+                                    </span>
+                                </div>
+                            </a></div>
+                            activeClss = "";
+                        }
+                    }
+                 </div>
+                <a class="carousel-control-prev" href="#carousel-casos" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon carousel-control-prev-icon-green" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-casos" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon carousel-control-next-icon-green" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="container-fluid min-background-color">
+
+        <div class="row min-background-color">
+            <div class="col-md-12 column">
+                <div style="margin-top:80px;margin-bottom:40px;">
+                    <h3 style="text-align: center;">Ciclo de proyecto para la implementación de las <strong>SbN</strong></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ciclo del Proyecto -->
+    <div class="container-fluid mt-2 mb-2 d-block d-md-none d-lg-none d-xl-none min-background-color">
+        <!-- <p class="h2" id="diagram-center-m"></p> -->
+        <hr>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" id="element-m-1"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-2"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-3"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-4"></a>
+            <a class="list-group-item list-group-item-action" id="element-m-5"></a>
+        </div>
+        <div id="carouselControls" class="carousel slide mt-2" data-ride="carousel">
+            <div class="carousel-inner" id="cards-carousel"></div>
+            <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="container-fluid d-none d-md-block d-lg-block d-xl-block" style="background-color:#fff;">
+        <div class="row align-items-center">
+            <div class="col cicle_background">
+                <span class="diagram-name element-label noselect" id="diagram-name"></span>
+                <span class="diagram-subtitle element-label noselect" id="diagram-subtitle"></span>
+                <span class="diagram-center element-label noselect" id="diagram-center"></span>
+
+                <!--Element 1 -->
+                <span class="element-1-label element-label noselect" id="element-1-label"></span>
+                <button class="btn-d btn-outline-success-d element-1" id="element-1"></button>
+                <!--Element 2 -->
+                <span class="element-2-label element-label noselect" id="element-2-label"></span>
+                <button class="btn-d btn-outline-success-d element-2" id="element-2"></button>
+                 <!--Element 3 -->
+                <span class="element-3-label element-label noselect" id="element-3-label"></span>
+                <button class="btn-d btn-outline-success-d element-3" id="element-3"></button>
+                 <!--Element 4 -->
+                <span class="element-4-label element-label noselect" id="element-4-label"></span>
+                <button class="btn-d btn-outline-success-d element-4" id="element-4"></button>
+                 <!--Element 5 -->
+                <span class="element-5-label element-label noselect" id="element-5-label"></span>
+                <button class="btn-d btn-outline-success-d element-5" id="element-5"></button>
+    
+                <!-- Menu -->
+                <span class="menu-dot-1" id="menu-dot-1"></span>
+                <a class="menu-text menu-text-1 nav-link-d cursor" id="menu-text-1"></a>
+    
+                <span class="menu-dot-2" id="menu-dot-2"></span>
+                <a class="menu-text menu-text-2 nav-link-d cursor" id="menu-text-2"></a>
+    
+                <span class="menu-dot-3" id="menu-dot-3"></span>
+                <a class="menu-text menu-text-3 nav-link-d cursor" id="menu-text-3"></a>
+    
+                <span class="menu-dot-4" id="menu-dot-4"></span>
+                <a class="menu-text menu-text-4 nav-link-d cursor" id="menu-text-4"></a>
+    
+                <span class="menu-dot-5" id="menu-dot-5"></span>
+                <a class="menu-text menu-text-5 nav-link-d cursor" id="menu-text-5"></a>
+    
+                <span class="menu-dot-6" id="menu-dot-6"></span>
+                <a class="menu-text menu-text-6 nav-link-d cursor" id="menu-text-6"></a>
+            </div>
+            <div class="col d-flex justify-content-center diagram-panel-info">
+                <div class="text-center data-d">
+                    
+                    <img class="text-d rounded-circle img-d" id="img-d" width="190" height="190" alt="Ciclo-del-proyecto">
+                    <hr>
+                    <h5 class="text-d data-title-d" id="title-d"></h5>
+                    <div class="row text-center">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-2 green-line-separator"></div>
+                        <div class="col-md-5"></div>
+                        <br>
+                        <p class="text-d" id="text-d"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid panel-info-and-video d-none d-sm-none d-md-block">
+        <div style="padding-top:25px;">
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <div>
+                                <div class="rounded-top border-sbn-tools">
+                                    <h4 class="home-exploration-panel">Explora aquí las principales funcionalidades de este sitio:</h4>
+                                    <div class="row buton-video-container">
+                                        <div class="col-md-3 offset-md-1 text-center">
+                                            <div class="btn-toolbar1" role="toolbar" aria-label="Basic example"><a href="/asistente-seleccion-sbn/">
+                                              <button type="button" class="btn btn-sbn-tools">Asistente selección SbN</button></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <div class="btn-toolbar1" role="toolbar" aria-label="Basic example"><a href="/Gestionar-sbns/">
+                                              <button type="button" class="btn btn-sbn-tools">Caja de herramientas</button></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 text-center">
+                                            <div class="btn-toolbar1" role="toolbar" aria-label="Basic example">
+                                              <button type="button" class="btn btn-sbn-tools-2">Videos SbN</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="laptop-main-page">
+                                <div class="video-container" style="margin-top:1;padding-bottom:1px;">
+                                    <video controls="controls"/> 
+                                        <source src="/media/rr5kvp2a/video_sbn_vf.mp4" 
+                                            type="video/mp4"> 
+                                    </video> 
+                                    <img src='/media/assets/img/background-laptop.svg' alt="video">
+                                </div>        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="curved-div">
+          <p>
+            
+          </p>
+          <svg viewBox="0 0 1440 320" style="margin-top: -70px;">
+              <path fill="#0a3f0a" fill-opacity="1" d="M0,64L120,90.7C240,117,480,171,720,181.3C960,192,1200,160,1320,144L1440,128L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"/>
+          </svg>
+        </div>
+    </div>
+    <div class="d-md-none d-lg-none text-center" style="text-align:center; padding:0 10%; ">
+        <hr>
+        <h4>Explora aquí las principales funcionalidades de este sitio:</h4>
+        <div>
+            <div class="offset-md-1 text-center">
+                <div class="btn-toolbar1" role="toolbar" aria-label="Basic example"><a href="/asistente-seleccion-sbn/">
+                    <button type="button" class="btn btn-sbn-tools">Asistente selección SbN</button></a>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="btn-toolbar1" role="toolbar" aria-label="Basic example"><a href="/Gestionar-sbns/">
+                    <button type="button" class="btn btn-sbn-tools">Caja de herramientas</button></a>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="btn-toolbar1" role="toolbar" aria-label="Basic example">
+                    <button type="button" class="btn btn-sbn-tools-2">Videos SbN</button>
+                </div>
+            </div>
+            <hr>
+            <div class="embed-responsive embed-responsive-16by9" style="margin-bottom:2rem;">
+                <video controls="controls" class="embed-responsive-item" src="/media/n0cpc5hj/sbn_intro_v2_min.mp4"type="video/mp4" allowfullscreen></video>
+            </div>
+        </div>
+    </div>
+        
+    <div style="padding-top: 7rem;background: #fff;">
+         @Html.Partial("~/Views/Partials/Navigation/sbnFooter.cshtml")
+    </div>
+    
+    <!-- Modal HTML Markup -->
+    <div id="ModalShareForm" class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title">Comparte tus datos con nosotros</h1>
+                </div>
+                <div class="modal-body">
+                    <form role="form" method="POST" action="">
+                        <input type="hidden" name="_token" value="">
+                        <div class="form-group">
+                            <label class="control-label">Nombre completo*</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="fullname" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Sector*</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="sector" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Entidad*</label>
+                            <div>
+                                <input type="text" class="form-control input-lg" name="company" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Correo electrónico</label>
+                            <div>
+                                <input type="email" class="form-control input-lg" name="email" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div>
+                                <button type="submit" class="btn btn-success">COMPARTIR DATOS</button>
+                                <button type="button" class="btn btn-success">AHORA NO</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</body>
+
+</html>

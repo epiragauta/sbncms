@@ -1,82 +1,58 @@
-﻿@inherits Sbn.Cms.Web.Common.Views.SbnViewPage
-<div class="u-clearfix u-sheet u-sheet-1">  
-  <a href="#" class="u-image u-logo u-image-1">
-    <img src="@Url.Content("~/media/assets/img/logo_sbn-03.png")" class="u-logo-image u-logo-image-1" title="Logo Ecopetrol 70 Años">
-    
-  </a>
-  <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
-    <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px; font-weight: 400;">
-      <a class="u-button-style u-custom-active-color u-custom-border u-custom-border-color u-custom-hover-color u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
-        href="#">
-        <svg>
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#menu-hamburger"></use>
-        </svg>
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <defs>
-            <symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;">
-              <rect y="1" width="16" height="2"></rect>
-              <rect y="7" width="16" height="2"></rect>
-              <rect y="13" width="16" height="2"></rect>
-            </symbol>
-          </defs>
-        </svg>
-      </a>
+﻿<nav class="navbar navbar-expand-md sbn-navbar" id="navmain">
+    <div class="w-100 d-sm d-md-none text-left">
+        <button class="navbar-toggler ml-auto custom-toggler border-0 " type="button" data-toggle="collapse" data-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand d-sm d-md-none">
+                Menú
+            </a>
+        </button>
     </div>
-    <div class="u-custom-menu u-nav-container">
-      <ul class="u-nav u-spacing-2 u-unstyled u-nav-1">
-        <li class="u-nav-item"><a
-            class="u-active-custom-color-1 u-button-style u-hover-custom-color-1 u-nav-link u-text-active-custom-color-3 u-text-hover-grey-90 u-text-white"
-            href="/inicio2/" style="padding: 36px 20px;">Home</a>
-        </li>
-        <li class="u-nav-item"><a
-            class="u-active-custom-color-1 u-button-style u-hover-custom-color-1 u-nav-link u-text-active-custom-color-3 u-text-hover-grey-90 u-text-white"
-            href="/acerca-de/" style="padding: 36px 20px;">Acerca de</a>
-        </li>
-        <li class="u-nav-item"><a href="/que-es-una-sbn/"
-            class="u-active-custom-color-1 u-button-style u-hover-custom-color-1 u-nav-link u-text-active-custom-color-3 u-text-hover-grey-90 u-text-white"
-            href="Que_son_las_SbN.html" style="padding: 36px 20px;">Qué son las SbN</a>
-        </li>
-        <li class="u-nav-item"><a href="/casos-de-exito/"
-            class="u-active-custom-color-1 u-button-style u-hover-custom-color-1 u-nav-link u-text-active-custom-color-3 u-text-hover-grey-90 u-text-white"
-            style="padding: 36px 20px;">Casos de exito</a>
-        </li>
-        <li class="u-nav-item"><a href="/implementar-sbn/"
-            class="u-active-custom-color-1 u-button-style u-hover-custom-color-1 u-nav-link u-text-active-custom-color-3 u-text-hover-grey-90 u-text-white"
-            style="padding: 36px 20px;">Implementación SbN</a>
-        </li>
-        <li class="u-nav-item"><a
-            class="u-active-custom-color-1 u-button-style u-hover-custom-color-1 u-nav-link u-text-active-custom-color-3 u-text-hover-grey-90 u-text-white"
-            style="padding: 36px 20px;">Preguntas frecuentes</a>
-        </li>
-      </ul>
+    <div class="sbn-logo-navbar d-none d-md-block">
+        <a href="/" class="sbn-image-navbar">
+            <img src="@Url.Content("~/media/assets/img/logo_sbn-03.png")" class="sbn-logo-image-navbar" title="Soluciones basadas en Naturaleza">
+        </a>
     </div>
-    <div class="u-custom-menu u-nav-container-collapse">
-      <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-        <div class="u-inner-container-layout u-sidenav-overflow">
-          <div class="u-menu-close"></div>
-          <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html"
-                style="padding: 10px 20px;">Home</a>
-            </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Acerca-de.html"
-                style="padding: 10px 20px;">Acerca de</a>
-            </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" href="Que_son_las_SbN.html"
-                style="padding: 10px 20px;">Qué son las SbN</a>
-            </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">Casos de
-                exito</a>
-            </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">Implementación
-                SbN</a>
-            </li>
-            <li class="u-nav-item"><a class="u-button-style u-nav-link" style="padding: 10px 20px;">Preguntas
-                frecuentes</a>
-            </li>
-          </ul>
+    <div class="ml-auto mx-auto-main-bar">
+        <div class="collapse navbar-collapse flex-grow-1 text-left sbn-menu-navbar" id="navbarNav">
+            <ul class="navbar-nav flex-nowrap">
+                <li class="nav-item d-block d-md-none d-lg-none d-xl-none">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/">Inicio</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/acerca-de/">Acerca de</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/que-es-una-sbn/">Qué son las SbN</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/implementar-sbn/">Explorar</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/Gestionar-sbns/">Caja de herramientas</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/casos-de-exito/">Casos de éxito</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/implementar-sbn-2/">Implementación SbN</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/preguntas-frecuentes/">Preguntas frecuentes</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0;" href="/recursos/">Recursos</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" style="margin-top: auto; margin-bottom: 0; font-size:14px;">
+                       <div class="input-group mb-3">
+                          <i id="bi-search" class="bi bi-search"></i>
+                        </div>
+                   </a>
+                </li>
+            </ul>
+            <div class="input-group search-bar-input">
+              <input id="hdr-search" type="text" class="form-control header-search" style="max-width: 1000px;" placeholder="Buscar" aria-label="Buscar">
+            </div>
         </div>
-      </div>
-      <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-    </div>
-  </nav>
-</div>
+    </div
+</nav>    

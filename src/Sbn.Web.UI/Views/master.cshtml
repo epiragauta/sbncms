@@ -5,40 +5,43 @@
 }
 <!doctype html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Name - Sitename</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@Model.Name</title>
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="@Url.Content("~/css/nicepage.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/bootstrap.min.css")" media="screen">
     <link rel="stylesheet" href="@Url.Content("~/css/home.css")" media="screen">
     <link rel="stylesheet" href="@Url.Content("~/css/sbn.css")" media="screen">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/libs/sweetalert2.min.css")" media="screen">
+    <link rel="stylesheet" href="@Url.Content("~/css/libs/smart_wizard_all.min.css")" media="screen">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="@Url.Content("~/css/select2-bootstrap4.min.css")" rel="stylesheet" />
+    
     <script type="text/javascript" src="@Url.Content("~/sbn/lib/jquery/jquery.min.js")"></script>
-    <script type="text/javascript" src="@Url.Content("~/scripts/nicepage.js")" defer=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/bootstrap.min.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/libs/sweetalert2.all.min.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/libs/jquery.smartWizard.min.js")" defer=""></script>
+    <script type="text/javascript" src="@Url.Content("~/scripts/sbn.js")" defer=""></script>
     
     @RenderSection("Header", required: false)
+    @RenderSection("Scripts", required: false)
 </head>
 
 <body class="frontpage">
     <header class="u-clearfix u-custom-color-3 u-header u-header" id="sec-ead9">
         @Html.Partial("~/Views/Partials/Navigation/sbnHeader.cshtml")
     </header>
-    <div class="mobile-nav">
-        <nav class="nav-bar">
-            
-        </nav>
-    </div>
-
+    
     <main>
         @RenderBody()
     </main>
-
-
+    
 </body>
 
 </html>

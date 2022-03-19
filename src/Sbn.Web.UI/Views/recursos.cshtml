@@ -1,88 +1,304 @@
 ﻿@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
-@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Recursos>
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Recursos>;
+@using Sbn.Cms.Core.Services;
+@using Sbn.Cms.Core.PropertyEditors;
+@inject IDataTypeService DataTypeService;
 @{
 	Layout = "master.cshtml";
 }
-<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 3rem;" >
-    <div class="titles">Recursos</div>
-    <div>En esta sección usted encontrará documentos científicos relacionados con la implementación de las SbN y sus beneficios para el medio ambiente</div>
-    
-    <div class="row">
-        <div class="col-md-4 px-5">
-            <input class="col-md-12 signup-input text-value input-search" type="search" id="mySearchText2" aria-label="Recipient's username" >
-        </div>
-    </div>
-    
-    
-    <section class="section">
-        <div class="row">
-        @{
-            var numberOfRecursos = 5; //Model.CasosAmostrar;
-            var startNodeId = Model.Id;
-            var startNode = Sbn.Content(startNodeId);
-            if (startNode == null){
-                  <div class="recursos">
-                      <h1>No hay recursos en este momento, intente después.</h1>
-                  </div>
-                  return;
-            }
+@section Scripts {
+     <script type="text/javascript">
+        $(document).ready(function() {
             
-            //Gets all recursos to calculate pages
-            var recursos = startNode.Children.OrderBy(x => x.CreateDate).ToList();
-            var numOfRecursos = recursos.Count;
-            var columns = 3;
-            int counter = 0;
-            int numOfRecursosByPage = 6;
+            $('select').select2({
+                theme: 'bootstrap4',
+            });
             
-            var pageCount = (int)Math.Ceiling((double)numOfRecursos / (double)numOfRecursosByPage);
-            //gets the page from the querystring and sets it to one if it is out of range
+            $('#area-tematica-select').on('select2:select', function(e){
+                //console.log('area-select-select2:select', this, e.params.data);
+                //filterResource({areaTematica: e.params.data});
+                window.location.href="?query=" + "area-tematica" + "&value=" + e.params.data.id;
+            });
             
-            var page = 1;
+            $('#tipo-documento-select').on('select2:select', function(e){
+                //console.log('tipo-documentot-select2:select', this, e.params.data);
+                window.location.href="?query=" + "tipo-documento" + "&value=" + e.params.data.id;
+            });
             
-            if (!string.IsNullOrEmpty(Context.Request.Query["page"])){
-                int.TryParse(Context.Request.Query["page"], out page);
-                if (page <= 0 || page > pageCount){
-                    page = 1;
-                }
-            }
+            $('#sbn-select').on('select2:select', function(e){
+                //console.log('sbn-select2:select', this, e.params.data);
+                window.location.href="?query=" + "sbn" + "&value=" + e.params.data.id;
+                //filterResource({sbn: e.params.data});
+            });
             
-            //Gets the recursos for the current page
-            var pagedResources = recursos.Skip((page - 1) * numOfRecursosByPage).Take(numOfRecursosByPage).ToList();
+             $('#tag-select').on('select2:select', function(e){
+                //console.log('tag-select2:select', this, e.params.data);
+                window.location.href="?query=" + "tag" + "&value=" + e.params.data.id;
+                //filterResource({sbn: e.params.data});
+            });
+        });
         
-            if (pagedResources.Count != null){
-                @foreach (ContentModels.Recurso recurso in pagedResources){
-                    <div class="col-md-12">
-                        <h2>@recurso.Nombre</h2>
-                        <div>@recurso.Detalle</div>
-                        <div class="blogpost-meta">
-                            <small class="blogpost-date">@recurso.CreateDate.ToShortDateString()</small>
-                        </div>
-                    </div>
+        function filterResources(filter){
+            let areaTematica;
+            let tipoDocumento;
+            let sbn;
+            if (filter.areaTematica){
+                var query = "areaTematica";
+                var value=$('#select-sbn').val();
+                $('#query').val(query);
+                $('#value').val(value);
+                //ocument.forms["query-form"].submit();
+                window.location.href="?query=" + query + "&value=" + value;
+            }
+        }
+     </script>
+}
+
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding-top:3rem !important;" >
+    <div class="titles"><h2>Recursos</h2></div>
+    <div style="padding-bottom:1.5rem;"><span>En esta sección usted encontrará documentos científicos relacionados con la implementación de las SbN y sus beneficios para el medio ambiente.</span></div>
+    <section class="section">
+    @{
+        var numberOfRecursos = 5; //Model.CasosAmostrar;
+        var startNodeId = Model.Id;
+        var startNode = Sbn.Content(startNodeId);
+        var areaTematicaList =  (ValueListConfiguration)DataTypeService.GetDataType(1319).Configuration;  // ID Áreas Temáticas
+        var tipoPublicacionList =  (ValueListConfiguration)DataTypeService.GetDataType(1255).Configuration;  // ID Tipos Publicación
+        var startNodeSbNs = Sbn.Content(1251); // 1251 corresponde al ID de tipos de SbN
+        var sbns = startNodeSbNs.Children.OrderBy(x => x.CreateDate).ToList();
+        var query = "";
+        var value = "";
+        var search = "";
+        var defaultSelected = "selected";
+        
+        if (startNode == null){
+              <div class="recursos">
+                  <h1>No hay recursos en este momento, intente después.</h1>
+              </div>
+              return;
+        }
+        
+        if (!string.IsNullOrEmpty(Context.Request.Query["query"]) && !string.IsNullOrEmpty(Context.Request.Query["value"])){
+            query = Context.Request.Query["query"];
+            value = Context.Request.Query["value"];
+            defaultSelected = "";
+        }else if (!string.IsNullOrEmpty(Context.Request.Query["search"])){
+            search = Context.Request.Query["search"];
+        }
+        
+        //Gets all recursos to calculate pages
+        var recursos = startNode.Children.DistinctBy(x => ((ContentModels.Recurso)x).Nombre).OrderBy(x => x.CreateDate).ToList();
+        var allRecursos = recursos;
+        var numOfRecursos = recursos.Count;
+        var columns = 3;
+        int counter = 0;
+        int numOfRecursosByPage = 15;
+        
+        if (value != "ALL"){
+            if (query != "" && value != ""){
+                List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arrayResources = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+                if (query == "area-tematica"){
+                    @foreach(ContentModels.Recurso recurso in recursos){
+                        if (recurso.AreaTematica != null){
+                            @foreach(var area_ in recurso.AreaTematica){
+                                if (area_ == value){
+                                    arrayResources.Add(recurso);
+                                }
+                            }
+                        }
+                    }
+                }else  if (query == "tipo-documento"){
+                    @foreach(ContentModels.Recurso recurso in recursos){
+                        if (recurso.TipoDocumento != null){
+                            if (recurso.TipoDocumento == value){
+                                arrayResources.Add(recurso);
+                            }
+                        }
+                    }
+                }else  if (query == "sbn"){
+                    @foreach(ContentModels.Recurso recurso in recursos){
+                        var sId = recurso.Id.ToString();
+                        var iOf = value.IndexOf(sId);
+                        if (iOf != -1){
+                            arrayResources.Add(recurso);
+                        }
+                    }
+                }else  if (query == "tag"){
+                    if (value.IndexOf("(T)") != -1){
+                        var val = value.Replace("(T)", "").Trim();
+                        @foreach(ContentModels.Recurso recurso in recursos){
+                            if (recurso.Nombre.Trim() == val){
+                                arrayResources.Add(recurso);
+                            }
+                        }
+                    }else{
+                        @foreach(ContentModels.Recurso recurso in recursos){
+                            if (recurso.PalabrasClave.ToList().Count > 0){
+                                foreach (var p in recurso.PalabrasClave){
+                                    if (p == value){
+                                        arrayResources.Add(recurso);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                recursos = arrayResources;
+                numOfRecursos = recursos.Count;
+            }
+        }
+        
+        var pageCount = (int)Math.Ceiling((double)numOfRecursos / (double)numOfRecursosByPage);
+        //gets the page from the querystring and sets it to one if it is out of range
+        int numPage = 1;
+        
+        if (!string.IsNullOrEmpty(Context.Request.Query["numPage"])){
+            int.TryParse(Context.Request.Query["numPage"], out numPage);
+            if (numPage <= 0 || numPage > pageCount){
+                numPage = 1;
+            }
+        }
+        //Gets the recursos for the current page
+        var pagedResources = recursos.Skip((numPage - 1) * numOfRecursosByPage).Take(numOfRecursosByPage).ToList();
+        var listTagsResources = new List<String>();
+        var listTitles = new List<String>();
+        @foreach (ContentModels.Recurso recurso in allRecursos){
+            listTitles.Add(recurso.Nombre);
+            if (recurso.PalabrasClave.ToList().Count > 0){
+                foreach (var p in recurso.PalabrasClave){
+                    if (!listTagsResources.Contains(p)){
+                        listTagsResources.Add(p);
+                    }
                 }
             }
         }
-            
+        
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group has-search">
+                    <span class="bi bi-search form-control-feedback"></span>
+                    
+                    @if (listTagsResources.Count > 0){
+                        <select class="select2-tag form-control" id="tag-select" data-placeholder="Palabra clave y Título">
+                          <option value="-1">Palabra clave / Título</option>
+                          <option value="ALL">Todos</option>
+                        @foreach (var t in listTagsResources){
+                          <option value="@t">@t</option>  
+                        }
+                        @foreach (var t in listTitles){
+                          <option value="(T)@t">@t</option>  
+                        }
+                        </select>
+                    }
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group has-search">
+                    <span class="bi bi-search form-control-feedback"></span>
+                    <select class="select2-area-tematica form-control" id="area-tematica-select" data-placeholder="Área temática">
+                      <option value="-1">Área temática</option>
+                      <option value="ALL">Todos</option>
+                    @foreach (var item in areaTematicaList.Items){
+                        <option value="@item.Value">@item.Value</option>
+                    }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group has-search">
+                    <span class="bi bi-search form-control-feedback"></span>
+                    <select class="select2-area-tematica form-control" id="tipo-documento-select" data-placeholder="Tipo de documento">
+                      <option value="-1">Tipo de documento</option>
+                      <option value="ALL">Todos</option>
+                    @foreach (var item in tipoPublicacionList.Items){
+                        <option value="@item.Value">@item.Value</option>
+                    }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group has-search">
+                    <span class="bi bi-search form-control-feedback"></span>
+                    <select class="select2-area-tematica form-control" id="sbn-select" data-placeholder="SbN">
+                    <option value="-1">SbN</option>
+                    <option value="ALL">Todas</option>
+                    @foreach (ContentModels.Sbn2 sbn in sbns){
+                        var soportes = @sbn.SoporteBibliografico;
+                        var soporteIds = "";
+                        if (soportes != null){
+                            @foreach (var rb in soportes){
+                                ContentModels.Recurso recurso_ =  (Recurso)@rb.ReferenciaBibliografica;
+                                if (recurso_ != null){
+                                soporteIds += recurso_.Id + ",";
+                                }
+                            }
+                            if (soporteIds != ""){
+                                soporteIds = soporteIds.Substring(0,soporteIds.Length-1);
+                                <option value="@soporteIds">@sbn.Nombre</option>
+                            }
+                        }
+                    }
+                    </select>
+                </div>
+            </div>
         </div>
+            
+        <div class="row">
+        <div class="col-md-12 px-3 py-2">
+            <small>@(((numPage-1) * numOfRecursosByPage) + 1) - @(numPage * numOfRecursosByPage)  de  @numOfRecursos Referencias</small>
+        </div>
+        
+        @if (pagedResources.Count != null){
+            @foreach (ContentModels.Recurso recurso in pagedResources){
+                <div class="col-md-12 py-2">
+                    <span class="recurso-titulo"><a href="@recurso.Documento.Url" target="_blank">@recurso.Nombre</a></span>
+                    <span class="recurso-descripcion">@recurso.Detalle</span>
+                    <div class="recurso-mas-info">
+                        @{
+                            var areas = "";
+                            @foreach(string a in recurso.AreaTematica){
+                                areas += a + ", ";   
+                            }
+                            if (areas.Length > 0){
+                                areas = areas.Substring(0, areas.Length-2);
+                                <small class="blogpost-date"><strong>Área(s) temática(s)</strong>: @areas</small><br/>
+                            }
+                            <small class="blogpost-date"><strong>Tipo publicación</strong>: @recurso.TipoDocumento</small><br/>
+                            if (recurso.PalabrasClave.ToList().Count > 0){
+                                <small class="blogpost-date">Palabras Clave: </small>
+                                foreach (var p in recurso.PalabrasClave){
+                                    <span class="badge badge-success">@p</span>
+                                }
+                            }
+                        }
+                        <div><small class="blogpost-date">Autor: @recurso.Autor - Año: @recurso.Year</small></div>
+                        
+                    </div>
+                </div>
+            }
+        }
+        </div>
+    }
+        
         <div class="row">
             <div class="col-md-12">
             @{        
                 if (pageCount > 1){
+                    var parameters = "";
+                    if (query != "" && value != ""){
+                        parameters = "&query=" +  query + "&value=" + value;
+                    }
                     <div class="pagination justify-content-center">
                         <ul>
-                            @if (page > 1)
-                            {
-                                <li><a href="?page=@(page-1)">Anterior</a></li>
-                            }
+                            <li><a class="@(numPage == 1 ? "disabled" : string.Empty)" href="?numPage=@(numPage-1)@parameters">&lt;</a></li>
                             @for (int p = 1; p < pageCount + 1; p++)
                             {
-                                <li class="@(p == page ? "active" : string.Empty)">
-                                    <a href="?page=@p">@p</a>
+                                <li class="@(p == numPage ? "active" : string.Empty)">
+                                    <a class="@(p == numPage ? "active" : string.Empty)"href="?numPage=@p@parameters">@p</a>
                                 </li>
                             }
-                            @if (page < pageCount)
-                            {
-                                <li><a href="?page=@(page+1)">Siguiente</a></li>
-                            }
+                            <li><a class="@(numPage == pageCount ? "disabled" : string.Empty)" href="?numPage=@(numPage+1)@parameters">&gt;</a></li>
+                            
                         </ul>
                     </div>
                 }
