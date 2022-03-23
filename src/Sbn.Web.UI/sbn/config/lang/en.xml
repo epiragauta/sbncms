@@ -1046,8 +1046,8 @@ To manage your website, simply open the Umbraco backoffice and start adding cont
     <key alias="requestPasswordResetConfirmation">An email with password reset instructions will be sent to the
       specified address if it matched our records
     </key>
-    <key alias="showPassword">Show password</key>
-    <key alias="hidePassword">Hide password</key>
+    <key alias="showPassword">Mostrar contraseña</key>
+    <key alias="hidePassword">Ocultar contraseña</key>
     <key alias="returnToLogin">Return to login form</key>
     <key alias="setPasswordInstruction">Please provide a new password</key>
     <key alias="setPasswordConfirmation">Your Password has been updated</key>
