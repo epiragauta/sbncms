@@ -39,6 +39,10 @@ app.config(function ($routeProvider) {
                                         $route.current.params.section = "content";
                                     }
 
+                                    if (user.allowedSections.indexOf("guest") == -1){
+                                        user.allowedSections.push("guest");
+                                    }                                    
+
                                     var found = _.find(user.allowedSections, function (s) {
                                         return s.localeCompare($route.current.params.section, undefined, { sensitivity: 'accent' }) === 0;
                                     })

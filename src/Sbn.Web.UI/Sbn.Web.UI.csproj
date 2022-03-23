@@ -24,25 +24,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="sbn/Data/**" />
     <Compile Remove="sbn/logs/**" />
     <Compile Remove="sbn/mediacache/**" />
     <Compile Remove="wwwroot/sbn/**" />
     <Compile Remove="App_Data/**" />
+    <Compile Remove="wwwroot\media\**" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="App_Data/**" />
-    <EmbeddedResource Remove="sbn/Data/**" />
     <EmbeddedResource Remove="sbn/logs/**" />
     <EmbeddedResource Remove="sbn/mediacache/**" />
+    <EmbeddedResource Remove="wwwroot\media\**" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="App_Data/**" />
-    <Content Remove="sbn/Data/**" />
     <Content Remove="sbn/logs/**" />
     <Content Remove="sbn/mediacache/**" />
+    <Content Remove="wwwroot\media\**" />
     <Content Remove="wwwroot/Web.config" />
   </ItemGroup>
 
@@ -57,9 +57,9 @@
       <CopyToPublishDirectory>Always</CopyToPublishDirectory>
     </None>
     <None Remove="App_Data/**" />
-    <None Remove="sbn/Data/**" />
     <None Remove="sbn/logs/**" />
     <None Remove="sbn/mediacache/**" />
+    <None Remove="wwwroot\media\**" />
     <None Include="sbn/SbnWebsite/NoNodes.cshtml" />
   </ItemGroup>
 

@@ -198,6 +198,9 @@ function NavigationController($scope, $rootScope, $location, $log, $q, $routePar
                 //load the tree
                 configureTreeAndLanguages();
                 $scope.treeApi.load({ section: $scope.currentSection, customTreeParams: $scope.customTreeParams, cacheKey: $scope.treeCacheKey });
+                if (args.value == "guest"){
+                    $rootScope.emptySection = true;
+                }
             });
         }
 

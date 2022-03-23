@@ -25,7 +25,7 @@
 @param {string} text Set the text for the checkbox label.
 @param {string=} labelKey Set a dictionary/localization string for the checkbox label
 @param {string=} cssClass Set a css class modifier
-@param {string=} color Set a hex code e.g. <code>#f5c1bc</code>. <code>#000000</code> by default
+@param {string=} color Set a hex code e.g. <code>#bad40</code>. <code>#000000</code> by default
 @param {boolean=} showText Set to <code>true</code> to show the text. <code>false</code> by default
 @param {string=} element Highlights a DOM-element (HTML selector) e.g. "my-div-name"
 @param {string=} state Set the initial state of the component. To have it hidden use <code>hidden</code>

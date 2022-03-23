@@ -24,7 +24,8 @@ function DashboardController($scope, $q, $routeParams, $location, dashboardResou
     }));
 
     promises.push(dashboardResource.getDashboard($routeParams.section).then(function (tabs) {
-        $scope.dashboard.tabs = tabs;
+        let tbs = tabs.filter(x => x.alias != "contentRedirectManager");
+        $scope.dashboard.tabs = tbs;
 
         if ($scope.dashboard.tabs && $scope.dashboard.tabs.length > 0) {
             initActiveTab();

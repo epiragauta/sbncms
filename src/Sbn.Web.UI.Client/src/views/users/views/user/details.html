@@ -94,7 +94,7 @@
 
                 </umb-control-group>
 
-                <umb-control-group style="margin-bottom: 25px;" label="@user_startnodes" description="@user_startnodeshelp">
+                <umb-control-group class="hide-box" style="margin-bottom: 25px;" label="@user_startnodes" description="@user_startnodeshelp">
 
                     <umb-node-preview style="max-width: 100%;"
                                       ng-repeat="node in model.user.startContentIds"
@@ -118,7 +118,7 @@
 
                 </umb-control-group>
 
-                <umb-control-group label="@user_mediastartnodes" description="@user_mediastartnodeshelp">
+                <umb-control-group class="hide-box" label="@user_mediastartnodes" description="@user_mediastartnodeshelp">
 
                     <umb-node-preview style="max-width: 100%;"
                                       ng-repeat="node in model.user.startMediaIds"
@@ -145,7 +145,7 @@
             </umb-box-content>
         </umb-box>
 
-        <umb-box>
+        <umb-box class="hide-box">
             <umb-box-header title-key="user_access" description-key="user_accessHelp"></umb-box-header>
             <umb-box-content class="block-form">
 

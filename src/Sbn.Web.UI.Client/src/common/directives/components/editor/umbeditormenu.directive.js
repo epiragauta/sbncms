@@ -36,7 +36,7 @@
                 if (!scope.actions) {
                     treeService.getMenu({ treeNode: scope.currentNode })
                         .then(function (data) {
-                            scope.actions = data.menuItems;
+                            scope.actions = data.menuItems.filter(x => x.alias == "create" || x.alias == "delete");
                         });
                 }
             };

@@ -264,6 +264,14 @@ function umbTreeDirective($q, treeService, notificationsService) {
                         args["queryString"] = $scope.customtreeparams;
                     }
 
+                    if (args.section == "guest"){
+                        return{
+                            alias: "guest",
+                            name: "Invitados",
+                            root: {containsTrees : false}
+                        }
+                    }
+
                     return treeService.getTree(args)
                         .then(function (data) {
                             //Only use the tree data, if we are still on the correct section
@@ -278,6 +286,15 @@ function umbTreeDirective($q, treeService, notificationsService) {
                             $scope.activeTree = $scope.tree.root;
 
                             emitEvent("treeLoaded", { tree: $scope.tree });
+                            
+                            if ($scope.tree.root.section == "settings"){
+                                // SbN :: Exclude Items
+                                var excludeNodes = ['mediaTypes','memberTypes','macros','relationTypes','logViewer','languages','contentBlueprints','partialViewMacros'];
+                                //var children = [];
+                                //$scope.tree.root.children.forEach(x => { var a = x.children.filter(y => excludeNodes.indexOf(y.metaData.treeAlias) == -1);
+                                //children.push(a);});
+                                //$scope.tree.root.children = children;
+                            }
                             emitEvent("treeNodeExpanded", { tree: $scope.tree, node: $scope.tree.root, children: $scope.tree.root.children });
                          
                             return $q.when(data);

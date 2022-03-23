@@ -23,6 +23,7 @@ function sectionsDirective($timeout, $window, navigationService, treeService, se
             function loadSections() {
                 sectionService.getSectionsForUser()
                     .then(function (result) {
+                        result.push({name:"Invitados", alias: "guest", routePath: "guest/guest/guest"});
                         scope.sections = result;
                         scope.visibleSections = scope.sections.length;
 

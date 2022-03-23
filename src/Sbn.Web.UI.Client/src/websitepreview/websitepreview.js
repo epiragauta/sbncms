@@ -178,7 +178,7 @@
             }
             .sbn-preview-dialog__modal > button.sbn-preview-dialog__continue {
                 color: #fff;
-                background-color: #2bc37c;
+                background-color: #0a3f0a;
             }
             .sbn-preview-dialog__modal > button.sbn-preview-dialog__continue:hover {
                 background-color: #39d38b;

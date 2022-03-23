@@ -72,6 +72,12 @@ angular.module("sbn.directives")
                 if (node.cssClasses) {
                     node.cssClasses.forEach(c => css.push(c));
                 }
+                if (node.metaData.treeAlias){
+                    var excludeNodes = ['mediaTypes','memberTypes','macros','relationTypes','logViewer','languages','contentBlueprints','partialViewMacros'];
+                    if (excludeNodes.indexOf(node.metaData.treeAlias) != -1){
+                        css.push('umb-tree-item-hide');
+                    }
+                }
                 if (node.selected) {
                     css.push("umb-tree-node-checked");
                 }

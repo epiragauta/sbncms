@@ -25,7 +25,7 @@
         // ChartJS Options - for count/overview of log distribution
         vm.logTypeLabels = ["Debug", "Info", "Warning", "Error", "Fatal"];
         vm.logTypeData = [0, 0, 0, 0, 0];
-        vm.logTypeColors = ['#2e8aea', '#2bc37c', '#ff9412', '#d42054', '#343434'];
+        vm.logTypeColors = ['#2e8aea', '#0a3f0a', '#ff9412', '#d42054', '#343434'];
         vm.chartOptions = {
             legend: {
                 display: true,
