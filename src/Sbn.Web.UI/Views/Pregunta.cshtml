@@ -1,0 +1,15 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Pregunta>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+}
+<section class="section container w3-border w3-container w3-round-xlarge" >
+    
+    <section class="section">
+        <div class="container">
+            <h2>@Model.Titulo</h2>
+            <div>@Model.Respuesta</div>
+        </div>
+     </section>
+</section>

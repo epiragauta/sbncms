@@ -1,0 +1,8 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage
+@{
+	Layout = "masterBgWhite.cshtml";
+}
+<section class="section container-fluid">
+    @Html.GetGridHtml(Model, "gridContenido", "bootstrap3-fluid")
+</section>

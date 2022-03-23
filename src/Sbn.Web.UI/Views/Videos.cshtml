@@ -1,0 +1,183 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@using System.Text;
+@using System.Globalization;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Videos>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Core
+@using Examine
+@using Sbn.Cms.Infrastructure.Examine
+@inject IPublishedContentQuery _publishedContentQuery;
+@inject IExamineManager _examineManager; 
+@{
+	Layout = "master.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/css/sbn-casos-de-exito.css")" media="screen">
+<script type="text/javascript" src="@Url.Content("~/scripts/sbn-casos-de-exito.js")"></script>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#input-search').on('keypress', function(e){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    console.log('You pressed a "enter" key in textbox : ', $('#input-search').val());
+                    if ($('#input-search').val().length > 2){
+                        window.location.href="?search=" + $('#input-search').val();
+                   }
+                }
+            });
+            
+            $('#btn-search').on('click', function(e){
+               if ($('#input-search').val().length > 2){
+                window.location.href="?search=" + $('#input-search').val();
+               }
+            })
+            
+            $('#btn-clean').on('click', function(e){
+                window.location.href=window.location.pathname;
+            })
+        });
+    </script>    
+}
+
+<div class="casos-de-exito-background-header" style="z-index:-1;">
+    <div class="casos-de-exito-background-header-overcolor"></div>
+</div>
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 4rem 1rem 2rem;" >
+    
+    <div class="text-center casos-de-exito-header">
+        <h2 style="color:#fff !important;">Módulos informativos</h2>
+    </div>
+    
+@{
+    var startNodeSbNs = Sbn.Content(1414); // 1414 corresponde al ID de los Videos
+    var videos = startNodeSbNs.Children.OrderBy(x => x.Value<int>("ordenDePreparacion")).ToList();
+    var numOfVideos = videos.Count;
+    var columns = 3;
+    int counter = 0;
+    int numOfVideosByPage = 6;
+    var search = "";
+    var pageCount = (int)Math.Ceiling((double)numOfVideos / (double)numOfVideosByPage);
+    var numPage = 1;
+    List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arrayVideos = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+    if (!_examineManager.TryGetIndex(Constants.SbnIndexes.ExternalIndexName, out IIndex index)){
+		throw new InvalidOperationException($"No index found by name{ Constants.SbnIndexes.ExternalIndexName }");
+	}
+    
+    if (!string.IsNullOrEmpty(Context.Request.Query["search"])){
+        search = Context.Request.Query["search"];
+        var query = index.Searcher.CreateQuery(IndexTypes.Content);
+    	var queryExecutor = query.NodeTypeAlias("videoCapacitacion").And().ManagedQuery(search);
+    	@foreach (var result in _publishedContentQuery.Search(queryExecutor))
+        {
+            var video = (ContentModels.VideoCapacitacion)result.Content;
+    	    arrayVideos.Add(video);
+        }
+        if (arrayVideos.Count > 0){
+            videos = arrayVideos;
+            numOfVideos = videos.Count;
+            pageCount = (int)Math.Ceiling((double)numOfVideos / (double)numOfVideosByPage);
+        }else{
+            @foreach(ContentModels.VideoCapacitacion vd in videos){
+                var sbReturn = new StringBuilder();     
+                var arrayText = vd.Nombre.ToUpper().Normalize(NormalizationForm.FormD).ToCharArray(); 
+                var txt = "";
+                foreach (char letter in arrayText){     
+                    if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)  
+                        sbReturn.Append(letter);     
+                }
+                txt = sbReturn.ToString();
+                if (txt.IndexOf(search.ToUpper()) != -1){
+                    arrayVideos.Add(vd);
+                }else{
+                    sbReturn = new StringBuilder();     
+                    arrayText = vd.Descripcion.ToUpper().Normalize(NormalizationForm.FormD).ToCharArray(); 
+                    txt = "";
+                    foreach (char letter in arrayText){     
+                        if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)  
+                            sbReturn.Append(letter);     
+                    }
+                    txt = sbReturn.ToString();
+                    if (txt.IndexOf(search.ToUpper()) != -1){
+                        arrayVideos.Add(vd);
+                    }
+                }
+            }
+            
+            if (arrayVideos.Count > 0){
+                videos = arrayVideos;
+                numOfVideos = videos.Count;
+                pageCount = (int)Math.Ceiling((double)numOfVideos / (double)numOfVideosByPage);
+            }
+        }
+    }
+    
+    if (!string.IsNullOrEmpty(Context.Request.Query["numPage"])){
+        int.TryParse(Context.Request.Query["numPage"], out numPage);
+        if (numPage <= 0 || numPage > pageCount){
+            numPage = 1;
+        }
+    }
+    
+    var pagedVideos = videos.Skip((numPage - 1) * numOfVideosByPage).Take(numOfVideosByPage).ToList();
+    
+    <div class="row" style="margin: 0px;width:108%;">
+        <div class="input-group mb-3">
+          <input type="text" id="input-search" class="form-control" placeholder="Buscar Videos" aria-label="Buscar Videos" value="@search">
+          @if (search != ""){
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" id="btn-clean"><i class="bi bi-x-circle"></i></button>
+            </div>
+          }
+        </div>
+    </div>
+    
+    @:<section class="section section-casos-de-exito">
+        @:<div class="row row-casos-de-exito">
+            if (pagedVideos.Count != null){
+                @foreach(ContentModels.VideoCapacitacion video in pagedVideos){
+                    if (counter != 0 && counter % columns == 0){
+                        @:</div>
+                        @:<div class="row row-casos-de-exito">
+                    }
+                    <div class="col-md-4" style="margin-bottom: 1rem">
+                        <div class="card card-text-impl-sbn" style="background-color:#e9ecef;">
+                            <div class="position-relative position-relative overflow-hidden mx-auto " style="margin-top: 3rem;width: 15rem;height: 10rem;">
+                                <a href="@video.URL.Url" target="_blank"><img src="@video.ImagenMiniatura.LocalCrops.Src" class="w-100 h-100 text-dimg-d"  alt="@video.Nombre"  /></a>
+                            </div>
+                            <div class="card-body border-card-text" style="padding: 0.25rem;">
+                                <h5 class="card-title text-center"><strong>@video.Nombre</strong></h5>
+                                <p class="card-text text-center " style="font-size: 14px;">@video.Descripcion</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        @:</div>
+        @:<div class="row" style="padding-top:25px;">
+            @:<div class="col-md-12">
+                if (pageCount > 1){
+                    <div class="pagination justify-content-center">
+                        <ul>
+                            <li><a class="@(numPage == 1 ? "disabled" : string.Empty)" href="?numPage=@(numPage-1)">&lt;</a></li>
+                            
+                            @for (int p = 1; p < pageCount + 1; p++)
+                            {
+                                <li class="@(p == numPage ? "active" : string.Empty)">
+                                    <a class="@(p == numPage ? "active" : string.Empty)"href="?numPage=@p">@p</a>
+                                </li>
+                            }
+                            <li><a class="@(numPage == pageCount ? "disabled" : string.Empty)" href="?numPage=@(numPage+1)">&gt;</a></li>
+                            
+                        </ul>
+                    </div>
+                }
+            
+            @:</div>
+        @:</div>
+    @:</section>
+}
+</section>
+
+
+    

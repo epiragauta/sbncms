@@ -1,0 +1,39 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.VideoCapacitacion>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@{
+	Layout = "master.cshtml";
+}
+
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:3rem 0rem;" >
+    <div class="titles"><h2>Módulos informativos</h2></div>
+    <div style="padding-bottom:1.5rem;"><span>En esta sección usted encontrará videos relacionados con la implementación de las SbN y sus beneficios para el medio ambiente.</span></div>
+
+    <section class="section">
+        
+        
+@{
+	var selection = Sbn.Content(Guid.Parse("550b22b0-bfe3-4633-b692-1dc9e690530c"))
+    .ChildrenOfType("videoCapacitacion")
+    .Where(x => x.IsVisible());
+}
+<ul>
+	@foreach (var item in selection)
+	{
+	    
+		<li>
+			<a href="@item.Url()">@item.Name()</a>
+		</li>
+		
+	}
+</ul>
+
+
+
+</section>
+</section>
+
+        
+        
+        
+       

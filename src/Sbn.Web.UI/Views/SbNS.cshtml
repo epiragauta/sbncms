@@ -1,0 +1,234 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@using System.Text;
+@using System.Globalization;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Sbns>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Core
+@using Examine
+@using Sbn.Cms.Infrastructure.Examine
+@inject IPublishedContentQuery _publishedContentQuery;
+@inject IExamineManager _examineManager; 
+
+@{
+	Layout = "master.cshtml";
+}
+
+<link rel="stylesheet" href="@Url.Content("~/css/sbn-casos-de-exito.css")" media="screen">
+<script type="text/javascript" src="@Url.Content("~/scripts/sbn-casos-de-exito.js")"></script>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#input-search').on('keypress', function(e){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    console.log('You pressed a "enter" key in textbox : ', $('#input-search').val());
+                    if ($('#input-search').val().length > 2){
+                        window.location.href="?search=" + $('#input-search').val();
+                   }
+                }
+            });
+            
+            $('#btn-search').on('click', function(e){
+               if ($('#input-search').val().length > 2){
+                window.location.href="?search=" + $('#input-search').val();
+               }
+            })
+            
+            $('#btn-clean').on('click', function(e){
+                window.location.href=window.location.pathname;
+            })
+        });
+    </script>    
+}
+
+<div class="casos-de-exito-background-header" style="z-index:-1;">
+    <div class="casos-de-exito-background-header-overcolor"></div>
+</div>
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 4rem 1rem 2rem;" >
+    
+    <div class="text-center casos-de-exito-header">
+        <h2 style="color:#fff !important;width: 108%;">Caja de herramientas</h2>
+        <h2 style="color:#fff !important;width: 108%;">Soluciones basadas en Naturaleza</h2>
+        <p style="color:#fff !important;width: 108%;">A continuación, encontrará las SbN priorizadas en esta Plataforma y podrá consultar para cada una, herramientas prácticas para las diferentes etapas del ciclo de proyecto:</p>
+    </div>
+    @{
+    if (!_examineManager.TryGetIndex(Constants.SbnIndexes.ExternalIndexName, out IIndex index)){
+		throw new InvalidOperationException($"No index found by name{ Constants.SbnIndexes.ExternalIndexName }");
+	}
+	var search = "";
+	if (!string.IsNullOrEmpty(Context.Request.Query["search"])){
+        search = Context.Request.Query["search"];
+    }
+    var startNodeId = Model.Id;
+    var startNode = Sbn.Content(startNodeId);
+    if (startNode == null){
+      <section class="section section-casos-de-exito">
+        <div class="row row-casos-de-exito">
+          <div class="study-cases">
+              <h1>No hay SbN's en este momento, intente después.</h1>
+          </div>
+        </div>
+      </section>
+     return;
+    }
+    
+    //Gets all SbN to calculate pages
+    // 
+    var sbns = startNode.Children.Where(x => ((ContentModels.Sbn2)x).EstadoSbn != "En proceso").OrderBy(x => x.CreateDate).ToList();
+    var numOfSbns = sbns.Count;
+    var columns = 3;
+    int counter = 0;
+    int numOfSbnsByPage = 6;
+    
+    var pageCount = (int)Math.Ceiling((double)numOfSbns / (double)numOfSbnsByPage);
+    //gets the page from the querystring and sets it to one if it is out of range
+    var page = 1;
+    
+    List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arraySbns = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+    if (!string.IsNullOrEmpty(Context.Request.Query["search"])){
+        search = Context.Request.Query["search"];
+        var query = index.Searcher.CreateQuery(IndexTypes.Content);
+    	var queryExecutor = query.NodeTypeAlias("sbn2").And().ManagedQuery(search);
+    	@foreach (var result in _publishedContentQuery.Search(queryExecutor)){
+            var sbn = (ContentModels.Sbn2)result.Content;
+    	    arraySbns.Add(sbn);
+        }
+        if (arraySbns.Count > 0){
+            sbns = arraySbns;
+            numOfSbns = sbns.Count;
+            pageCount = (int)Math.Ceiling((double)numOfSbns / (double)numOfSbnsByPage);
+        }else{
+            @foreach(ContentModels.Sbn2 sb in sbns){
+                var sbReturn = new StringBuilder();     
+                var arrayText = sb.Nombre.ToUpper().Normalize(NormalizationForm.FormD).ToCharArray(); 
+                var txt = "";
+                foreach (char letter in arrayText){     
+                    if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)  
+                        sbReturn.Append(letter);     
+                }
+                txt = sbReturn.ToString();
+                if (txt.IndexOf(search.ToUpper()) != -1){
+                    arraySbns.Add(sb);
+                }else{
+                    sbReturn = new StringBuilder();     
+                    arrayText = sb.Descripcion.ToHtmlString().ToUpper().Normalize(NormalizationForm.FormD).ToCharArray(); 
+                    txt = "";
+                    foreach (char letter in arrayText){     
+                        if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)  
+                            sbReturn.Append(letter);     
+                    }
+                    txt = sbReturn.ToString();
+                    if (txt.IndexOf(search.ToUpper()) != -1){
+                        arraySbns.Add(sb);
+                    }
+                }
+            }
+            if (arraySbns.Count > 0){
+                sbns = arraySbns;
+                numOfSbns = sbns.Count;
+                pageCount = (int)Math.Ceiling((double)numOfSbns / (double)numOfSbnsByPage);
+            }
+        }
+    }
+    
+    if (!string.IsNullOrEmpty(Context.Request.Query["page"])){
+        int.TryParse(Context.Request.Query["page"], out page);
+        if (page <= 0 || page > pageCount){
+            page = 1;
+        }
+    }
+    
+    //Gets the sbns for the current page
+    var pagedSbns = sbns.Skip((page - 1) * numOfSbnsByPage).Take(numOfSbnsByPage).ToList();
+    var defaultImageUrl = "/media/tfqibmtp/huerto3.jpg";
+    
+    <div class="row" style="margin-left:0px;width:108%;">
+        <div class="input-group">
+          <input type="text" id="input-search" class="form-control" placeholder="Buscar SbN" aria-label="Buscar SbNs" value="@search">
+          @if (search != ""){
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button" id="btn-clean"><i class="bi bi-x-circle"></i></button>
+            </div>
+          }
+        </div>
+    </div>
+    
+    @:<section class="section section-casos-de-exito">
+        @:<div class="row row-casos-de-exito">
+            if (pagedSbns.Count != null){
+                @foreach (ContentModels.Sbn2 sbn in pagedSbns){
+                    @if(@sbn.EstadoSbn != "En proceso"){
+                    var image = @sbn.ImagenPortada;
+                    var maxLengthDescription = 180;
+                    var description = @sbn.Descripcion.ToHtmlString().Replace("<p>","").Replace("</p>","");
+                    
+                    if (description.Length > maxLengthDescription){
+                        var idxOfPnt = description.IndexOf(".");
+                        if (idxOfPnt != -1){
+                            maxLengthDescription = idxOfPnt;
+                        }
+                        description = description.Substring(0,maxLengthDescription) + "...";
+                    }
+                    
+                    var srcImage = defaultImageUrl;
+                    if (image != null){
+                        srcImage = image.LocalCrops.Src;
+                    }
+                    
+                    if (counter != 0 && counter % columns == 0){
+                        @:</div>
+                        @:<div class="row row-casos-de-exito">
+                    }
+                    
+                    <div class="col-md-4">
+                        <div class="active card-casos-de-exito">
+                            <img src="@srcImage" class="card-img-casos-de-exito" alt="img-@sbn.Nombre">
+                            <div class="overlay">
+                                <span>
+                                    <div class="card-body card-text-overlay">
+                                    <div>
+                                        <h5 class="card-title text-center">@sbn.Nombre</h5>
+                                        <p class="card-text" style="text-align: center">@description</p>
+                                    </div>                                
+                                </div>
+                                </span>
+                                <div class="cart-download-icon">
+                                    <a href ="/gestionar-sbns/@sbn.UrlSegment/?h=f">
+                                    <i class="bi bi-arrow-bar-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-title-main">
+                                <div class="card-title-center" style="margin: 3px;" >
+                                    <h5 class="card-title text-center">@sbn.Nombre</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    counter++;
+                }
+                }
+            }
+        @:</div>
+        @:<div class="row" style="padding-top:25px;">
+            @:<div class="col-md-12">
+                if (pageCount > 1){
+                    <div class="pagination justify-content-center">
+                        <ul>
+                            <li><a class="@(page == 1 ? "disabled" : string.Empty)" href="?page=@(page-1)">&lt;</a></li>
+                            @for (int p = 1; p < pageCount + 1; p++)
+                            {
+                                <li class="@(p == page ? "active" : string.Empty)">
+                                    <a href="?page=@p">@p</a>
+                                </li>
+                            }
+                            <li><a class="@(page == pageCount ? "disabled" : string.Empty)" href="?page=@(page-1)">&gt;</a></li>
+                        </ul>
+                    </div>
+                }
+            
+            @:</div>
+        @:</div>
+    @:</section>
+    }
+</section>

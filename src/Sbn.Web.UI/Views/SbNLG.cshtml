@@ -1,0 +1,301 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Sbn2>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Core.Services;
+@using Sbn.Cms.Core.PropertyEditors;
+@inject IDataTypeService DataTypeService;
+
+@{
+	Layout = "master.cshtml";
+}
+
+<section class="section container w3-border w3-container w3-round-xlarge" >
+<div style="padding-top: 2rem !important; padding-bottom: .75rem !important; background: #e6e6e6; margin-left: -15px; margin-right: -15px;">
+<h3 style="text-align: center;">Caja de Herramientas</h3>
+</div>
+<div>
+<div class="container">
+<div class="row container-caja-herramientas">
+<div class="col-md-12">
+<div style="padding-top: 2rem !important; padding-bottom: .75rem !important;">
+<h4 style="text-align: left;"><strong>@Model.Nombre</strong></h4>
+<p style="text-align: left;">Sbn aplicable en:</p>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
+<div class="card-body text-center">
+<h3 class="card-title">Área</h3>
+<p><strong>Bosque</strong></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
+<div class="card-body text-center">
+<h3 class="card-title">Desafío</h3>
+<p><strong>Mitigación al CC</strong></p>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card shadow-lg p-3 mb-5 bg-white rounded" style="width: 18rem;">
+<div class="card-body">
+<h3 class="card-title text-center">Problema</h3>
+<p><strong>Pérdida de la biodiversidad</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="row container-caja-herramientas">
+<div class="col-md-12 text-right" style="padding-right: 2rem;"><button class="btn btn-sbn-tools btn-sbn-tools-width">Volver al asistente</button></div>
+</div>
+</div>
+</div>
+</section>
+
+<div class="container-fluid section-toolbox-2" style="padding-top: 1rem !important; margin-top: 2rem;">
+<div class="container" style="padding-top: 2rem !important;">
+<div class="toolbox-border">
+<div class="row">
+<div class="col-2 menu-vertical-tab">
+<div id="v-pills-tab" class="nav flex-column nav-pills" aria-orientation="vertical"><a id="v-pills-home-tab" href="#v-pills-home" class="nav-link active" data-toggle="pill" aria-controls="v-pills-home" aria-selected="true">Inicio</a> <a id="v-pills-profile-tab" href="#v-pills-profile" class="nav-link" data-toggle="pill" aria-controls="v-pills-profile" aria-selected="false">Formular</a> <a id="v-pills-messages-tab" href="#v-pills-messages" class="nav-link" data-toggle="pill" aria-controls="v-pills-messages" aria-selected="false">Planificar</a> <a id="v-pills-settings-tab" href="#v-pills-settings" class="nav-link" data-toggle="pill" aria-controls="v-pills-settings" aria-selected="false">Implementar</a> <a id="v-pills-settings-tab" href="#v-pills-settings" class="nav-link" data-toggle="pill" aria-controls="v-pills-settings" aria-selected="false">Monitorear</a> <a id="v-pills-settings-tab" href="#v-pills-settings" class="nav-link" data-toggle="pill" aria-controls="v-pills-settings" aria-selected="false">Casos de éxito</a> <a id="v-pills-settings-tab" href="#v-pills-settings" class="nav-link" data-toggle="pill" aria-controls="v-pills-settings" aria-selected="false">Glosario</a> <a id="v-pills-settings-tab" href="#v-pills-settings" class="nav-link" data-toggle="pill" aria-controls="v-pills-settings" aria-selected="false">Hoja de ruta</a></div>
+</div>
+<div class="col-10" style="background: #fff;">
+<div id="v-pills-tabContent" class="tab-content">
+<div id="v-pills-home" class="tab-pane fade show active" aria-labelledby="v-pills-home-tab">
+<div class="row">
+    
+<div class="col-md-9">
+<div class="text-center" style="margin-bottom: 2rem; padding-top: 10px;"><img src="/media/mt5dkh5w/02_desafios_scott-warren_baja.jpg?rmode=max&amp;width=500" alt="Restauracion ecosistemas" width="500" height="336.3522798251093" data-udi="umb://media/1f35ff62cef64b698a5c153c6bbb7359" /></div>
+<h5  style="text-align: center;"><strong>@Model.Nombre</strong></h5>
+<div class="row text-center">
+<div class="col-md-5"></div>
+<div class="col-md-2 green-line-separator"></div>
+<div class="col-md-5"></div>
+</div>
+<div class="sbn-text-container2">
+    <p style="text-align: center;">@Model.Descripcion</p>
+</div>
+<h5 style="text-align: center;"><strong>Objetivos</strong></h5>
+<div class="row text-center">
+<div class="col-md-5"></div>
+<div class="col-md-2 green-line-separator"></div>
+<div class="col-md-5"></div>
+</div>
+<div class="sbn-text-container2">
+    <p style="text-align: center;">@Model.Objetivos</p>
+</div>
+<h5 style="text-align: center;"><strong>Objetivos de desarrollo sostenible</strong></h5>
+<div class="row text-center">
+<div class="col-md-5"></div>
+<div class="col-md-2 green-line-separator" ></div>
+<div class="col-md-5"></div>
+</div>
+
+       
+        @{
+            var listIdOds = new List<String>();
+            foreach (var goal in @Model.Ods){
+                if (@goal.IndexOf("-") != -1){
+                    listIdOds.Add(@goal.Split("-")[0]);
+                }
+            }
+            
+        }
+           
+ @{
+                
+            var x = 1;
+            var classImg = "";
+            
+            <div class="panel-ods sdg">
+            @for(var i = 0; i < 3; i++){
+                <div class="row">
+                    @for(var j = 0; j < 6; j++){
+                        var y = "0" + x.ToString();
+                        y = y.Substring(y.Length-2,2);
+                        classImg = "class='abc'";
+                        if (!listIdOds.Contains(x.ToString())){
+                            classImg = "class=img-gray";
+                        }
+                        var src = "/media/assets/img/ods/s-web-goal-" + y + ".png";
+                        <div class="col-md-2 p-2">
+                            <img width="100%" height="100%" @classImg src="@src" alt="SDG icon" >
+                        </div>
+                        x++;
+                        if (x==18) break;
+                    }
+                </div>
+            }         
+            </div>
+        }
+        
+</div>
+<div class="col-md-3 vline-right-panel">
+<div class="text-center toolbox-right-panel"><strong>Aproximación a los servicios ecosistémicos</strong>
+<div class="calification-right-panel">
+<div class="calification-check"><img src="/media/assets/img/green-checkbox.png" alt="calificacion ok" width="36" />
+<p>Calidad del hábitat</p>
+</div>
+<div class="calification-check"><img src="/media/assets/img/orange-checkbox.png" alt="calificacion nok" width="36" />
+<p>Provisión de agua anual y estacional</p>
+</div>
+<div class="calification-check"><img src="/media/assets/img/orange-checkbox.png" alt="calificacion nok" width="36" />
+<p>Retención de sedimentos y nutrientes</p>
+</div>
+<div class="calification-check"><img src="/media/assets/img/orange-checkbox.png" alt="calificacion nok" width="36" />
+<p>Almacenamiento de carbono</p>
+</div>
+<div class="calification-check"><img src="/media/assets/img/orange-checkbox.png" alt="calificacion nok" width="36" />
+<p>Producción de cultivos</p>
+</div>
+<div class="calification-check"><img src="/media/assets/img/boton-play-sbn.png" alt="calificacion play" width="80" /></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row text-center" style="padding-top: 2rem; padding-bottom: 1rem; background: #e6e6e6;">
+<div class="col-md-12">
+<h5>Si usted desea conocer más sobre los ODS visite el siguiente enlace:</h5>
+<button class="btn btn-sbn-white">ir a enlace</button></div>
+</div>
+</div>
+<div id="v-pills-profile" class="tab-pane fade" aria-labelledby="v-pills-profile-tab">...</div>
+<div id="v-pills-messages" class="tab-pane fade" aria-labelledby="v-pills-messages-tab">...</div>
+<div id="v-pills-settings" class="tab-pane fade" aria-labelledby="v-pills-settings-tab">
+<div class="col-md-12">
+<h5 style="text-align: center; padding-top: 2rem;"><strong>Pasos e instrumentos sugeridos en la fase de Implementación de esta SbN</strong></h5>
+<div class="row text-center ">
+<div class="col-md-5"></div>
+<div class="col-md-2" style="border-top: solid 2px; color: #bad405; margin-top: 1rem; margin-bottom: 1.2rem;"></div>
+<div class="col-md-5"></div>
+</div>
+<div class="sbn-color-box col-md-12">
+<div class="row">
+<div class="col-md-2" style="padding-top: 2rem;">
+<p>Paso 1</p>
+</div>
+<div class="col-md-6 vline-right-panel" style="font-size: 18px;">
+<p>Guía 1 Ejecución de obras</p>
+<div style="font-size: 15px; font-weight: normal;">
+<p>Definición de la guía</p>
+</div>
+</div>
+<div class="col-md-4" style="padding-top: 2rem;"><button class="btn btn-sbn-tools-3 btn-sbn-tools-width">Descargar Guía</button></div>
+</div>
+</div>
+<div class="sbn-color-box2 col-md-12">
+<div class="row">
+<div class="col-md-2" style="padding-top: 2rem;">
+<p>Paso 2</p>
+</div>
+<div class="col-md-6 vline-right-panel" style="font-size: 18px;">
+<p>Identificación de beneficiarios</p>
+<div style="font-size: 15px; font-weight: normal;">
+<p>Definición de la etapa</p>
+</div>
+</div>
+<div class="col-md-4" style="padding-top: 2rem;"><button class="btn btn-sbn-tools-4 btn-sbn-tools-width">Descargar Guía</button></div>
+</div>
+</div>
+<h5 style="text-align: center; padding-top: 2rem;"><strong>Diseños y planos de construcción sugeridos</strong></h5>
+<div class="row text-center ">
+<div class="col-md-5"></div>
+<div class="col-md-2" style="border-top: solid 2px; color: #bad405; margin-top: 1rem; margin-bottom: 1.2rem;"></div>
+<div class="col-md-5"></div>
+</div>
+<div class="col-md-12">
+<div class="row">
+<div class="col-md-2"><img src="/media/assets/img/diseno-1.png" alt="Diseño1" width="100" /></div>
+<div class="col-md-6">
+<h5><strong>Diseño 1</strong></h5>
+<div style="font-size: 15px; font-weight: normal;">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh ipsum dolor sit amet,</p>
+</div>
+</div>
+<div class="col-md-4" style="padding-top: 2rem;"><button class="btn btn-sbn-tools-4 btn-sbn-tools-width">Descargar Documento</button></div>
+<div class=" col-md-12 sbn-separador"></div>
+</div>
+</div>
+<div class="col-md-12">
+<div class="row">
+<div class="col-md-2"><img src="/media/assets/img/diseno-1.png" alt="Diseño1" width="100" /></div>
+<div class="col-md-6">
+<h5><strong>Diseño 1</strong></h5>
+<div style="font-size: 15px; font-weight: normal;">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh ipsum dolor sit amet,</p>
+</div>
+</div>
+<div class="col-md-4" style="padding-top: 2rem;"><button class="btn btn-sbn-tools-4 btn-sbn-tools-width">Descargar Documento</button></div>
+<div class=" col-md-12 sbn-separador"></div>
+</div>
+</div>
+<div class="col-md-12">
+<div class="row">
+<div class="col-md-2"><img src="/media/assets/img/diseno-1.png" alt="Diseño1" width="100" /></div>
+<div class="col-md-6">
+<h5><strong>Diseño 1</strong></h5>
+<div style="font-size: 15px; font-weight: normal;">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh ipsum dolor sit amet,</p>
+</div>
+</div>
+<div class="col-md-4" style="padding-top: 2rem;"><button class="btn btn-sbn-tools-4 btn-sbn-tools-width">Descargar Documento</button></div>
+<div class=" col-md-12 sbn-separador"></div>
+</div>
+</div>
+<h5 style="text-align: center; padding-top: 2rem;"><strong>Información de los técnicos/profesionales requeridos para esta fase</strong></h5>
+<div class="row text-center ">
+<div class="col-md-5"></div>
+<div class="col-md-2" style="border-top: solid 2px; color: #bad405; margin-top: 1rem; margin-bottom: 1.2rem;"></div>
+<div class="col-md-5"></div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-4">
+<div class="card card-text-impl-sbn"><span class="card-margin-top-sbn"></span>
+<div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image"><img src="/media/assets/img/perfil-sbn.png" alt="Perfil 1" /></div>
+<div class="card-body">
+<h5 class="card-title text-center"><strong>Perfil 1</strong></h5>
+<p class="card-text text-center ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="div-btn-card-impl-sbn"><button class="btn-card-impl-sbn">Leer más</button></div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card card-text-impl-sbn"><span class="card-margin-top-sbn"></span>
+<div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image"><img src="/media/assets/img/perfil-sbn.png" alt="Perfil 2" /></div>
+<div class="card-body">
+<h5 class="card-title text-center"><strong>Perfil 2</strong></h5>
+<p class="card-text text-center ">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="div-btn-card-impl-sbn"><button class="btn-card-impl-sbn">Leer más</button></div>
+</div>
+</div>
+</div>
+<div class="col-md-4">
+<div class="card card-text-impl-sbn"><span class="card-margin-top-sbn"></span>
+<div class="position-relative rounded-circle overflow-hidden mx-auto custom-circle-image"><img src="/media/assets/img/perfil-sbn.png" alt="Perfil 3" /></div>
+<div class="card-body">
+<h5 class="card-title text-center"><strong>Perfil 3</strong></h5>
+<p class="card-text text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="div-btn-card-impl-sbn"><button class="btn-card-impl-sbn">Leer más</button></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h5 style="text-align: center; padding-top: 3rem;"><strong>La implementación de la SbN requiere acuerdos con diferentes actores para lo cual, sugerimos tener en cuenta la siguiente plantilla</strong></h5>
+<div class="row text-center ">
+<div class="col-md-5"></div>
+<div class="col-md-2" style="border-top: solid 2px; color: #bad405; margin-top: 1rem; margin-bottom: 1.2rem;"></div>
+<div class="col-md-5"></div>
+</div>
+<div style="text-align: center;"><img src="/media/assets/img/lineamiento-sbn.png" alt="Lineamiento" /></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>

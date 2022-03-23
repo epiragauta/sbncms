@@ -1,0 +1,7 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Test_campo>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@{
+	Layout = null;
+}
+@Model.Value("nombre", fallback: Fallback.ToAncestors)

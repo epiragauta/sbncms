@@ -1,0 +1,246 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.AsistenteSeleccionSbN>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Core.Services;
+@using Sbn.Cms.Core.PropertyEditors;
+@using Newtonsoft.Json;
+@inject IDataTypeService DataTypeService;
+@{
+	Layout = "master.cshtml";
+}
+@section Scripts {
+     <script type="text/javascript" src="@Url.Content("~/scripts/sbn-asistente-seleccion.js")"></script>
+}
+<div class="casos-de-exito-background-header" style="z-index:-1;">
+    <div class="casos-de-exito-background-header-overcolor"></div>
+</div>
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding:1rem 2rem;" >
+    <section class="section container  ">
+        
+        <div class="text-center casos-de-exito-header"style="color:#fff !important ">
+            <h2 style="color:#fff !important;">Asistente para seleccionar SbN</h2>
+            <p>Se debe seleccionar por lo menos uno de los tres</p>
+        </div>
+        <div class="row curved-border" style="background:#fefefe;padding:0.5rem;">
+            <div class="col-md-4 d-none d-sm-none d-md-block title-area-aplicacion"style="padding-bottom:6px; padding-top:7px; text-align:center;">
+                <strong>ÁREA DE IMPLEMENTACIÓN</strong><span id="clearImplementacion" style="display:none;padding-left:5px;"><i class="bi bi-x-circle bi-search"></i></span>
+            </div>
+            <div class="col-md-4 d-none d-sm-none d-md-block title-desafio" style="padding-bottom:6px; padding-top:7px; text-align:center;">
+                <strong>DESAFÍO</strong><span id="clearDesafio"style="display:none;padding-left:5px;"><i class="bi bi-x-circle bi-search"></i></span>
+            </div>
+            <div class="col-md-4 d-none d-sm-none d-md-block title-problema" style="padding-bottom:6px; padding-top:7px; text-align:center;">
+                <strong>PROBLEMA</strong><span id="clearProblema" style="display:none;padding-left:5px;"><i class="bi bi-x-circle bi-search"></i></span>
+            </div>
+            <div class="col-md-12 sbn-title-area-aplicacion d-md-none d-lg-none text-center" >
+                <strong>ÁREA DE IMPLEMENTACIÓN</strong>
+            </div>
+            <div class="col-md-4 sbn-filters" >
+            @{
+                var aplicationArea =  (ValueListConfiguration)DataTypeService.GetDataType(1261).Configuration;
+                var info = Sbn.Content(1107).Children.OrderBy(x => ((ContentModels.Recurso)x).Autor.Trim()).ToList();
+                foreach (var item in aplicationArea.Items)
+                {
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="area-aplicacion" id="@item.Value" value="@item.Value">
+                      <label class="form-check-label" for="@item.Value">
+                        @item.Value
+                    </label>
+                </div>        
+                }
+            }
+            </div>
+            <div class="col-md-12 sbn-title-area-aplicacion d-md-none d-lg-none text-center"><strong>DESAFÍO</strong></div>
+            <div class="col-md-4 sbn-filters">
+            @{
+                var challenge =  (ValueListConfiguration)DataTypeService.GetDataType(-43).Configuration;
+                foreach (var item in challenge.Items)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="desafio" id="@item.Value" value="@item.Value">
+                          <label class="form-check-label" for="@item.Value">
+                            @item.Value
+                        </label>
+                    </div>     
+                }
+            }
+            </div>
+            <div class="col-md-12 sbn-title-area-aplicacion d-md-none d-lg-none text-center"><strong>PROBLEMA</strong></div>
+            <div class="col-md-4 sbn-filters">
+                
+            @{
+                var issues =  (ValueListConfiguration)DataTypeService.GetDataType(1157).Configuration;
+                foreach (var item in issues.Items)
+                {
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="problema" id="@item.Value" value="@item.Value">
+                          <label class="form-check-label" for="@item.Value">
+                            @item.Value
+                        </label>
+                    </div>     
+                }
+            }
+            </div>
+        </div>
+        
+        <div class="row curved-border" style="background:#BAD405;padding:0.5rem;margin-top: 0.5rem;margin-bottom: 0.5rem;">
+            <div>
+                <h4>SbN recomendadas</h4>
+            </div>
+        </div>
+        <div class="row curved-border" style="background:#fefefe;padding:0.5rem;">
+            <div >
+                @{
+                    var startNode = Sbn.Content(1251); // ID Sbn
+                    if (startNode == null){
+                          <div class="study-cases">
+                              <h1>No hay SbN's en este momento, intente después.</h1>
+                          </div>
+                          return;
+                    }
+                    
+                    //Gets all SbN to calculate pages
+                    var sbns = startNode.Children.Where(x => ((ContentModels.Sbn2)x).EstadoSbn != "En proceso").OrderBy(x => x.CreateDate).ToList();
+                    var numOfSbns = sbns.Count;
+                    JsonSerializer serializer = new JsonSerializer();
+                    var classSbnVisibility = "";
+                    int counter = 0;
+                    @foreach (ContentModels.Sbn2 sbn in sbns){
+                        var sbnChallenges = new List<String>();
+                        var sbnIssues = new List<String>();
+                        var sbnAreas = new List<String>();
+                        foreach (var soporte in @sbn.SoporteBibliografico){
+                            var recurso = soporte.ReferenciaBibliografica;
+                            if (recurso != null){
+                                foreach (var desafio in @soporte.Desafio){
+                                    if (!sbnChallenges.Contains(desafio)){
+                                        sbnChallenges.Add(desafio);
+                                    }
+                                }
+                                foreach (var problema in @soporte.Problema){
+                                    if (!sbnIssues.Contains(problema)){
+                                        sbnIssues.Add(problema);
+                                    }
+                                }
+                                foreach (var area in @soporte.AreaAplicacion){
+                                    if (!sbnAreas.Contains(area)){
+                                        sbnAreas.Add(area);
+                                    }
+                                }
+                            }
+                            classSbnVisibility = "";
+                            //if (sbnChallenges.Count==0 && sbnIssues.Count==0 && sbnAreas.Count==0){
+                            classSbnVisibility="sbn-hide";
+                            //}
+                        }
+                        string outChallenges = JsonConvert.SerializeObject(sbnChallenges);
+                        string outIssues = JsonConvert.SerializeObject(sbnIssues);
+                        string outAreas = JsonConvert.SerializeObject(sbnAreas);
+                        var maxLengthDescription = 280;
+                        var description = @sbn.Descripcion.ToHtmlString().Replace("<p>","").Replace("</p>","");
+                        int biblioCount= 0;
+                        int counterBiblio = 0;
+                        var sbnBibliografia = sbn.SoporteBibliografico.DistinctBy(x => ((ContentModels.Recurso)x.ReferenciaBibliografica).Autor.Trim() + ((ContentModels.Recurso)x.ReferenciaBibliografica).Year + ((ContentModels.Recurso)x.ReferenciaBibliografica).Nombre).OrderBy(x => ((ContentModels.Recurso)x.ReferenciaBibliografica).Autor.Trim()).ToList(); 
+                        //.OrderBy(x => (((ContentModels.Recurso)((TipoElementoRefBiblio)x).ReferenciaBibliografica).Autor).ToList();
+                        
+                        
+                        if (description.Length > maxLengthDescription){
+                            var idxOfPnt = description.IndexOf(".");
+                            if (idxOfPnt != -1){
+                                maxLengthDescription = idxOfPnt;
+                            }
+                            description = description.Substring(0,maxLengthDescription) + "...";
+                        }
+                        
+                        <div style="display:none;" id="msg-without-sbn">No existen soluciones para el filtro seleccionado.</div>
+                        <div class="sbn-filter-title @classSbnVisibility" challenges='@outChallenges' issues='@outIssues' areas='@outAreas'>
+                            <div class="row" style="background: #cecdcd;margin: -8px;padding-left: 0.5rem;margin-bottom: 1rem;padding-top: 0.2rem;">
+                                <h5 style=""><strong>@sbn.Nombre</strong></h5>
+                            </div>
+                            <div ><p>@description </p></div> 
+                            <div class="text-right"><a href="/gestionar-sbns/@sbn.UrlSegment">
+                                <button class="btn btn-sbn-tools btn-sbn-tools-width" style="margin-right: 1rem;"> Ver caja de herramientas </button></a>
+                            </div>
+                            <div><br></div>
+                            <div class="mb-4">
+                                <p><strong>Se encontraron las siguientes referencias bibliográficas que soportan esta recomendación:</strong></p>
+                                @foreach (var soporte in sbnBibliografia){
+                                    var recurso = soporte.ReferenciaBibliografica;
+                                    if (recurso != null){
+                                        var sbnChallenges_ = new List<String>();
+                                        var sbnIssues_ = new List<String>();
+                                        var sbnAreas_ = new List<String>(); 
+                                        foreach (var desafio in @soporte.Desafio){
+                                            if (!sbnChallenges_.Contains(desafio)){
+                                                sbnChallenges_.Add(desafio);
+                                            }
+                                        }
+                                        foreach (var problema in @soporte.Problema){
+                                            if (!sbnIssues_.Contains(problema)){
+                                                sbnIssues_.Add(problema);
+                                            }
+                                        }
+                                        foreach (var area in @soporte.AreaAplicacion){
+                                            if (!sbnAreas_.Contains(area)){
+                                                sbnAreas_.Add(area);
+                                            }
+                                        }
+                                        string outChallenges_ = JsonConvert.SerializeObject(sbnChallenges_);
+                                        string outIssues_ = JsonConvert.SerializeObject(sbnIssues_);
+                                        string outAreas_ = JsonConvert.SerializeObject(sbnAreas_);
+                                        
+                                        //var info = Sbn.Content(1107).Children.OrderBy(x => x.Value<string>("autor").Trim()).ToList(); // Bibliografía
+                                        //var info = Sbn.Content(1107).Children.OrderBy(x => x.CreateDate).ToList();
+                                        
+                                        <div >
+                                            <div>
+                                                @foreach(ContentModels.Recurso contenido in info){
+                                                    biblioCount = counterBiblio;
+                                                    
+                                                    if(@counterBiblio <6){
+                                                        if(@recurso.Id == @contenido.Id){
+                                                        counterBiblio++;
+                                                        <ul style="padding:0rem 2rem;text-align: justify;margin-bottom:2px;">
+                                                            <li class="sbn-bibliografia sbn-resource-hide" challenges='@outChallenges_' issues='@outIssues_' areas='@outAreas_'> @contenido.Autor (@contenido.Year).  @contenido.Nombre. 
+                                                                <strong><a href="@contenido.Documento.Url" target="_blank" style="color:#0a3f0a !important;"> Ver recurso </a></strong>
+                                                            </li>
+                                                        </ul>
+                                                        }
+                                                    }else if(@counterBiblio >= 6){
+                                                        if(@recurso.Id == @contenido.Id){
+                                                            <div class="collapse" id="RefenreciasBio_@counter" >
+                                                                <ul style="padding:0rem 2rem;text-align: justify;margin-bottom:2px;">
+                                                                    <li class="sbn-bibliografia sbn-resource-hide" challenges='@outChallenges_' issues='@outIssues_' areas='@outAreas_'> @contenido.Autor (@contenido.Year). @contenido.Nombre. 
+                                                                        <strong><a href="@contenido.Documento.Url" target="_blank" style="color:#0a3f0a !important;"> Ver recurso </a></strong>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                    @{
+                                        if(@biblioCount >=6){
+                                            <div class="text-right">
+                                                <p>
+                                                    <button class=" btn btn-sbn-tools btn-sbn-tools-width " type="button" data-toggle="collapse" data-target="#RefenreciasBio_@counter" aria-expanded="false" aria-controls="RefenreciasBio_@counter" style="margin-right: 1rem;">
+                                                        Ver más referencias bibliograficas
+                                                    </button>
+                                                </p>
+                                            </div>
+                                        }
+                                        counter++;
+                                        
+                                    }
+                                
+                            </div>
+                        </div>
+                        
+                    }   
+                }
+            </div>
+        </div>
+    </section>
+</section>

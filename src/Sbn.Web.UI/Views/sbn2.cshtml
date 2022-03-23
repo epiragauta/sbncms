@@ -1,0 +1,1320 @@
+﻿@using Sbn.Cms.Web.Common.PublishedModels;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.Sbn2>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+@using Sbn.Cms.Core.Models;
+@using Sbn.Cms.Core.Services;
+@using Sbn.Cms.Core.PropertyEditors;
+@using System.Collections;
+@using System.Reflection;
+@using System.Collections.Generic;
+@inject IDataTypeService DataTypeService;
+@{
+	Layout = "master.cshtml";
+	var clsHeaderSbn = "show-header-sbn";
+
+    if (!string.IsNullOrEmpty(Context.Request.Query["h"])){
+        clsHeaderSbn = Context.Request.Query["h"] == "f" ? "hide-header-sbn" : "show-header-sbn";
+    }
+}
+@section Scripts {
+     <script type="text/javascript" src="@Url.Content("~/scripts/sbn-detalle.js")"></script>
+}
+
+<section class="section container w3-border w3-container w3-round-xlarge d-none d-sm-none d-md-none d-lg-block" style="line-height: 0.5;">
+  <div style="padding-top: 1rem !important; background: #e6e6e6; margin-left: -15px; margin-right: -15px;">
+    <h3 style="text-align: center;">Caja de Herramientas</h3>
+    <br><br><br>
+  </div>
+  <div>
+    <div class="container">
+      <div class="row container-caja-herramientas mb-3">
+        <div class="col-md-12">
+          <div>
+            <h3 style="text-align: center;">
+              <strong>@Model.Nombre</strong>
+            </h4>
+            <p style="text-align: left;" class="@clsHeaderSbn">Según su selección en el asistente:</p>
+          </div>
+        </div>
+        <div class="row @clsHeaderSbn">
+            <div class="col-md-4">
+              <div class="card shadow-lg p-2 bg-white rounded" style="width: 18rem;height:7rem; border-radius:0.5rem !important;">
+                <div class="card-body text-center" style="padding: 0.25rem;">
+                    <h5 class="card-title"><strong>ÁREA DE IMPLEMENTACIÓN</strong></h5>
+                    <p id="area" style="font-size: 15px;line-height: 1.5;font-weight:500;">areas</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-lg p-2 bg-white rounded" style="width: 18rem;height:7rem; border-radius:0.5rem !important;">
+                <div class="card-body text-center" style="padding: 0.25rem;">
+                    <h5 class="card-title"><strong>DESAFÍO</strong></h5>
+                    <p id="desafio" style="font-size: 15px;line-height: 1.5;font-weight:500;">desafios</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card shadow-lg p-2 bg-white rounded" style="width: 18rem;height:7rem; border-radius:0.5rem !important;">
+                <div class="card-body text-center" style="padding: 0.25rem;">
+                    <h5 class="card-title "><strong>PROBLEMA</strong></h5>
+                    <p id="problema" style="font-size: 15px;line-height: 1.5;font-weight:500;">problemas</p>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row container-caja-herramientas @clsHeaderSbn">
+        <div class="col-md-12 text-right" style="padding-right: 2rem;">
+            <a href="/asistente-seleccion-sbn/">
+                <button class="btn btn-sbn-tools btn-sbn-tools-width">Volver al asistente</button>
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section container w3-border w3-container w3-round-xlarge d-md-block d-lg-none" style="line-height: 0.5;">
+  <div style="padding-top: 1rem !important; background: #e6e6e6; margin-left: -15px; margin-right: -15px;">
+    <h3 style="text-align: center;">Caja de Herramientas</h3>
+    <br><br><br>
+  </div>
+    <div>
+        <div class="container-caja-herramientas mb-3" style="text-align: center;">
+            <div>
+                <h3 >
+                  <strong>@Model.Nombre</strong>
+                </h4>
+                <p  class="@clsHeaderSbn sbn-card-display">Según su selección en el asistente:</p>
+                <div class=" @clsHeaderSbn sbn-card-display" >
+                    <div class="card shadow-lg p-2 bg-white rounded sbn-card-desafios-size">
+                        <div class="card-body text-center" style="padding: 0.25rem;">
+                            <h5 class="card-title"><strong>ÁREA DE IMPLEMENTACIÓN</strong></h5>
+                            <p id="area" style="font-size: 15px;line-height: 1.5;font-weight:500;">areas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" @clsHeaderSbn sbn-card-display" >
+                    <div class="card shadow-lg p-2 bg-white rounded sbn-card-desafios-size">
+                        <div class="card-body text-center" style="padding: 0.25rem;">
+                            <h5 class="card-title"><strong>DESAFÍO</strong></h5>
+                            <p id="desafio" style="font-size: 15px;line-height: 1.5;font-weight:500;">desafios</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" @clsHeaderSbn sbn-card-display" >
+                    <div class="card shadow-lg p-2 bg-white rounded sbn-card-desafios-size">
+                        <div class="card-body text-center" style="padding: 0.25rem;">
+                            <h5 class="card-title "><strong>PROBLEMA</strong></h5>
+                            <p id="problema" style="font-size: 15px;line-height: 1.5;font-weight:500;">problemas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class=" @clsHeaderSbn sbn-card-display" >
+                    <a href="/asistente-seleccion-sbn/">
+                        <button class="btn btn-sbn-tools btn-sbn-tools-width">Volver al asistente</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<div class="container-fluid section-toolbox-2 parallax" style="padding-top: 1rem !important; margin-top: 2rem;padding-right: 0px;padding-left: 0px;">
+    <div class="container" style="padding-top: 1rem !important;">
+        <div class="toolbox-border">
+            <div class="row" style="margin-left: -0.5rem !important;margin-right: 0px !important;width:100%">
+                 <div class="col-2 menu-vertical-tab d-none d-sm-none d-md-none d-lg-block" >
+                    <div id="v-pills-tab" class="nav flex-column nav-pills" aria-orientation="vertical">
+                        <a id="v-pills-home-tab" href="#v-pills-home" class="nav-link active" data-toggle="pill" aria-controls="v-pills-home" aria-selected="true">Inicio</a> 
+                        <a id="v-pills-preparar-tab" href="#v-pills-preparar" class="nav-link" data-toggle="pill" aria-controls="v-pills-preparar" aria-selected="false">Preparación</a> 
+                        <a id="v-pills-formular-tab" href="#v-pills-formular" class="nav-link" data-toggle="pill" aria-controls="v-pills-formular" aria-selected="false">Formulación</a> 
+                        <a id="v-pills-planificar-tab" href="#v-pills-planificar" class="nav-link" data-toggle="pill" aria-controls="v-pills-planificar" aria-selected="false">Planificación</a> 
+                        @if (@Model.PasosImplementacion != null){<a id="v-pills-implementar-tab" href="#v-pills-implementar" class="nav-link" data-toggle="pill" aria-controls="v-pills-implementar" aria-selected="false">Implementación</a>} 
+                        <a id="v-pills-seguimiento-tab" href="#v-pills-seguimiento" class="nav-link" data-toggle="pill" aria-controls="v-pills-seguimiento" aria-selected="false">Seguimiento</a> 
+                        <a id="v-pills-aprendizaje-tab" href="#v-pills-aprendizaje" class="nav-link" data-toggle="pill" aria-controls="v-pills-aprendizaje" aria-selected="false">Aprendizaje</a> 
+                        @if (@Model.CasosDeExito != null){<a id="v-pills-caso-exito-tab" href="#v-pills-caso-exito" class="nav-link" data-toggle="pill" aria-controls="v-pills-caso-exito" aria-selected="false">Casos de éxito</a>} 
+                        @if (@Model.Glosario != null){<a id="v-pills-glosario-tab" href="#v-pills-glosario" class="nav-link" data-toggle="pill" aria-controls="v-pills-glosario" aria-selected="false">Glosario</a>}
+                        <a id="v-pills-hoja-de-ruta-tab" href="#v-pills-hoja-de-ruta" class="nav-link" data-toggle="pill" aria-controls="v-pills-hoja-de-ruta" aria-selected="false">Hoja de ruta</a>
+                    </div>
+                </div>
+                <div class="col-2 menu-vertical-tab d-md-block d-lg-none">
+                    <div id="v-pills-tab" class="nav flex-column nav-pills" aria-orientation="vertical"  >
+                        <a id="v-pills-home-tab" href="#v-pills-home" class="nav-link active text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-house" style="font-size:30px"></i></a> 
+                        <a id="v-pills-preparar-tab" href="#v-pills-preparar" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-preparar" aria-selected="false"><img src="/media/wc0mfti1/seguimiento-n.png" alt="Actividad1" width="40" /></a> 
+                        <a id="v-pills-formular-tab" href="#v-pills-formular" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-formular" aria-selected="false"><img src="/media/cuvnsyf1/formulacion-n.png" alt="Actividad1" width="40" /></a> 
+                        <a id="v-pills-planificar-tab" href="#v-pills-planificar" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-planificar" aria-selected="false"><img src="/media/ud2bqgsj/planificacion-n.png" alt="Actividad1" width="40" /></a> 
+                        @if (@Model.PasosImplementacion != null){<a id="v-pills-implementar-tab" href="#v-pills-implementar" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-implementar" aria-selected="false"><img src="/media/fnbf4jci/implementacion-n.png" alt="Actividad1" width="40" /></a>} 
+                        <a id="v-pills-seguimiento-tab" href="#v-pills-seguimiento" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-seguimiento" aria-selected="false"><img src="/media/wc0mfti1/seguimiento-n.png" alt="Actividad1" width="40" /></a>
+                        <a id="v-pills-aprendizaje-tab" href="#v-pills-aprendizaje" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-aprendizaje" aria-selected="false"><img src="/media/dwlab45b/aprendizaje-n.png" alt="Actividad1" width="40" /></a> 
+                        @if (@Model.CasosDeExito != null){<a id="v-pills-caso-exito-tab" href="#v-pills-caso-exito" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-caso-exito" aria-selected="false"><i class="bi bi-graph-up-arrow" style="font-size:30px"></i></a>} 
+                        @if (@Model.Glosario != null){<a id="v-pills-glosario-tab" href="#v-pills-glosario" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-glosario" aria-selected="false"><i class="bi bi-list-ul" style="font-size:30px"></i></a>}
+                        <a id="v-pills-hoja-de-ruta-tab" href="#v-pills-hoja-de-ruta" class="nav-link text-center sbn-nav-bar-responsive" data-toggle="pill" aria-controls="v-pills-hoja-de-ruta" aria-selected="false"><i class="bi bi-map" style=""style="font-size:30px"></i></a>
+                    </div>
+                </div>
+                <div class="col-10" style="background: #fff;padding-right: 25px !important;">
+                    <div id="v-pills-tabContent" class="tab-content">
+                        <div id="v-pills-home" class="tab-pane fade show active" aria-labelledby="v-pills-home-tab">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="text-center sbn-imagen-size">
+                                        <img src="@Model.ImagenPortada.LocalCrops.Src" alt="@Model.Name" width="100%" height="100%"/>
+                                    </div>
+                                    <h5  style="text-align: center;"><strong>@Model.Nombre</strong></h5>
+                                    <div class="row text-center">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator"></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                                    <div class="sbn-text-container2">
+                                        <p style="text-align: center;">@Model.Descripcion</p>
+                                    </div>
+                                    <h5 style="text-align: center;"><strong>Objetivos</strong></h5>
+                                    <div class="row text-center">
+                                      <div class="col-md-5"></div>
+                                      <div class="col-md-2 green-line-separator"></div>
+                                      <div class="col-md-5"></div>
+                                    </div>
+                                    <div class="sbn-text-container2">
+                                        <p style="text-align: center;">@Model.Objetivos</p>
+                                    </div>
+                                    <h5 style="text-align: center;"><strong>Objetivos de Desarrollo Sostenible</strong></h5>
+                                    <div class="row text-center">
+                                      <div class="col-md-5"></div>
+                                      <div class="col-md-2 green-line-separator" ></div>
+                                      <div class="col-md-5"></div>
+                                    </div>
+                                  @{
+                                      var listIdOds = new List<String>();
+                                      var listODS = new List<String>();
+                                      foreach (var goal in @Model.Ods){
+                                          if (@goal.IndexOf("-") != -1){
+                                              listIdOds.Add(@goal.Split("-")[0]);
+                                          }
+                                      }
+                                  }
+                                  @{
+                                      var x = 1;
+                                      var classImg = "";
+                                      var showODS = true;
+                                      int numMd = listIdOds.Count <= 6 ? 6-listIdOds.Count : listIdOds.Count <= 12 ? 12-listIdOds.Count : listIdOds.Count <= 18 ? 18-listIdOds.Count : listIdOds.Count ;
+                                      int countEnableODS = listIdOds.Count;
+                                      
+                                      <div class="panel-ods sdg">
+                                      
+                                      @for(var i = 0; i < 3; i++){
+                                          <div class="row">
+                                              @for(var j = 0; j < 6; j++){
+                                                  var y = "0" + x.ToString();
+                                                  y = y.Substring(y.Length-2,2);
+                                                  showODS = true;
+                                                  var src = "/media/assets/img/ods/s-web-goal-" + y + ".png";
+                                                  if (!listIdOds.Contains(x.ToString())){
+                                                      showODS = false;
+                                                  }else{
+                                                    listODS.Add(src);
+                                                  }
+                                                  x++;
+                                              }
+                                          </div>
+                                      }
+                                        <div class="row">
+                                        @for(var i = 0; i < listIdOds.Count; i++){
+                                          <div class="col-md-2 p-2 text-center sbn-desafio-img">
+                                              <img width="100%" height="100%" src="@listODS[i]" alt="SDG icon" >
+                                          </div>
+                                        }
+                                        
+                                        @if(numMd > 0){
+                                          var md=numMd+1;
+                                          <div class="col-md-@md p-2"></div>
+                                        }
+                                        
+                                        
+                                        </div>
+                                      </div>
+                                  }
+                                <div class="row text-center" style="padding-top: 1rem; padding-bottom: 1rem; background: #e6e6e6;">
+                                    <div class="col-md-12">
+                                        <p>Si usted desea conocer más sobre los ODS visite el siguiente enlace:</p>
+                                        <a href="https://www.un.org/sustainabledevelopment/es/objetivos-de-desarrollo-sostenible/" target="_blank"> <button class="btn btn-sbn-white">ir a enlace</button></a>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-3 vline-right-panel" style="margin-bottom:0;">
+                                    <div class="text-center toolbox-right-panel"><strong>Aproximación a los servicios ecosistémicos</strong>
+                                        <div class="calification-right-panel">
+                                            @{
+                                                var excludeProps = new string[]{"ContentType", "Key", "Properties"};
+                                                Dictionary<string, string> list = new Dictionary<string, string>();
+                                                list.Add("AlmacenamientoCarbono","Almacenamiento de carbono");
+                                                list.Add("BellezaEscenica","Belleza Escenica");
+                                                list.Add("BienestarHumano","Bienestar humano");
+                                                list.Add("CalidadHabitat","Calidad de hábitat");
+                                                list.Add("CiclajeDeNutrientesYfertilidadDelSuelo","Ciclaje de Nutrientes y fertilidad del suelo");
+                                                list.Add("ControlDeInundaciones","Control de inundaciones");
+                                                list.Add("ControlDeLaErosion","Control de la erosión");
+                                                list.Add("DiversidadDeEspeciesDeFaunaYflora","Diversidad de especies de fauna y flora");
+                                                list.Add("IntercambioGenetico","Intercambio genético");
+                                                list.Add("Polinizacion","Polinización");
+                                                list.Add("PracticasCulturales","Prácticas culturales");
+                                                list.Add("ProductosMedicinales","Productos medicinales");
+                                                list.Add("ProvisionAgua","Provisión de agua");
+                                                list.Add("ProvisionAlimentos","Provisión de alimentos");
+                                                list.Add("ProvisionDeHabitat","Provisión de Habitat");
+                                                list.Add("ProvisionDeMadera","Provisión de madera");
+                                                list.Add("ProvisionDeProductosNoMaderables","Provision de productos no maderables");
+                                                list.Add("PurificacionDelAgua","Purificación del agua");
+                                                list.Add("PurificacionDelAire","Purificación del aire");
+                                                list.Add("RecreacionTurismo","Recreación y Turismo");
+                                                list.Add("RegulacionDelClima","Regulacion del clima");
+                                                list.Add("RegulacionHidrica","Regulacion hídrica");
+                                                list.Add("2","green");
+                                                list.Add("1","orange");
+                                                //Dictionary<int, string> serviciosOrdenados = new Dictionary<int, string>();
+                                                foreach (var prop in @Model.Servicios.GetType().GetProperties()){
+                                                    var value = @prop.GetValue(@Model.Servicios).ToString();
+                                                    if (Array.IndexOf(excludeProps, prop.Name) == -1 ) {
+                                                        if (value != "0"){
+                                                            <div class="calification-check"><img src="/media/assets/img/@list[@value]-checkbox.png" alt="calificacion ok" width="36" />
+                                                                <p>@list[@prop.Name]</p>
+                                                            </div>
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            <div><br><br></div>
+                                            
+                                            @{
+                                                var startNodeSbNs = Sbn.Content(1414); // 1414 corresponde al ID de los Videos
+                                                var videos = startNodeSbNs.Children.OrderBy(x => x.CreateDate).ToList();
+                                                @foreach(ContentModels.VideoCapacitacion videoc in videos){
+                                                    if(@Model.VideoEntrenamiento != null && @videoc.Id == @Model.VideoEntrenamiento.Id){
+                                               
+                                                        <div>
+                                                            @if (@Model.VideoEntrenamiento != null){
+                                                                <div class="text-center"><strong>Video explicativo</strong></div>
+                                                                <div class="row text-center">
+                                                                    <div class="col-md-5"></div>
+                                                                    <div class="col-md-2 green-line-separator"></div>
+                                                                    <div class="col-md-5"></div>
+                                                                </div>
+                                                                <button type="button" class="btn calification-check" data-toggle="modal" data-target="#myModal"><img src="/media/assets/img/boton-play-sbn.png" alt="calificacion play" width="80" /></button>
+                                                                <!-- CÓDIGO DE VENTANA MODAL -->
+                                                                <div class="modal" id="myModal">
+                                                                    <div class="modal-dialog" style="height: 100%;">
+                                                                        <div class="modal-content" style="height: 50%;">
+                                                                            <div class="modal-body" id="VideoSbn">
+                                                                                <iframe width="100%" height="100%" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" id="videoSbn" 
+                                                                                allowfullscreen sandbox="allow-presentation, allow-same-origin , allow-scripts" controls="controls" src="@videoc.URL.Url" name="media1"> </iframe>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            }
+                                                            
+                                                        </div>
+                                                    }
+                                                }
+                                            }
+                                            
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- TIPS -->
+                                <!-- Modal -->
+                                    @if (@Model.TipsInicio != null && @Model.TipsInicio.Count() > 0){
+                                    <a class="float-button" data-toggle="modal" data-target="#modalInicio" style="padding-top: 0.75rem;"><i class="bi bi-bookmark-check" style="font-size: 1.5rem;"></i></a>
+                                    <div class="modal fade" id="modalInicio" tabindex="-1" aria-labelledby="sbn-tips" aria-hidden="true">
+                                        <div class="modal-dialog sbn-tips" >
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #bad405;">
+                                                    <h4 class="modal-title" id="sbn-tips"><strong>Tenga en cuenta:</strong></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @foreach(var tip in @Model.TipsInicio){
+                                                    <div>
+                                                        <p class="bold-text-sbn" style="font-size: 17px;"><strong>@tip.Titulo</strong></p>
+                                                        <p style="color:#0a3f0a; font-size: 15px;">@tip.Contenido</p>
+                                                    </div>
+                                                    if (@tip.URL != null){
+                                                    <div>
+                                                        <a style="color:#0a3f0a; margin-bottom: 1rem;" href="@tip.URL.Url" target="_blank">ver más</a>
+                                                        <p></p>
+                                                        <!-- <p>Orden: @tip.OrdenDePresentacion</p> -->
+                                                    </div>
+                                                    }
+                                                } 
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    }
+                        </div>
+                        
+                                                                        <!-- PREPARACIÓN -->
+                        
+                        <div id="v-pills-preparar" class="tab-pane fade" aria-labelledby="v-pills-preparar-tab">
+                            <h5 class="text-center tittle-sbn2">Pasos y herramientas sugeridos en la etapa de preparación de esta SbN</h5>
+                            <div class="row text-center ">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2 green-line-separator "></div>
+                                <div class="col-md-5"></div>
+                            </div>                                
+                          <!-- accordion -->
+                          @{
+                              int counter = 1;
+                              <div class="accordion" id="accordionSbn">
+                                  @foreach (var paso in @Model.Paso){
+                                      <div>
+                                          <div class="card-header" id="heading_@counter" style="padding: unset !important;">
+                                              <h2 class="mb-0" >
+                                              <button class="btn btn-block text-left bold-text-sbn" type="button" data-toggle="collapse" data-target="#accordion_@counter" aria-expanded="false" aria-controls="accordion_@counter" style="box-shadow: 0 0 0 0;">
+                                                  <img class="sbn-img-resource" src="/media/u05hkbl1/preparacion-b.png" alt="Actividad1" width="80" height: "4rem" />
+                                                  <a style="font-size:18px;">@paso.Nombre<a>
+                                                  <a class="btn btn-sbn-tools-3 btn-sbn-tools-width" style="float:right;margin-top: 0.5rem;padding-top: 12px;">Ver más</a>
+                                              </button>
+                                              </h2>
+                                          </div>
+                                          <div id="accordion_@counter" class="collapse" aria-labelledby="heading_@counter" data-parent="#accordionSbn">
+                                              <div class="card-body normal-text-sbn"style="padding-top: 0;">
+                                                <a style="margin-bottom: 1rem;"> @paso.Descripcion</a>
+                                                <div  style="overflow-x:auto;">
+                                                      <table class="table    d-none d-sm-none d-md-block">
+                                                              <thead>
+                                                                  <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                      <th scope="col" style="vertical-align: middle;">Recursos/Herramientas</th>
+                                                                      <th scope="col" style="vertical-align: middle;">Descripción</th>
+                                                                      <th scope="col" style="vertical-align: middle;">Tipo de documento:</th>
+                                                                      <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                      <th scope="col" style="vertical-align: middle;">Dificultad</th>
+                                                                  </tr>
+                                                              </thead>
+                                                              @foreach(var recurso in paso.RecursoSbn){
+                                                                  var urlDoc = recurso.UrlDocumento;
+                                                                  <tbody>
+                                                                      <tr>
+                                                                          <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                          <td><p>@recurso.Descripcion</p></td>
+                                                                          <td style="text-align: center;"><p>@recurso.TipoDocumento</p></td>
+                                                                          <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                          <td style="text-align: center;"><img src="/media/assets/img/@recurso.Dificultad-dificultad.png" alt="Dificultad" width="50"/></td>
+                                                                      </tr>
+                                                                  </tbody>
+                                                              }
+                                                      </table>
+                                                      <table class="table   d-md-none d-lg-none" style="font-size: 0.8rem;">
+                                                            <thead>
+                                                                <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                    <th scope="col" style="vertical-align: middle;">Recursos <br> Herramientas</th>
+                                                                    <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                      
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach(var recurso in paso.RecursoSbn){
+                                                                var urlDoc = recurso.UrlDocumento;
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                        <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            }
+                                                      </table>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      counter++;
+                                        }
+                                </div>
+                                @if (((List<LineamientoSbn>)Model.Lineamiento).Count > 0){
+                                <h5 class="text-center tittle-sbn2">Recuerde tener en cuenta la normativa que orienta su proyecto SbN</h5>
+                                <div class="row text-center ">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2 green-line-separator "></div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                @foreach (var lineamiento in @Model.Lineamiento){
+                                var urlDoc = lineamiento.UrlDescarga;
+                                <div class="sbn-color-box3 col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-1" style="display: grid;align-content: center;">
+                                            <img src="/media/assets/img/sbn-decreto.png" alt="Diseño1" width="80" />
+                                        </div>
+                                        <div class="col-md-4" style="font-size: 18px;text-align:center;display: flex;align-items: center;">
+                                            <a style="color:#0a3f0a !important;padding-left: 1rem;" href="@urlDoc.Url" target="_blank">@lineamiento.Nombre</a>
+                                        </div>
+                                        <div class="col-md-7" style="font-size: 13px;padding-top: 0.75rem;padding-left:1rem;">
+                                            <p>@lineamiento.Descripcion</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                                }
+                              }
+                                <!-- accordion -->
+                            <!-- TIPS -->
+                                <!-- Modal -->
+                                    @if (@Model.TipsPreparacion != null && @Model.TipsPreparacion.Count() > 0){
+                                    <a class="float-button" data-toggle="modal" data-target="#modalPreparacion" style="padding-top: 0.75rem;">
+                                        <i class="bi bi-bookmark-check" style="font-size: 1.5rem;"></i>
+                                    </a>
+                                    <div class="modal fade" id="modalPreparacion" tabindex="-1" aria-labelledby="sbn-tips" aria-hidden="true">
+                                        <div class="modal-dialog sbn-tips" >
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #bad405;">
+                                                    <h4 class="modal-title" id="sbn-tips"><strong>Tenga en cuenta:</strong></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @foreach(var tip in @Model.TipsPreparacion){
+                                                    <div>
+                                                        <p class="bold-text-sbn" style="font-size: 17px;"><strong>@tip.Titulo</strong></p>
+                                                        <p style="color:#0a3f0a; font-size: 15px;">@tip.Contenido</p>
+                                                    </div>
+                                                    if (@tip.URL != null){
+                                                    <div>
+                                                        <a style="color:#0a3f0a; margin-bottom: 1rem;" href="@tip.URL.Url" target="_blank">ver más</a>
+                                                        <p></p>
+                                                        <!-- <p>Orden: @tip.OrdenDePresentacion</p> -->
+                                                    </div>
+                                                    }
+                                                } 
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    }
+                        </div>
+                        
+                                                                            <!-- FORMULACIÓN -->
+                            
+                        <div id="v-pills-formular" class="tab-pane fade" aria-labelledby="v-pills-formular-tab">
+                                <h5 class="text-center tittle-sbn2">Pasos y herramientas sugeridos en la etapa de formulación de esta SbN</h5>
+                                <div class="row text-center ">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2 green-line-separator "></div>
+                                    <div class="col-md-5"></div>
+                                </div>                                
+                                @{
+                                int counterFormular = 1;
+                                <div class="accordion" id="accordionFormularSbn">
+                                @foreach (var paso in @Model.Pasos){
+                                    <div>
+                                        <div class="card-header" id="heading-formular-@counterFormular" style="padding: unset !important;">
+                                            <h2 class="mb-0">
+                                            <button class="btn btn-block text-left bold-text-sbn" type="button" data-toggle="collapse" data-target="#accordion-formular-@counterFormular" aria-expanded="false" aria-controls="accordion-formular-@counterFormular" style="box-shadow: 0 0 0 0;">
+                                                <img class="sbn-img-resource" src="/media/3eyd4rcn/formulacion-b.png" alt="Actividad1" width="80" />
+                                                <a style="font-size:18px;">@paso.Nombre<a>
+                                                <a class="btn btn-sbn-tools-3 btn-sbn-tools-width" style="float:right;margin-top: 0.5rem;padding-top: 12px;">Ver más</a>
+                                            </button>
+                                            </h2>
+                                        </div>
+                                        <div id="accordion-formular-@counterFormular" class="collapse" aria-labelledby="heading-formular-@counterFormular" data-parent="#accordionFormularSbn">
+                                            <div class="card-body normal-text-sbn" style="padding-top: 0;">
+                                                <a style="margin-bottom: 1rem;">@paso.Descripcion</a>
+                                                <div  style="overflow-x:auto;">
+                                                    <table class="table    d-none d-sm-none d-md-block">
+                                                        <thead>
+                                                            <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                <th scope="col" style="vertical-align: middle;">Recursos/Herramientas</th>
+                                                                <th scope="col" style="vertical-align: middle;">Descripción</th>
+                                                                <th scope="col" style="vertical-align: middle;">Tipo de documento:</th>
+                                                                <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                <th scope="col" style="vertical-align: middle;">Dificultad</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach(var recurso in paso.RecursoSbn){
+                                                            var urlDoc = recurso.UrlDocumento;
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                    <td><p>@recurso.Descripcion</p></td>
+                                                                    <td style="text-align: center;"><p>@recurso.TipoDocumento</p></td>
+                                                                    <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    <td style="text-align: center;"><img src="/media/assets/img/@recurso.Dificultad-dificultad.png" alt="Dificultad" width="50"/></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        }
+                                                    </table>
+                                                    <table class="table   d-md-none d-lg-none" style="font-size: 0.8rem;">
+                                                            <thead>
+                                                                <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                    <th scope="col" style="vertical-align: middle;">Recursos <br> Herramientas</th>
+                                                                    <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                      
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach(var recurso in paso.RecursoSbn){
+                                                                var urlDoc = recurso.UrlDocumento;
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                        <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            }
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    counterFormular++;
+                                }
+                                </div>
+                                }
+                                <!-- TIPS -->
+                                <!-- Modal -->
+                                    @if (@Model.TipsFormulacion != null && @Model.TipsFormulacion.Count() > 0){
+                                    <a class="float-button" data-toggle="modal" data-target="#modalFormulacion" style="padding-top: 0.75rem;"><i class="bi bi-bookmark-check" style="font-size: 1.5rem;"></i></a>
+                                    <div class="modal fade" id="modalFormulacion" tabindex="-1" aria-labelledby="sbn-tips" aria-hidden="true">
+                                        <div class="modal-dialog sbn-tips" >
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #bad405;">
+                                                    <h4 class="modal-title" id="sbn-tips"><strong>Tenga en cuenta:</strong></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @foreach(var tip in @Model.TipsFormulacion){
+                                                    <div>
+                                                        <p class="bold-text-sbn" style="font-size: 17px;"><strong>@tip.Titulo</strong></p>
+                                                        <p style="color:#0a3f0a; font-size: 15px;">@tip.Contenido</p>
+                                                    </div>
+                                                    if (@tip.URL != null){
+                                                    <div>
+                                                        <a style="color:#0a3f0a; margin-bottom: 1rem;" href="@tip.URL.Url" target="_blank">ver más</a>
+                                                        <p></p>
+                                                        <!-- <p>Orden: @tip.OrdenDePresentacion</p> -->
+                                                    </div>
+                                                    }
+                                                } 
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    }
+                            </div>
+                            
+                                                                    <!-- PLANIFICACIÓN -->
+                            
+                            <div id="v-pills-planificar" class="tab-pane fade" aria-labelledby="v-pills-planificar-tab">
+                                <h5 class="text-center tittle-sbn2">Pasos y herramientas sugeridos en la etapa de planificación de esta SbN</h5>
+                                <div class="row text-center ">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2 green-line-separator "></div>
+                                    <div class="col-md-5"></div>
+                                </div>                                
+                                @{
+                                int counterPlanificar = 1;
+                                <div class="accordion" id="accordionPlanificarPasosSbn">
+                                @foreach (var pasos in @Model.PasosPlanificacion){
+                                    <div>
+                                        <div class="card-header" id="heading-planificar-@counterPlanificar" style="padding: unset !important;">
+                                            <h2 class="mb-0">
+                                            <button class="btn btn-block text-left bold-text-sbn" type="button" data-toggle="collapse" data-target="#accordion-planificar-@counterPlanificar" aria-expanded="false" aria-controls="accordion-planificar-@counterPlanificar" style="box-shadow: 0 0 0 0;">
+                                                <img class="sbn-img-resource" src="/media/h20o0mur/planificacion-b.png" alt="Actividad1" width="80" />
+                                                <a style="font-size:18px;">@pasos.Nombre<a>
+                                                <a class="btn btn-sbn-tools-3 btn-sbn-tools-width" style="float:right;margin-top: 0.5rem;padding-top: 12px;">Ver más</a>
+                                            </button>
+                                            </h2>
+                                        </div>
+                                        <div id="accordion-planificar-@counterPlanificar" class="collapse" aria-labelledby="heading-planificar-@counterPlanificar" data-parent="#accordionPlanificarPasosSbn">
+                                            <div class="card-body normal-text-sbn"style="padding-top: 0;">
+                                                <a style="margin-bottom: 1rem;">@pasos.Descripcion</a>
+                                                <div  style="overflow-x:auto;">
+                                                    <table class="table    d-none d-sm-none d-md-block">
+                                                        <thead>
+                                                            <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                <th scope="col" style="vertical-align: middle;">Recursos/Herramientas</th>
+                                                                <th scope="col" style="vertical-align: middle;">Descripción</th>
+                                                                <th scope="col" style="vertical-align: middle;">Tipo de documento:</th>
+                                                                <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                <th scope="col" style="vertical-align: middle;">Dificultad</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach(var recurso in pasos.RecursoSbn){
+                                                            var urlDoc = recurso.UrlDocumento;
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                    <td><p>@recurso.Descripcion</p></td>
+                                                                    <td style="text-align: center;"><p>@recurso.TipoDocumento</p></td>
+                                                                    <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    <td style="text-align: center;"><img src="/media/assets/img/@recurso.Dificultad-dificultad.png" alt="Dificultad" width="50"/></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        }
+                                                    </table>
+                                                    <table class="table   d-md-none d-lg-none" style="font-size: 0.8rem;">
+                                                            <thead>
+                                                                <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                    <th scope="col" style="vertical-align: middle;">Recursos <br> Herramientas</th>
+                                                                    <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                      
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach(var recurso in pasos.RecursoSbn){
+                                                                var urlDoc = recurso.UrlDocumento;
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                        <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            }
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    counterPlanificar++;
+                                }
+                                </div>
+                                @if (@Model.DisenosYplanos != null && @Model.DisenosYplanos.Count() > 0){
+                                    <h5 class="text-center tittle-sbn2">Diseños y planos de construcción sugeridos</h5>
+                                    <div class="row text-center ">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator "></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                                    <div class="row">
+                                        @foreach (var disenoPlano in @Model.DisenosYplanos){                                        
+                                          <div class="col-md-12">
+                                              <div class="row" >
+                                                  <div class="col-md-2"><img src="/media/assets/img/sbn-diseno.png" alt="Diseño sbn" width="100" /></div>
+                                                  <div class="col-md-7" style="color:#0a3f0a;font-weight: normal;">
+                                                      <p style="font-size:18px;"><strong>@disenoPlano.Titulo</strong></p>
+                                                      <div style="font-size: 15px; font-weight: normal;"><p>@disenoPlano.TextoIntroductorio</p></div>
+                                                  </div>
+                                                  <div class="col-md-3" style="display: flex;align-items: center;">
+                                                      <a class="btn btn-sbn-tools-4 btn-sbn-tools-width" style="float:right;padding-top: 12px;" href="@disenoPlano.ArchivoDocumento.Url" target="_blank">Descargar documento</a>
+                                                  </div>
+                                              </div>
+                                              <div class=" col-md-12 sbn-separador"></div>
+                                          </div>
+                                        }
+                                    </div>
+                                }
+                                @if (@Model.PersonalDeApoyo != null && @Model.PersonalDeApoyo.Count() > 0){
+                                    <h5 class="text-center tittle-sbn2">Información de los técnicos/profesionales requeridos para esta etapa</h5>
+                                    <div class="row text-center ">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator "></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                                    <div class="row" style="justify-content:center">
+                                        @foreach (var personal in @Model.PersonalDeApoyo){
+                                            <div class="col-md-4">
+                                                <div class="card card-text-impl-sbn"><span class="card-margin-top-sbn"></span>
+                                                    @if (personal.ImagenRepresentativa != null && personal.ImagenRepresentativa.LocalCrops != null){
+                                                    <div class="position-relative overflow-hidden mx-auto sbn-personal-apoyo"><img src="@personal.ImagenRepresentativa.LocalCrops.Src" alt="Perfil 1" /></div>
+                                                    }
+                                                    <div class="card-body">
+                                                        <h5 class="card-title text-center"><strong>@personal.Perfil</strong></h5>
+                                                        <p class="card-text text-center " style="font-size: 14px;">@personal.TextoIntroductorio</p>
+                                                    </div>
+                                                </div>
+                                            </div>                                        
+                                        }
+                                    </div>
+                                }
+                                
+                                } 
+                                <!-- TIPS -->
+                                <!-- Modal -->
+                                    @if (@Model.TipsPlanificacion != null && @Model.TipsPlanificacion.Count() > 0){
+                                    <a class="float-button" data-toggle="modal" data-target="#modalPlanificacion" style="padding-top: 0.75rem;"><i class="bi bi-bookmark-check" style="font-size: 1.5rem;"></i></a>
+                                    <div class="modal fade" id="modalPlanificacion" tabindex="-1" aria-labelledby="sbn-tips" aria-hidden="true">
+                                        <div class="modal-dialog sbn-tips" >
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #bad405;">
+                                                    <h4 class="modal-title" id="sbn-tips"><strong>Tenga en cuenta:</strong></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @foreach(var tip in @Model.TipsPlanificacion){
+                                                    if (@tip.URL != null){
+                                                    <div>
+                                                        <p class="bold-text-sbn" style="font-size: 17px;"><strong>@tip.Titulo</strong></p>
+                                                        <p style="color:#0a3f0a; font-size: 15px;">@tip.Contenido</p>
+                                                        <a style="color:#0a3f0a; margin-bottom: 1rem;" href="@tip.URL.Url" target="_blank">ver más</a>
+                                                        <p></p>
+                                                        <!-- <p>Orden: @tip.OrdenDePresentacion</p> -->
+                                                    </div>
+                                                    }
+                                                } 
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    }
+                            </div>
+                            
+                                                                    <!-- IMPLEMENTACIÓN -->
+                            
+                            <div id="v-pills-implementar" class="tab-pane fade" aria-labelledby="v-pills-implementar-tab">
+                                <div class="col-md-12">
+                                    <h5 class="tittle-sbn2 text-center">Pasos e instrumentos sugeridos en la etapa de Implementación de esta SbN</h5>
+                                    <div class="row text-center">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator "></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                                    @{
+                                        int counterImplementar = 1;
+                                        <div class="accordion" id="accordionImplementarPasosSbn">
+                                            @foreach (var paso in @Model.PasosImplementacion){
+                                                <div>
+                                                    <div class="card-header" id="heading-implementar-@counterImplementar" style="padding: unset !important;">
+                                                        <h2 class="mb-0">
+                                                        <button class="btn btn-block text-left bold-text-sbn" type="button" data-toggle="collapse" data-target="#accordion-implementar-@counterImplementar" aria-expanded="false" aria-controls="accordion-implementar-@counterImplementar" style="box-shadow: 0 0 0 0;">
+                                                            <img class="sbn-img-resource" src="/media/l1fofgjl/implementacion-b.png" alt="Actividad1" width="80" />
+                                                            <a style="font-size:18px;">@paso.Nombre<a>
+                                                            <a class="btn btn-sbn-tools-3 btn-sbn-tools-width" style="float:right;margin-top: 0.5rem;padding-top: 12px;">Ver más</a>
+                                                        </button>
+                                                        </h2>
+                                                    </div>
+                                                    <div id="accordion-implementar-@counterImplementar" class="collapse" aria-labelledby="heading-implementar-@counterImplementar" data-parent="#accordionImplementarPasosSbn">
+                                                        <div class="card-body normal-text-sbn"style="padding-top: 0;">
+                                                            <a style="margin-bottom: 1rem;">@paso.Descripcion</a>
+                                                        </div>
+                                                        <div  style="overflow-x:auto;">
+                                                            <table class="table    d-none d-sm-none d-md-block">
+                                                                <thead>
+                                                                    <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                        <th scope="col" style="vertical-align: middle;">Recursos/Herramientas</th>
+                                                                        <th scope="col" style="vertical-align: middle;">Descripción</th>
+                                                                        <th scope="col" style="vertical-align: middle;">Tipo de documento:</th>
+                                                                        <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                        <th scope="col" style="vertical-align: middle;">Dificultad</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                @foreach(var recurso in paso.RecursoSbn){
+                                                                    var urlDoc = recurso.UrlDocumento;
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                            <td><p>@recurso.Descripcion</p></td>
+                                                                            <td style="text-align: center;"><p>@recurso.TipoDocumento</p></td>
+                                                                            <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                            <td style="text-align: center;"><img src="/media/assets/img/@recurso.Dificultad-dificultad.png" alt="Dificultad" width="50"/></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                }
+                                                            </table>
+                                                            <table class="table   d-md-none d-lg-none" style="font-size: 0.8rem;">
+                                                                <thead>
+                                                                    <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                        <th scope="col" style="vertical-align: middle;">Recursos <br> Herramientas</th>
+                                                                        <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                          
+                                                                    </tr>
+                                                                </thead>
+                                                                @foreach(var recurso in paso.RecursoSbn){
+                                                                    var urlDoc = recurso.UrlDocumento;
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                            <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                }
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                counterImplementar++;
+                                            }
+                                        <div>
+                                        
+                                        @if (@Model.AcuerdosDeTrabajo != ""){
+                                            <h5 class="text-center tittle-sbn2">Acuerdos de trabajo</h5>
+                                            <div class="row text-center ">
+                                                <div class="col-md-5"></div>
+                                                <div class="col-md-2 green-line-separator "></div>
+                                                <div class="col-md-5"></div>
+                                            </div>
+                                            <div style="text-align:center;margin-bottom: 2rem;">
+                                                <a href="@Model.AcuerdosDeTrabajo" target="_blank"><img src="/media/assets/img/sbn-decreto.png" alt="Diseño sbn" width="170" /></a>
+                                            </div>
+                                        }
+                                    
+                                    <!-- Modal -->
+                                    @if (@Model.TipsImplementacion != null && @Model.TipsImplementacion.Count() > 0){
+                                    <a class="float-button" data-toggle="modal" data-target="#modalImplementacion" style="padding-top: 0.75rem;"><i class="bi bi-bookmark-check" style="font-size: 1.5rem;"></i></a>
+                                    <div class="modal fade" id="modalImplementacion" tabindex="-1" aria-labelledby="sbn-tips" aria-hidden="true">
+                                        <div class="modal-dialog sbn-tips" >
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #bad405;">
+                                                    <h4 class="modal-title" id="sbn-tips"><strong>Tenga en cuenta:</strong></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @foreach(var tip in @Model.TipsImplementacion){
+                                                    <div>
+                                                        <p class="bold-text-sbn" style="font-size: 17px;"><strong>@tip.Titulo</strong></p>
+                                                        <p style="color:#0a3f0a; font-size: 15px;">@tip.Contenido</p>
+                                                    </div>
+                                                    if (@tip.URL != null){
+                                                    <div>
+                                                        <a style="color:#0a3f0a; margin-bottom: 1rem;" href="@tip.URL.Url" target="_blank">ver más</a>
+                                                        <p></p>
+                                                        <!-- <p>Orden: @tip.OrdenDePresentacion</p> -->
+                                                    </div>
+                                                    }
+                                                }    
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    }
+                                    
+                                </div>
+                            </div>
+                            }
+                        
+                            </div>
+                        </div>
+                        
+                                                                <!-- SEGUIMIENTO -->
+                        
+                        <div id="v-pills-seguimiento" class="tab-pane fade" aria-labelledby="v-pills-seguimiento-tab">
+                            <h5 class="tittle-sbn2 text-center">Pasos e instrumentos sugeridos en la etapa de Seguimiento de esta SbN</h5>
+                            <div class="row text-center">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-2 green-line-separator "></div>
+                                <div class="col-md-5"></div>
+                            </div>
+                            <!-- PASOS SEGUIMIENTO SBN-->
+                            @{
+                                int counterSeguimiento = 1;
+                                <div class="accordion" id="accordionSeguimientoPasosSbn">
+                                @foreach (var paso in @Model.PasosSeguimiento){
+                                    <div>
+                                        <div class="card-header" id="heading-implementar-@counterSeguimiento" style="padding: unset !important;">
+                                            <h2 class="mb-0">
+                                            <button class="btn btn-block text-left bold-text-sbn" type="button" data-toggle="collapse" data-target="#accordion-implementar-@counterSeguimiento" 
+                                                aria-expanded="false" aria-controls="accordion-implementar-@counterImplementar" style="box-shadow: 0 0 0 0;">
+                                                <img class="sbn-img-resource" src="/media/q15jrxzm/seguimiento-b.png" alt="Actividad1" width="80" />
+                                                <a style="font-size:18px;">@paso.Nombre<a>
+                                                <a class="btn btn-sbn-tools-3 btn-sbn-tools-width" style="float:right;margin-top: 0.5rem;padding-top: 12px;">Ver más</a>
+                                            </button>
+                                            </h2>
+                                        </div>
+                                        <div id="accordion-implementar-@counterSeguimiento" class="collapse" aria-labelledby="heading-implementar-@counterSeguimiento" data-parent="#accordionSeguimientoPasosSbn">
+                                            <div class="card-body normal-text-sbn " style="padding-top: 0;">
+                                                <a style="margin-bottom: 1rem;">@paso.Descripcion</a>
+                                            </div>
+                                            <div  style="overflow-x:auto;">
+                                                <table class="table    d-none d-sm-none d-md-block">
+                                                    <thead>
+                                                        <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                            <th scope="col" style="vertical-align: middle;">Recursos/Herramientas</th>
+                                                            <th scope="col" style="vertical-align: middle;">Descripción</th>
+                                                            <th scope="col" style="vertical-align: middle;">Tipo de documento:</th>
+                                                            <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                            <th scope="col" style="vertical-align: middle;">Dificultad</th>
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach(var recurso in paso.RecursoSbn){
+                                                        var urlDoc = recurso.UrlDocumento;
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                <td><p>@recurso.Descripcion</p></td>
+                                                                <td style="text-align: center;"><p>@recurso.TipoDocumento</p></td>
+                                                                <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                <td style="text-align: center;"><img src="/media/assets/img/@recurso.Dificultad-dificultad.png" alt="Dificultad" width="50"/></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    }
+                                                </table>
+                                                <table class="table   d-md-none d-lg-none" style="font-size: 0.8rem;">
+                                                    <thead>
+                                                        <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                            <th scope="col" style="vertical-align: middle;">Recursos <br> Herramientas</th>
+                                                            <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                          
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach(var recurso in paso.RecursoSbn){
+                                                        var urlDoc = recurso.UrlDocumento;
+                                                        <tbody>
+                                                            <tr>
+                                                                <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    }
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    counterSeguimiento++;
+                                }    
+                                </div>
+                                <!-- INDICADORES SEGUIMIENTO SBN -->
+                                @if (@Model.Indicadores != null && @Model.Indicadores.Count() > 0){
+                                    <h5 class="tittle-sbn2 text-center">Indicadores para evaluar el alcance y efectividad de la SbN</h5>
+                                    <div class="row text-center">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator "></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                                    <div class="sbn-text-box-grey">
+                                        @foreach (var indicador in @Model.Indicadores){
+                                            <div>
+                                                <div class="col-md-12">
+                                                    <div class="row" >
+                                                        <div class="col-md-2"><img src="/media/assets/img/sbn-indicador-01.png" alt="Diseño sbn" width="100%" /></div>
+                                                        <div class="col-md-5" style="color:#0a3f0a;font-weight: normal;">
+                                                            <p style="font-size:18px;"><strong>@indicador.Titulo</strong></p>
+                                                            <div style="font-size: 15px; font-weight: normal;"><p>@indicador.Descripcion</p></div>
+                                                        </div>
+                                                        <div class="col-md-2"><p>@indicador.RangoDeResultados</p></div>
+                                                        <div class="col-md-3" style="display: flex;align-items: center;">
+                                                            <a class="btn btn-sbn-tools-4 btn-sbn-tools-width" style="float:right;padding-top: 12px;" href="@indicador.URldeDescarga.Url" target="_blank">Descargar documento</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class=" col-md-12 sbn-separador" style="border-width: 1px;"></div>
+                                                </div>
+                                            </div>  
+                                        }    
+                                    </div>
+                                }
+                                
+                                <!-- MODELOS -->
+                                @if (@Model.Modelos != null && @Model.Modelos.Count() > 0){
+                                    <h5 class="tittle-sbn2 text-center">Modelos que pueden soportar sus tareas</h5>
+                                    <div class="row text-center">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator "></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                                    <div  style="justify-content: center;display:flex; padding-bottom:1rem;">
+                                        @foreach (var modelo in @Model.Modelos){
+                                            <div class ="col-md-4 d-none d-sm-none d-md-none d-lg-block" >   
+                                                
+                                                <div >
+                                                    <div class="sbn-text-box-grey-2 normal-text-sbn-2 " style="padding-top: 1rem;">
+                                                        <p  class="bold-text-sbn" style="font-size:18px;text-align:center;">@modelo.Titulo<p>
+                                                        <p>@modelo.Descripcion</p>
+                                                    </div>
+                                                    <div class="div-btn-card-impl-sbn"><a href="@modelo.URldeDescarga.Url"><button class="btn-card-impl-sbn" style="bottom: 0px;">Descargar</button></a></div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                            
+                                            
+                                        }
+                                    </div>    
+                                    <div>
+                                        @foreach (var modelo in @Model.Modelos){
+                                            <div class =" d-md-block d-lg-none" style="justify-content: center;display:flex; padding-bottom:1rem;">
+                                                <div>
+                                                    <div class="col-md-12">
+                                                        <div class="row" >
+                                                            <div class="sbn-text-box-grey normal-text-sbn-2 " style="padding-top: 1rem;">
+                                                                <p  class="bold-text-sbn" style="font-size:18px;text-align:center;">@modelo.Titulo<p>
+                                                                <p>@modelo.Descripcion</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="div-btn-card-impl-sbn"><a href="@modelo.URldeDescarga.Url"><button class="btn-card-impl-sbn" style="bottom: 0px;">Descargar</button></a></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                <!-- PLANTILLA -->
+                                @if (@Model.Plantilla != null && @Model.Plantilla.Count() > 0){
+                                <h5 class="tittle-sbn2 text-center">Documenta los avances de su proceso, para lo cual, disponemos ejemplos de plantilla</h5>
+                                <div class="row text-center">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2 green-line-separator "></div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                <div style="justify-content: center;display:flex;padding-bottom:1rem;">
+                                        <div class="col-md-8 sbn-text-box-grey " style="padding-top: 1rem;font-size: 18px;">
+                                            <div style="justify-content: center;display:flex;align-items: center;">
+                                                <a style="color: #0a3f0a !important;text-decoration:none;" href="@Model.Plantilla" style="font-size: 18px;"><img src="/media/assets/img/sbn-decreto.png" alt="Diseño sbn" width="80" />Plantilla reporte de resultados</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                }
+                                <!-- TIPS -->
+                                <!-- Modal -->
+                                @if (@Model.TipsSeguimiento != null && @Model.TipsSeguimiento.Count() > 0){    
+                                    <a class="float-button" data-toggle="modal" data-target="#modalSeguimiento" style="padding-top: 0.75rem;"><i class="bi bi-bookmark-check" style="font-size: 1.5rem;"></i></a>
+                                    <div class="modal fade" id="modalSeguimiento" tabindex="-1" aria-labelledby="sbn-tips" aria-hidden="true">
+                                        <div class="modal-dialog sbn-tips" >
+                                            <div class="modal-content">
+                                                <div class="modal-header" style="background-color: #bad405;">
+                                                    <h4 class="modal-title" id="sbn-tips"><strong>Tenga en cuenta:</strong></h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            <div class="modal-body">
+                                                @foreach(var tip in @Model.TipsSeguimiento){
+                                                    <div>
+                                                        <p class="bold-text-sbn" style="font-size: 17px;"><strong>@tip.Titulo</strong></p>
+                                                        <p style="color:#0a3f0a; font-size: 15px;">@tip.Contenido</p>
+                                                    </div>
+                                                    if (@tip.URL != null){
+                                                    <div>
+                                                        <a style="color:#0a3f0a; margin-bottom: 1rem;" href="@tip.URL.Url" target="_blank">ver más</a>
+                                                        <p></p>
+                                                        <!-- <p>Orden: @tip.OrdenDePresentacion</p> -->
+                                                    </div>
+                                                    }
+                                                } 
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        
+                                                            <!-- APRENDIZAJE -->
+                            
+                        <div id="v-pills-aprendizaje" class="tab-pane fade" aria-labelledby="v-pills-aprendizaje-tab">
+                                <h5 class="text-center tittle-sbn2">Pasos y herramientas sugeridos en la etapa de aprendizaje de esta SbN</h5>
+                                <div class="row text-center ">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2 green-line-separator "></div>
+                                    <div class="col-md-5"></div>
+                                </div>                                
+                                @{
+                                int counterAprendizaje = 1;
+                                <div class="accordion" id="accordionAprendizajeSbn">
+                                @foreach (var paso in @Model.PasosAprendizaje){
+                                    <div>
+                                        <div class="card-header" id="heading-aprendizaje-@counterAprendizaje" style="padding: unset !important;">
+                                            <h2 class="mb-0">
+                                            <button class="btn btn-block text-left bold-text-sbn" type="button" data-toggle="collapse" data-target="#accordion-aprendizaje-@counterAprendizaje" aria-expanded="false" aria-controls="accordion-aprendizaje-@counterAprendizaje" style="box-shadow: 0 0 0 0;">
+                                                <img class="sbn-img-resource" src="/media/lkmhiq1t/aprendizaje-b.png" alt="Actividad1" width="80" />
+                                                <a style="font-size:18px;">@paso.Nombre<a>
+                                                <a class="btn btn-sbn-tools-3 btn-sbn-tools-width" style="float:right;margin-top: 0.5rem;padding-top: 12px;">Ver más</a>
+                                            </button>
+                                            </h2>
+                                        </div>
+                                        <div id="accordion-aprendizaje-@counterAprendizaje" class="collapse" aria-labelledby="heading-aprendizaje-@counterAprendizaje" data-parent="#accordionAprendizajeSbn">
+                                            <div class="card-body normal-text-sbn" style="padding-top: 0;">
+                                                <a style="margin-bottom: 1rem;">@paso.Descripcion</a>
+                                                <div style="overflow-x:auto;">
+                                                    <table class="table d-none d-sm-none d-md-block">
+                                                        <thead>
+                                                            <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                <th scope="col" style="vertical-align: middle;">Recursos/Herramientas</th>
+                                                                <th scope="col" style="vertical-align: middle;">Descripción</th>
+                                                                <th scope="col" style="vertical-align: middle;">Tipo de documento:</th>
+                                                                <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                <th scope="col" style="vertical-align: middle;">Dificultad</th>
+                                                            </tr>
+                                                        </thead>
+                                                        @foreach(var recurso in paso.RecursoSbn){
+                                                            var urlDoc = recurso.Documento;
+                                                            <tbody>
+                                                                <tr>
+                                                                    <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                    <td><p>@recurso.Descripcion</p></td>
+                                                                    <td style="text-align: center;"><p>@recurso.TipoDeDocumento</p></td>
+                                                                    <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    <td style="text-align: center;"><img src="/media/assets/img/@recurso.Dificultad-dificultad.png" alt="Dificultad" width="50"/></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        }
+                                                    </table>
+                                                    <table class="table   d-md-none d-lg-none" style="font-size: 0.8rem;">
+                                                            <thead>
+                                                                <tr style="background-color: #d6d8db99;color:#0a3f0a;text-align:center;">
+                                                                    <th scope="col" style="vertical-align: middle;">Recursos <br> Herramientas</th>
+                                                                    <th scope="col" style="vertical-align: middle;">Descarga</th>
+                                                                      
+                                                                </tr>
+                                                            </thead>
+                                                            @foreach(var recurso in paso.RecursoSbn){
+                                                                var urlDoc = recurso.Documento;
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th scope="row"><p style="color:#0a3f0a;font-weight: normal;">@recurso.Nombre</p></th>
+                                                                        <td style="text-align: center;"><a href="@urlDoc.Url" target="_blank"><img src="/media/assets/img/sbn-descarga.png" alt="Descarga" width="50"/></a></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            }
+                                                      </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    counterAprendizaje++;
+                                }
+                                </div>
+                                }
+                        </div>
+                        
+                                                                    <!-- CASOS DE ÉXITO -->
+                        
+                        <div id="v-pills-caso-exito" class="tab-pane fade" aria-labelledby="v-pills-caso-exito-tab">
+                            <div class="text-center">
+                                <h5 class=" tittle-sbn2">Casos de Éxito</h5>
+                            </div>
+                            <div class="row text-center">
+                                        <div class="col-md-5"></div>
+                                        <div class="col-md-2 green-line-separator"></div>
+                                        <div class="col-md-5"></div>
+                                    </div>
+                            <section class="section " style="width:100%;padding-bottom:2rem;">
+                                @if (@Model.CasosDeExito != null){
+                                <div class="row row-casos-de-exito">
+                                @foreach (var caso in @Model.CasosDeExito){                                            
+                                    string nombre = caso.Value<string>("nombre");
+                                    string imageUrl = caso.Value<IPublishedContent>("imagen")?.GetCropUrl(400,300) ?? "/img/carousel.jpg";
+                                    Link link = caso.Value<Link>("documento");
+                                    <div class="col-md-4">
+                                        <div class="active card-casos-de-exito-sbn">
+                                            <img src="@imageUrl"/ class="card-img-casos-de-exito-sbn">
+                                            <div class="overlay">
+                                                <span>
+                                                    <div class="card-body card-text-overlay-sbn">
+                                                        <h5 class="card-title text-center ">@nombre</h5>
+                                                        <div class="card-text">@caso.Value("detalle")</div>
+                                                    </div>
+                                                </span>
+                                                <div class="cart-download-icon">
+                                                    <a href='@link.Url' target="blank"><i class="bi bi-download"></i></a>
+                                                </div>
+                                            </div>
+                                            <div class="card-title-main-sbn">
+                                                <h5 class="card-title text-center card-title-center-sbn">@nombre</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                </div>
+                                }
+                            </section>                                
+                        </div>
+                        
+                                                                <!-- GLOSARIO -->
+                        
+                        <div id="v-pills-glosario" class="tab-pane fade" aria-labelledby="v-pills-glosario-tab">
+                            @if (@Model.Glosario != null){
+                            Dictionary<string, IPublishedContent> listGlosario = new Dictionary<string, IPublishedContent>();
+                            int i=0;
+                            <div>
+                                <h5 class="tittle-sbn2 text-center">Glosario</h5>
+                                <div class="row text-center">
+                                    <div class="col-md-5"></div>
+                                    <div class="col-md-2 green-line-separator"></div>
+                                    <div class="col-md-5"></div>
+                                </div>
+                                @foreach(var glosario in @Model.Glosario){
+                                    string titulo = glosario.Value<string>("titulo");
+                                    listGlosario.Add(titulo, glosario);
+                                }
+                                @{
+                                var l = listGlosario.OrderBy(key => key.Key);
+                                var dic = l.ToDictionary((keyItem) => keyItem.Key, (valueItem) => valueItem.Value);
+                                var currentLetter = "";
+                                @foreach (var g in dic){
+                                    var title = g.Key;
+                                    var letter = title.Substring(0,1);
+                                    @if (currentLetter != letter){
+                                        currentLetter = letter;
+                                        <h3>@letter</h3>
+                                    }
+                                    var contenido = dic[title].Value<string>("contenido");
+                                    <div class= "sbn-text-box-grey">
+                                        <p class="bold-text-sbn" style="font-size:18px;">@title</p>
+                                        <p class="normal-text-sbn-2">@contenido</p>
+                                    </div>
+                                }
+                                }
+                            </div>
+                            }else{
+                                <div>No cuenta con glosario asociado</div>
+                            }
+                        </div>
+                        
+                                                                <!-- HOJA DE RUTA -->
+                        
+                        <div id="v-pills-hoja-de-ruta" class="tab-pane fade" aria-labelledby="v-pills-hoja-de-ruta-tab">
+                            <div class="row">                                    
+                                <div class="col-md-12">
+                                  <h5 class="tittle-sbn2 text-center">Hoja de ruta</h5>
+                                    <div class="row text-center">
+                                          <div class="col-md-5"></div>
+                                          <div class="col-md-2 green-line-separator"></div>
+                                          <div class="col-md-5"></div>
+                                    </div>
+                                    <div class="text-center sbn-imagen-size">
+                                          
+                                          <a href="@Model.Archivo.Url" target="_blank">
+                                              <img src="@Model.Imagen.LocalCrops.Src" alt="@Model.Name" width="100%" height="100%" />
+                                          </a>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<!-- <section class="section">
+        <div class="container">
+            <div>Descripcion: @Model.Descripcion</div>
+            <div>Objetivos: @Model.Objetivos</div>
+            <div>Estado: @Model.EstadoSbn</div>
+            
+        
+            <h5>SoporteBibliografico</h5>
+        @{
+                
+            <div>node: @listIdOds</div>
+            
+            foreach (var soporte in @Model.SoporteBibliografico){
+                var recurso = soporte.ReferenciaBibliografica;
+                if (recurso != null){
+                    <div>Referencia: @recurso.Name</div>
+                    <div>URL: @recurso.UrlSegment</div>
+                    
+                    
+                    foreach (var desafio in @soporte.Desafio){
+                        <div>Desafío: @desafio</div>
+                    }
+                    foreach (var problema in @soporte.Problema){
+                        <div>Problema: @problema</div>
+                    }
+                    foreach (var srv in @soporte.AreaAplicacion){
+                        <div>Área: @srv</div>
+                    }
+                }
+            }
+        
+        }
+        </div>
+    </section> -->

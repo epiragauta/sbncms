@@ -1,0 +1,242 @@
+﻿@{/* inherits Sbn.Cms.Web.Common.Views.SbnViewPage */}
+@using Sbn.Cms.Web.Common.PublishedModels;
+@using System.Text;
+@using System.Globalization;
+@inherits Sbn.Cms.Web.Common.Views.SbnViewPage<ContentModels.PaginaDeContenido>
+@using ContentModels = Sbn.Cms.Web.Common.PublishedModels;
+
+@using Sbn.Cms.Core
+@using Examine
+@using Sbn.Cms.Infrastructure.Examine
+@inject IPublishedContentQuery _publishedContentQuery;
+@inject IExamineManager _examineManager; 
+@{
+	Layout = "master.cshtml";
+}
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#input-search').on('keypress', function(e){
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if(keycode == '13'){
+                    console.log('You pressed a "enter" key in textbox : ', $('#input-search').val());
+                    if ($('#input-search').val().length > 2){
+                        window.location.href="?search=" + $('#input-search').val();
+                   }
+                }
+            });
+            
+            $('#btn-search').on('click', function(e){
+               if ($('#input-search').val().length > 2){
+                window.location.href="?search=" + $('#input-search').val();
+               }
+            })
+            
+            $('#btn-clean').on('click', function(e){
+                window.location.href=window.location.pathname;
+            })
+        });
+    </script>    
+}
+<section class="section container w3-border w3-container w3-round-xlarge" style="padding-top:3rem !important;" >
+    <div class="titles"><h2>Búsquedas</h2></div>
+    <section class="section">
+    @{
+        if (!_examineManager.TryGetIndex(Constants.SbnIndexes.ExternalIndexName, out IIndex index)){
+    		throw new InvalidOperationException($"No index found by name{ Constants.SbnIndexes.ExternalIndexName }");
+    	}
+        var numberOfRecursos = 5; 
+        var startNode = Sbn.Content(Guid.Parse("877b7366-a92d-4fea-a1f1-8af0b1f15a5c"));  // Preguntas
+        var search = "";
+        if (startNode == null){
+            <div class="recursos">
+              <h1>No hay información en este momento, intente después.</h1>
+            </div>
+            return;
+        }
+        
+        //Gets all recursos to calculate pages
+        var recursos = startNode.Children.OrderBy(x => x.CreateDate).ToList();
+        var numOfRecursos = recursos.Count;
+        int counter = 0;
+        int numOfRecursosByPage = 10;
+        var query = index.Searcher.CreateQuery(IndexTypes.Content);
+        List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arrayResults = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+        recursos = arrayResults;
+        if (!string.IsNullOrEmpty(Context.Request.Query["search"])){
+            search = Context.Request.Query["search"];
+            
+        	var queryExecutor = query.NodeTypeAlias("pregunta").And().ManagedQuery(search);
+        	@foreach (var result in _publishedContentQuery.Search(queryExecutor))
+            {
+                var pr = (ContentModels.Pregunta)result.Content;
+        	    arrayResults.Add(pr);
+            }
+            if (arrayResults.Count > 0){
+                recursos = arrayResults;
+                numOfRecursos = recursos.Count;
+            }else{
+                @foreach(ContentModels.Pregunta pr in recursos){
+                    var sbReturn = new StringBuilder();     
+                    var arrayText = pr.Titulo.ToUpper().Normalize(NormalizationForm.FormD).ToCharArray(); 
+                    var txt = "";
+                    foreach (char letter in arrayText){     
+                        if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)  
+                            sbReturn.Append(letter);     
+                    }
+                    txt = sbReturn.ToString();
+                    if (txt.IndexOf(search.ToUpper()) != -1){
+                        arrayResults.Add(pr);
+                    }
+                }
+                if (arrayResults.Count > 0){
+                    recursos = arrayResults;
+                    numOfRecursos = recursos.Count;
+                }
+            }
+        }
+        
+        var pageCount = (int)Math.Ceiling((double)numOfRecursos / (double)numOfRecursosByPage);
+        //gets the page from the querystring and sets it to one if it is out of range
+        
+        int numPage = 1;
+        if (!string.IsNullOrEmpty(Context.Request.Query["numPage"])){
+            int.TryParse(Context.Request.Query["numPage"], out numPage);
+            if (numPage <= 0 || numPage > pageCount){
+                numPage = 1;
+            }
+        }
+        //Gets the recursos for the current page
+        var pagedResources = recursos.Skip((numPage - 1) * numOfRecursosByPage).Take(numOfRecursosByPage).ToList();    
+        <div class="row">
+            <div class="col-md-5">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="input-search" placeholder="Buscar" value="@search"/>
+                    <div class="input-group-append">
+                      <button class="btn btn-secondary" type="button" id="btn-search"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            @if (arrayResults.Count > 0){
+                <div class="col-md-5">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" id="btn-clean"><i class="bi bi-x-circle"></i></button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row">
+            @if (pagedResources.Count != null){
+                @foreach (ContentModels.Pregunta recurso in pagedResources){
+                    <div class="col-md-12 py-2">
+                        <strong>Pregunta: </strong><span class= "recurso-titulo"><a>@recurso.Titulo</a></span>
+                        <div class="recurso-descripcion">@recurso.Respuesta</div>
+                        <div class="recurso-mas-info">
+                            <small class="blogpost-date">@recurso.CreateDate.ToShortDateString()</small>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+        
+        <!-- SbNs-->
+        arrayResults = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+        var query2 = index.Searcher.CreateQuery(IndexTypes.Content);
+        var queryExecutor2 = query2.NodeTypeAlias("sbn2").And().ManagedQuery(search);
+    	@foreach (var result in _publishedContentQuery.Search(queryExecutor2))
+        {
+            var pr = (ContentModels.Sbn2)result.Content;
+    	    arrayResults.Add(pr);
+        }
+        @if (arrayResults.Count > 0){
+            recursos = arrayResults;
+            numOfRecursos = recursos.Count;
+            <div class="row">
+                @foreach (ContentModels.Sbn2 recurso in recursos){
+                    <div class="col-md-12  py-2">
+                        <strong>SbN: </strong>
+                        <a target="_blank" href ="/gestionar-sbns/@recurso.UrlSegment/?h=f">
+                            <span class= "recurso-titulo">@recurso.Nombre</span>
+                            </a>
+                        <div class="recurso-descripcion">@recurso.Descripcion</div>
+                    </div>
+                }
+            </div>
+        }
+        
+        <!-- Casos de exito -->
+        arrayResults = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+        var query3 = index.Searcher.CreateQuery(IndexTypes.Content);
+        var queryExecutor3 = query3.NodeTypeAlias("casoDeExito").And().ManagedQuery(search);
+    	@foreach (var result in _publishedContentQuery.Search(queryExecutor3))
+        {
+            var pr = (ContentModels.CasoDeExito)result.Content;
+    	    arrayResults.Add(pr);
+        }
+        @if (arrayResults.Count > 0){
+            recursos = arrayResults;
+            numOfRecursos = recursos.Count;
+            <div class="row">
+                @foreach (ContentModels.CasoDeExito recurso in recursos){
+                    <div class="col-md-12  py-2">
+                        <strong>Caso de éxito: </strong>
+                        <a href="@recurso.Documento.Url" target="blank">
+                            <span class= "recurso-titulo">@recurso.Nombre</span>
+                        </a>
+                        <div class="recurso-descripcion">@recurso.Detalle</div>
+                    </div>
+                }
+            </div>
+        }
+        
+        
+        arrayResults = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
+        var query4 = index.Searcher.CreateQuery(IndexTypes.Content);
+        var queryExecutor4 = query4.NodeTypeAlias("videoCapacitacion").And().ManagedQuery(search);
+    	@foreach (var result in _publishedContentQuery.Search(queryExecutor4))
+        {
+            var pr = (ContentModels.VideoCapacitacion)result.Content;
+    	    arrayResults.Add(pr);
+        }
+        @if (arrayResults.Count > 0){
+            recursos = arrayResults;
+            numOfRecursos = recursos.Count;
+            <div class="row">
+                @foreach (ContentModels.VideoCapacitacion recurso in recursos){
+                    <div class="col-md-12  py-2">
+                        <strong>Video: </strong>
+                        <a href="@recurso.URL.Url" target="_blank">
+                            <span class= "recurso-titulo">@recurso.Nombre</span>
+                        </a>
+                        <div class="recurso-descripcion">@recurso.Descripcion</div>
+                    </div>
+                }
+            </div>
+        }
+        
+        
+    }    
+        <div class="row">
+            <div class="col-md-12">
+            @{        
+                if (pageCount > 1){
+                    <div class="pagination justify-content-center">
+                        <ul>
+                            <li><a class="@(numPage == 1 ? "disabled" : string.Empty)" href="?numPage=@(numPage-1)">&lt;</a></li>
+                            @for (int p = 1; p < pageCount + 1; p++)
+                            {
+                                <li class="@(p == numPage ? "active" : string.Empty)">
+                                    <a class="@(p == numPage ? "active" : string.Empty)"href="?numPage=@p">@p</a>
+                                </li>
+                            }
+                            <li><a class="@(numPage == pageCount ? "disabled" : string.Empty)" href="?numPage=@(numPage+1)">&gt;</a></li>
+                        </ul>
+                    </div>
+                }
+            }
+            </div>
+        </div>
+    </section>
+</section>
+
