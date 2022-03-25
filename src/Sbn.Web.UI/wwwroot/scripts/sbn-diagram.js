@@ -94,10 +94,10 @@ $(document).ready(function() {
         selected = e.target.id.substr(-1);
         if(selected == 5){
             //$(`#diagram-subtitle`).html(InfoDiagram[0].subtitle);
-            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background_active.svg')`}); 
+            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background_active_.svg')`}); 
         }else{
             $(`#diagram-subtitle`).html('');
-            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background.svg')`}); 
+            $('.cicle_background').css({'background-image': `url('/media/assets/img/ciclo/cicle_background_.svg')`}); 
         }
         //$(`#element-${selected}`).addClass("active");
         $(`#element-m-${selected}`).addClass("active text-white active-selected-m");

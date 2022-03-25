@@ -36,11 +36,16 @@
             $('#btn-clean').on('click', function(e){
                 window.location.href=window.location.pathname;
             })
+            
+            var searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.has("search")){
+                $('#count-result').insertAfter($('#search-input-bar'));
+            }
         });
     </script>    
 }
 <section class="section container w3-border w3-container w3-round-xlarge" style="padding-top:3rem !important;" >
-    <div class="titles"><h2>Búsquedas</h2></div>
+    <div class="titles" id="search-title"><h2>Búsquedas</h2></div>
     <section class="section">
     @{
         if (!_examineManager.TryGetIndex(Constants.SbnIndexes.ExternalIndexName, out IIndex index)){
@@ -60,7 +65,7 @@
         var recursos = startNode.Children.OrderBy(x => x.CreateDate).ToList();
         var numOfRecursos = recursos.Count;
         int counter = 0;
-        int numOfRecursosByPage = 10;
+        int numOfRecursosByPage = 5;
         var query = index.Searcher.CreateQuery(IndexTypes.Content);
         List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent> arrayResults = new List<Sbn.Cms.Core.Models.PublishedContent.IPublishedContent>();
         recursos = arrayResults;
@@ -97,20 +102,21 @@
             }
         }
         
-        var pageCount = (int)Math.Ceiling((double)numOfRecursos / (double)numOfRecursosByPage);
+        var pageCount = 1; //(int)Math.Ceiling((double)numOfRecursos / (double)numOfRecursosByPage);
         //gets the page from the querystring and sets it to one if it is out of range
         
         int numPage = 1;
+        int countResourceInPage = 0;
         if (!string.IsNullOrEmpty(Context.Request.Query["numPage"])){
             int.TryParse(Context.Request.Query["numPage"], out numPage);
-            if (numPage <= 0 || numPage > pageCount){
-                numPage = 1;
-            }
+            //if (numPage <= 0 || numPage > pageCount){
+            //    numPage = 1;
+            //}
         }
         //Gets the recursos for the current page
-        var pagedResources = recursos.Skip((numPage - 1) * numOfRecursosByPage).Take(numOfRecursosByPage).ToList();    
+        //var pagedResources = recursos.Skip((numPage - 1) * numOfRecursosByPage).Take(numOfRecursosByPage).ToList();    
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-5 py-3" id="search-input-bar">
                 <div class="input-group">
                     <input type="text" class="form-control" id="input-search" placeholder="Buscar" value="@search"/>
                     <div class="input-group-append">
@@ -126,17 +132,30 @@
                 </div>
             }
         </div>
+        
+        
         <div class="row">
-            @if (pagedResources.Count != null){
-                @foreach (ContentModels.Pregunta recurso in pagedResources){
-                    <div class="col-md-12 py-2">
-                        <strong>Pregunta: </strong><span class= "recurso-titulo"><a>@recurso.Titulo</a></span>
-                        <div class="recurso-descripcion">@recurso.Respuesta</div>
-                        <div class="recurso-mas-info">
-                            <small class="blogpost-date">@recurso.CreateDate.ToShortDateString()</small>
-                        </div>
+            @foreach (ContentModels.Pregunta recurso in recursos){
+                if (numPage == 1 && countResourceInPage < numOfRecursosByPage){
+                <div class="col-md-12 py-2">
+                    <strong>Pregunta: </strong><span class= "recurso-titulo"><a>@recurso.Titulo</a></span>
+                    <div class="recurso-descripcion">@recurso.Respuesta</div>
+                    <div class="recurso-mas-info">
+                        <small class="blogpost-date">@recurso.CreateDate.ToShortDateString()</small>
                     </div>
+                </div>
+                }else{
+                    if ((countResourceInPage >= (numOfRecursosByPage * (numPage-1))) && (countResourceInPage <= (numOfRecursosByPage * numPage))){
+                        <div class="col-md-12 py-2">
+                            <strong>Pregunta: </strong><span class= "recurso-titulo"><a>@recurso.Titulo</a></span>
+                            <div class="recurso-descripcion">@recurso.Respuesta</div>
+                            <div class="recurso-mas-info">
+                                <small class="blogpost-date">@recurso.CreateDate.ToShortDateString()</small>
+                            </div>
+                        </div>
+                    }
                 }
+                countResourceInPage++;
             }
         </div>
         
@@ -151,16 +170,29 @@
         }
         @if (arrayResults.Count > 0){
             recursos = arrayResults;
-            numOfRecursos = recursos.Count;
+            numOfRecursos += recursos.Count;
             <div class="row">
                 @foreach (ContentModels.Sbn2 recurso in recursos){
-                    <div class="col-md-12  py-2">
+                    if (numPage == 1 && (countResourceInPage < numOfRecursosByPage)){
+                    <div class="col-md-12">
                         <strong>SbN: </strong>
                         <a target="_blank" href ="/gestionar-sbns/@recurso.UrlSegment/?h=f">
                             <span class= "recurso-titulo">@recurso.Nombre</span>
                             </a>
                         <div class="recurso-descripcion">@recurso.Descripcion</div>
                     </div>
+                    }else{
+                        if ((countResourceInPage >= (numOfRecursosByPage * (numPage-1))) && (countResourceInPage <= (numOfRecursosByPage * numPage))){
+                        <div class="col-md-12">
+                            <strong>SbN: </strong>
+                            <a target="_blank" href ="/gestionar-sbns/@recurso.UrlSegment/?h=f">
+                                <span class= "recurso-titulo">@recurso.Nombre</span>
+                                </a>
+                            <div class="recurso-descripcion">@recurso.Descripcion</div>
+                        </div>
+                        }
+                    }
+                    countResourceInPage++;
                 }
             </div>
         }
@@ -176,9 +208,10 @@
         }
         @if (arrayResults.Count > 0){
             recursos = arrayResults;
-            numOfRecursos = recursos.Count;
+            numOfRecursos += recursos.Count;
             <div class="row">
                 @foreach (ContentModels.CasoDeExito recurso in recursos){
+                  if (numPage == 1 && countResourceInPage < numOfRecursosByPage){
                     <div class="col-md-12  py-2">
                         <strong>Caso de éxito: </strong>
                         <a href="@recurso.Documento.Url" target="blank">
@@ -186,6 +219,18 @@
                         </a>
                         <div class="recurso-descripcion">@recurso.Detalle</div>
                     </div>
+                  }else{
+                    if ((countResourceInPage >= (numOfRecursosByPage * (numPage-1))) && (countResourceInPage <= (numOfRecursosByPage * numPage))){
+                      <div class="col-md-12">
+                        <strong>Caso de éxito: </strong>
+                        <a href="@recurso.Documento.Url" target="blank">
+                            <span class= "recurso-titulo">@recurso.Nombre</span>
+                        </a>
+                        <div class="recurso-descripcion">@recurso.Detalle</div>
+                      </div>
+                    }
+                  }
+                  countResourceInPage++;
                 }
             </div>
         }
@@ -201,9 +246,10 @@
         }
         @if (arrayResults.Count > 0){
             recursos = arrayResults;
-            numOfRecursos = recursos.Count;
+            numOfRecursos += recursos.Count;
             <div class="row">
                 @foreach (ContentModels.VideoCapacitacion recurso in recursos){
+                  if (numPage == 1 && countResourceInPage < numOfRecursosByPage){
                     <div class="col-md-12  py-2">
                         <strong>Video: </strong>
                         <a href="@recurso.URL.Url" target="_blank">
@@ -211,32 +257,48 @@
                         </a>
                         <div class="recurso-descripcion">@recurso.Descripcion</div>
                     </div>
+                  }else{
+                    if ((countResourceInPage >= (numOfRecursosByPage * (numPage-1))) && (countResourceInPage <= (numOfRecursosByPage * numPage))){
+                        <div class="col-md-12  py-2">
+                            <strong>Video: </strong>
+                            <a href="@recurso.URL.Url" target="_blank">
+                                <span class= "recurso-titulo">@recurso.Nombre</span>
+                            </a>
+                            <div class="recurso-descripcion">@recurso.Descripcion</div>
+                        </div>
+                    }
+                  }
+                  countResourceInPage++;
                 }
             </div>
         }
         
-        
     }    
         <div class="row">
             <div class="col-md-12">
-            @{        
+            @{  
+                pageCount = (int)Math.Ceiling((double)countResourceInPage / (double)numOfRecursosByPage);
                 if (pageCount > 1){
                     <div class="pagination justify-content-center">
                         <ul>
-                            <li><a class="@(numPage == 1 ? "disabled" : string.Empty)" href="?numPage=@(numPage-1)">&lt;</a></li>
+                            <li><a class="@(numPage == 1 ? "disabled" : string.Empty)" href="?search=@search&numPage=@(numPage-1)">&lt;</a></li>
                             @for (int p = 1; p < pageCount + 1; p++)
                             {
                                 <li class="@(p == numPage ? "active" : string.Empty)">
-                                    <a class="@(p == numPage ? "active" : string.Empty)"href="?numPage=@p">@p</a>
+                                    <a class="@(p == numPage ? "active" : string.Empty)"href="?search=@search&numPage=@p">@p</a>
                                 </li>
                             }
-                            <li><a class="@(numPage == pageCount ? "disabled" : string.Empty)" href="?numPage=@(numPage+1)">&gt;</a></li>
+                            <li><a class="@(numPage == pageCount ? "disabled" : string.Empty)" href="?search=@search&numPage=@(numPage+1)">&gt;</a></li>
                         </ul>
                     </div>
                 }
             }
             </div>
         </div>
+        <div class="col-md-12 px-3 py-2" id="count-result">
+            <small>Se encontraron @countResourceInPage elementos.</small>
+        </div>
     </section>
 </section>
 
+    

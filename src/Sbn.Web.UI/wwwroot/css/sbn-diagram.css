@@ -1,7 +1,7 @@
 /* Medium devices (desktops, 768px  and up)*/
 @media  (min-width: 768px) and (max-width: 959px) { 
     .cicle_background{
-        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        background-image: url('/media/assets/img/ciclo/cicle_background_.svg');
         height: 543px;
         background-repeat: no-repeat;
         z-index: 1;
@@ -249,7 +249,7 @@
 
 @media  (min-width: 960px) and (max-width: 1199px) { 
     .cicle_background{
-        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        background-image: url('/media/assets/img/ciclo/cicle_background_.svg');
         height: 543px;
         background-repeat: no-repeat;
         z-index: 1;
@@ -539,7 +539,7 @@
 @media (min-width: 1200px) and (max-width: 1599px) { 
     
        .cicle_background{
-        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        background-image: url('/media/assets/img/ciclo/cicle_background_.svg');
         height: 543px;
         background-repeat: no-repeat;
         z-index: 1;
@@ -829,7 +829,7 @@
 @media (min-width: 1600px) and (max-width: 1919px) { 
     
     .cicle_background{
-        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        background-image: url('/media/assets/img/ciclo/cicle_background_.svg');
         height: 643px;
         background-repeat: no-repeat;
         z-index: 1;
@@ -1114,7 +1114,7 @@
 /*XXX-Large devices (larger desktops, 1400px and up)*/
 @media (min-width: 1920px) { 
     .cicle_background{
-        background-image: url('/media/assets/img/ciclo/cicle_background.svg');
+        background-image: url('/media/assets/img/ciclo/cicle_background_.svg');
         height: 753px;
         background-repeat: no-repeat;
         z-index: 1;
