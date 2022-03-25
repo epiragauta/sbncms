@@ -249,7 +249,7 @@ function filterSbn(filter){
     let countFilteredSbn = 0;
     sbns.each((i,sbn) => {
         if (sbn.childNodes[1].innerText.trim() == 'Restauración de ecosistemas forestales'){
-            console.log(sbn.childNodes[1].innerText);
+            //console.log(sbn.childNodes[1].innerText);
         }
         let desafios = JSON.parse(sbn.getAttribute("challenges"));
         let problemas = JSON.parse(sbn.getAttribute("issues"));
@@ -469,6 +469,27 @@ function filterSbn(filter){
         }else{
             sbn.classList.add("sbn-hide");
         }
+        
+        var sbnsVisible  = $(".sbn-filter-title").not(".sbn-hide");
+        var b = $(sbns[0]).children(".mb-4").children("div").children("div").children("ul").children("li").not(".sbn-resource-hide");
+        var c = $(sbns[0]).children(".mb-4").children("div").children("div").children("div").children("ul").children("li").not(".sbn-resource-hide");
+        var d = b.length + c.length;
+        var i = 0;
+        var elWithMoreBiblio = 0;
+        sbnsVisible.each((e,l) => {
+            var b = $(l).children(".mb-4").children("div").children("div").children("ul").children("li").not(".sbn-resource-hide");
+            var c = $(l).children(".mb-4").children("div").children("div").children("div").children("ul").children("li").not(".sbn-resource-hide");
+            var e = b.length + c.length;
+            if (e > d){
+                elWithMoreBiblio = i;
+                d = e;
+            }
+            i++;
+        });
+        if (elWithMoreBiblio != 0){
+            $(sbnsVisible[elWithMoreBiblio]).insertBefore($(sbnsVisible[0]));
+        }
+        
     });
     
     (countFilteredSbn > 0) ? $("#msg-without-sbn").hide() : $("#msg-without-sbn").show();

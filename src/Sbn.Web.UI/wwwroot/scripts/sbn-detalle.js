@@ -19,4 +19,7 @@ $(document).ready(function() {
     setTimeout(function(){
         document.getElementsByName("media1").item(0).contentDocument.activeElement.children[0].pause();   
     },200);
+    
+    //var listaSbn = document.getElementsByClassName("multi-collapse_0");
+    //console.log(listaSbn);
 });

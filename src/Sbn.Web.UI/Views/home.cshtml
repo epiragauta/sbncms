@@ -53,13 +53,13 @@
                             let html = `<div class="form-group row row-form-input">
                                             <label style="text-align: left;" class="col-sm-4 col-form-label">Nombre completo: *</label>
                                             <div class="col-sm-7">
-                                                <input type="text" id="swal-input1" class="form-control input-lg" name="fullname_" value="">
+                                                <input type="text" id="full-name-id" class="form-control input-lg" name="fullname_" value="">
                                             </div>
                                         </div>
                                         <div class="form-group row row-form-input">
                                             <label style="text-align: left;" class="col-sm-4 col-form-label">Sector: *</label>
                                             <div class="col-sm-7">
-                                                <select class="form-control" id="sector-select">
+                                                <select class="form-control" id="sector-select-id">
                                                   <option>ONG</option>
                                                   <option>Investigación</option>
                                                   <option>Productivo</option>
@@ -70,16 +70,16 @@
                                         <div class="form-group row row-form-input">
                                             <label style="text-align: left;" class="col-sm-4 col-form-label">Organizacion: *</label>
                                             <div  class="col-sm-7">
-                                                <input type="text" id="swal-input2" class="form-control input-lg" name="organizacion_" value="">
+                                                <input type="text" id="organization-id" class="form-control input-lg" name="organizacion_" value="">
                                             </div>
                                         </div>
                                         <div class="form-group row row-form-input">
                                             <label style="text-align: left;" class="col-sm-4 col-form-label">Correo electrónico: *</label>
                                             <div  class="col-sm-7">
-                                                <input type="text" id="swal-input2" class="form-control input-lg" name="email_" value="">
+                                                <input type="text" id="email-id" class="form-control input-lg" name="email_" value="">
                                             </div>
                                         </div>`;    
-                            const { value: formValues } = await Swal.fire({
+                            const { value: values } = await Swal.fire({
                               title: 'Comparte tus datos con nosotros',
                               html: html,
                               focusConfirm: false,
@@ -89,14 +89,19 @@
                               width: 600,
                               preConfirm: () => {
                                 return [
-                                  document.getElementById('swal-input1').value,
-                                  document.getElementById('swal-input2').value
+                                  document.getElementById('full-name-id').value,
+                                  document.getElementById('email-id').value,
+                                  document.getElementById('organization-id').value,
+                                  document.getElementById('sector-select-id').value
                                 ]
                               }
                             })
                             
-                            if (formValues) {
-                              Swal.fire("Gracias!")
+                            if (values) {
+                                var url = `/Sbn/Api/SbnData/SaveUser?email=${values[1]}&organization=${values[2]}&sector=${values[3]}&fullUserName=${values[0]}&key=P1o2i3u4y5t6`;
+                                $.get(url, function( data ) {
+                                  Swal.fire("Gracias!");
+                                });
                             }
                             
                             })()

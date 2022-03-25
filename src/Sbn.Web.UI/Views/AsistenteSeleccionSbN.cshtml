@@ -87,7 +87,7 @@
                 <h4>SbN recomendadas</h4>
             </div>
         </div>
-        <div class="row curved-border" style="background:#fefefe;padding:0.5rem;">
+        <div class="row curved-border sbn-container" style="background:#fefefe;padding:0.5rem;">
             <div >
                 @{
                     var startNode = Sbn.Content(1251); // ID Sbn
@@ -161,7 +161,7 @@
                                 <button class="btn btn-sbn-tools btn-sbn-tools-width" style="margin-right: 1rem;"> Ver caja de herramientas </button></a>
                             </div>
                             <div><br></div>
-                            <div class="mb-4">
+                            <div class="mb-4 ">
                                 <p><strong>Se encontraron las siguientes referencias bibliográficas que soportan esta recomendación:</strong></p>
                                 @foreach (var soporte in sbnBibliografia){
                                     var recurso = soporte.ReferenciaBibliografica;
@@ -192,7 +192,7 @@
                                         //var info = Sbn.Content(1107).Children.OrderBy(x => x.CreateDate).ToList();
                                         
                                         <div >
-                                            <div>
+                                            <div >
                                                 @foreach(ContentModels.Recurso contenido in info){
                                                     biblioCount = counterBiblio;
                                                     
@@ -200,16 +200,16 @@
                                                         if(@recurso.Id == @contenido.Id){
                                                         counterBiblio++;
                                                         <ul style="padding:0rem 2rem;text-align: justify;margin-bottom:2px;">
-                                                            <li class="sbn-bibliografia sbn-resource-hide" challenges='@outChallenges_' issues='@outIssues_' areas='@outAreas_'> @contenido.Autor (@contenido.Year).  @contenido.Nombre. 
+                                                            <li class="sbn-bibliografia sbn-resource-hide resource_@counter" challenges='@outChallenges_' issues='@outIssues_' areas='@outAreas_'> @contenido.Autor (@contenido.Year).  @contenido.Nombre. 
                                                                 <strong><a href="@contenido.Documento.Url" target="_blank" style="color:#0a3f0a !important;"> Ver recurso </a></strong>
                                                             </li>
                                                         </ul>
                                                         }
                                                     }else if(@counterBiblio >= 6){
                                                         if(@recurso.Id == @contenido.Id){
-                                                            <div class="collapse" id="RefenreciasBio_@counter" >
+                                                            <div class="collapse multi-collapse_@counter" >
                                                                 <ul style="padding:0rem 2rem;text-align: justify;margin-bottom:2px;">
-                                                                    <li class="sbn-bibliografia sbn-resource-hide" challenges='@outChallenges_' issues='@outIssues_' areas='@outAreas_'> @contenido.Autor (@contenido.Year). @contenido.Nombre. 
+                                                                    <li class="sbn-bibliografia sbn-resource-hide resource_@counter" challenges='@outChallenges_' issues='@outIssues_' areas='@outAreas_'> @contenido.Autor (@contenido.Year). @contenido.Nombre. 
                                                                         <strong><a href="@contenido.Documento.Url" target="_blank" style="color:#0a3f0a !important;"> Ver recurso </a></strong>
                                                                     </li>
                                                                 </ul>
@@ -225,7 +225,7 @@
                                         if(@biblioCount >=6){
                                             <div class="text-right">
                                                 <p>
-                                                    <button class=" btn btn-sbn-tools btn-sbn-tools-width " type="button" data-toggle="collapse" data-target="#RefenreciasBio_@counter" aria-expanded="false" aria-controls="RefenreciasBio_@counter" style="margin-right: 1rem;">
+                                                    <button class=" btn btn-sbn-tools btn-sbn-tools-width " type="button" data-toggle="collapse" data-target=".multi-collapse_@counter" aria-expanded="false" aria-controls="RefenreciasBio_@counter" style="margin-right: 1rem;">
                                                         Ver más referencias bibliograficas
                                                     </button>
                                                 </p>
