@@ -449,6 +449,8 @@ footer {
     align-items: center;
     justify-content: center;
     margin-bottom:1rem;
+    display: flex;
+    max-width:100% !important;
 }
 
 .sbn-nav-bar-responsive{
@@ -920,6 +922,15 @@ footer {
     .sbn-img-resource{
         display:none;
     }
+    .sbn-asistente-display{
+        padding-right: 0rem;
+        text-align:center;
+    }
+    .sbn-seleccion-align{
+        text-align: center; 
+        padding-top: 10px;
+        line-height: 1;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767){
@@ -1134,7 +1145,14 @@ footer {
     .sbn-img-resource{
         display:none;
     }
-    
+    .sbn-asistente-display{
+        padding-right: 0rem;
+        text-align:center;
+    }
+    .sbn-seleccion-align{
+        text-align: center; 
+        padding-top: 10px;
+    }
 }
 @media (min-width: 768px) and (max-width: 959px) {
     .navbar-expand-md .navbar-nav .nav-link {
@@ -1389,6 +1407,29 @@ footer {
     .sbn-img-resource{
         display:inline;
     }
+    .sbn-asistente-display{
+        padding-right: 0rem;
+        text-align:center;
+    }
+    .sbn-seleccion-align{
+        text-align: center; 
+        padding-top: 10px;
+    }
+    .row-casos-de-exito {
+        background-color: #fff;
+        padding-top: 15px;
+        margin-right: 0;
+    }
+    .sbn-tittle-style{
+        padding-top:15px !important;
+    }
+    .sbn-content-style{
+        padding-right: 5px!important;
+        padding-left: 5px !important;
+    }
+    .sbn-content-margin{
+        margin-top:15px;
+    }
 }
 @media (min-width: 960px) and (max-width: 1199px){
     .sbn-navbar .nav-item {
@@ -1591,6 +1632,17 @@ footer {
     }
     .sbn-img-resource{
         display:inline;
+    }
+    .sbn-asistente-display{
+        padding-right: 0rem;
+        text-align:center;
+    }
+    .sbn-seleccion-align{
+        text-align: center; 
+        padding-top: 10px;
+    }
+    .container, .container-md, .container-sm {
+        max-width: 960px;
     }
 }
 @media (min-width: 1200px) and (max-width: 1399px){
@@ -1815,6 +1867,22 @@ footer {
     .sbn-img-resource{
         display:inline;
     }
+    .show-header-sbn {
+        display: flex;
+    }
+    .sbn-asistente-display{
+        padding-right: 2rem;
+        text-align:right;
+    }
+    .sbn-seleccion-align{
+        text-align: left; 
+        padding-top: 10px;
+    }
+    .container-caja-herramientas{
+        margin-left:3rem;   
+        margin-right:3rem;
+        color: #0a3f0a;
+    }
 }
 @media (min-width: 1400px) {
     .mx-auto-main-bar{
@@ -1976,6 +2044,22 @@ footer {
         opacity: 0.8;
         height: 25%;
     }
+    .show-header-sbn {
+        display: flex;
+    }
+    .sbn-asistente-display{
+        padding-right: 2rem;
+        text-align:right;
+    }
+    .sbn-seleccion-align{
+        text-align: left; 
+        padding-top: 10px;
+    }
+    .container-caja-herramientas{
+        margin-left:3rem;   
+        margin-right:3rem;
+        color: #0a3f0a;
+    }
 }
 
 .recurso-titulo, .recurso-titulo a{
@@ -2045,11 +2129,6 @@ footer {
     font-weight: 600;
 }
 
-.container-caja-herramientas{
- margin-left:3rem;   
- margin-right:3rem;
- color: #0a3f0a;
-}
 .sbn-text-container{
     margin:2rem;
 }
@@ -2266,9 +2345,6 @@ footer {
     background: url('/media/assets/img/achurado.svg') #00ff0055;
 }
 
-.show-header-sbn{
-    display:flex;    
-}
 
 .hide-header-sbn{
     display:none;
@@ -2278,6 +2354,9 @@ footer {
     display:none;
 }
 
+.sbn-item{
+    padding-bottom:0px;
+}
 
 .sbn-bibliografia{
     padding-bottom:10px;
@@ -2302,3 +2381,5 @@ footer {
     margin-right: 0px;
     margin-left: 0px;
 }
+
+

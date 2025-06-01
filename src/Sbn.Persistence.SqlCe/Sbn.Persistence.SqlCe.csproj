@@ -18,6 +18,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Microsoft.SqlServer.Compact" Version="4.0.8876.1" />
     </ItemGroup>
 
     <ItemGroup>
